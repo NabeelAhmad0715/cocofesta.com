@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Redirect;
 
 class RegisterController extends Controller
 {
@@ -68,7 +69,7 @@ class RegisterController extends Controller
 
         return $request->wantsJson()
             ? new Response('', 201)
-            : redirect('/');
+            : Redirect::to($request->session()->get('link'));;
     }
 
     /**

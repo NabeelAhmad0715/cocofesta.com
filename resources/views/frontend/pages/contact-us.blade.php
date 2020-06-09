@@ -7,9 +7,7 @@
 @endsection
 
 @section('content')
-{{-- @php
-    $_SEESION['link'] = url()->current();
-@endphp --}}
+{{ session(['link' => url()->current()]) }}
 <section class="page-title bg-overlay-black-60 parallax" data-jarallax='{"speed": 0.6}' style="background-image: url({{ asset('images/bg/02.jpg') }});">
   <div class="container">
     <div class="row">
@@ -69,7 +67,12 @@
         </div>
         <div class="contact-3 col-lg-6">
             <div class="contact-3-info page-section-ptb" style="padding: 47px 0px;">
-            @include('common.partials.flash')
+            @if (session('contact-message'))
+                <div class="alert {{ session('alert-class', 'alert-info') }} border-0 alert-dismissible">
+                    <button type="button" class="close" data-dismiss="alert"><span>&times;</span></button>
+                    {!! session('contact-message') !!}
+                </div>
+            @endif
             <div class="clearfix">
                 <form  method="post" action="{{ route('pages.contact-enquiry') }}">
                     @csrf

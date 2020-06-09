@@ -59,7 +59,7 @@
             </li>
             <li><a href="{{ route('pages.contact-us') }}">Contact Us</a></li>
             @auth
-            <li><a href="javascript:void(0)">{{ auth()->user()->name }}<i class="fa fa-angle-down fa-indicator"></i></a>
+            <li class="active"><a href="javascript:void(0)">{{ auth()->user()->name }}<i class="fa fa-angle-down fa-indicator"></i></a>
               <ul class="drop-down-multilevel">
                   <li>
                     <a class="dropdown-item" href="{{ route('logout') }}"

@@ -263,11 +263,6 @@
     <!-- plugins-jquery -->
     <script src="{{ asset('js/plugins-jquery.js') }}"></script>
 
-    <!-- plugin_path -->
-    <script>
-      var plugin_path = 'js/';
-    </script>
-
     <!-- REVOLUTION JS FILES -->
     <script src="{{ asset('revolution/js/jquery.themepunch.tools.min.js') }}"></script>
     <script src="{{ asset('revolution/js/jquery.themepunch.revolution.min.js') }}"></script>
@@ -284,14 +279,17 @@
     <script src="{{ asset('revolution/js/extensions/revolution.extension.video.min.js') }}"></script>
     <!-- revolution custom -->
     <script src="{{ asset('revolution/js/revolution-custom.js') }}"></script>
+    <!-- plugin_path -->
+
+    <script>
+        var plugin_path = 'http://localhost:8000/js/';
+      </script>
+
 
     <!-- custom -->
     <script src="{{ asset('js/custom.js') }}"></script>
-    <script src="{{ asset('js/mega-menu/mega_menu.js') }}"></script>
-    <script src="{{ asset('js/nicescroll/jquery.nicescroll.js') }}"></script>
-    <script src="{{ asset('js/isotope/isotope.pkgd.min.js') }}"></script>
-    <!-- GetButton.io widget -->
-      <script type="text/javascript">
+
+    <script type="text/javascript">
         (function () {
             var options = {
                 facebook: "103233641397198", // Facebook page ID
@@ -311,6 +309,5 @@
         })();
       </script>
       @stack('scripts')
-      <!-- /GetButton.io widget -->
 </body>
 </html>
