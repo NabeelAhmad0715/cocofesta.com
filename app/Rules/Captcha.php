@@ -26,9 +26,27 @@ class Captcha implements Rule
      */
     public function passes($attribute, $value)
     {
-        $recaptcha = new ReCaptcha(config('app.recaptcha.CAPTCHA_KEY'));
-        $response = $recaptcha->verify($value, $_SERVER['REMOTE_ADDR']);
-        return $response->isSuccess();
+        $response   = isset($_POST["g-recaptcha-response"]) ? $_POST['g-recaptcha-response'] : null;
+        $privatekey = config('app.recaptcha.CAPTCHA_SECRET');
+
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, "https://www.google.com/recaptcha/api/siteverify");
+        curl_setopt($ch, CURLOPT_HEADER, 0);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+        curl_setopt($ch, CURLOPT_POST, 1);
+        curl_setopt($ch, CURLOPT_POSTFIELDS, array(
+            'secret' => $privatekey,
+            'response' => $response,
+            'remoteip' => $_SERVER['REMOTE_ADDR']
+        ));
+
+        $resp = json_decode(curl_exec($ch));
+        curl_close($ch);
+        if ($resp->success) {
+            return $resp;
+        } else {
+            return 'Please complete the recaptcha to submit the form';
+        }
     }
 
     /**

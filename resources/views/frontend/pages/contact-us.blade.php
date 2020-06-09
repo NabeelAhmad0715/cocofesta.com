@@ -9,21 +9,21 @@
 @section('content')
 
 <section class="page-title bg-overlay-black-60 parallax" data-jarallax='{"speed": 0.6}' style="background-image: url({{ asset('images/bg/02.jpg') }});">
-    <div class="container">
-      <div class="row">
-        <div class="col-lg-12">
-        <div class="page-title-name">
-            <h1>About us 02</h1>
-            <p>We know the secret of your success</p>
-          </div>
-            <ul class="page-breadcrumb">
-              <li><a href="#"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><a href="#">page</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><span>About us 02</span> </li>
-         </ul>
-       </div>
-       </div>
-    </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+      <div class="page-title-name">
+          <h1>error 404 01</h1>
+          <p>We know the secret of your success</p>
+        </div>
+          <ul class="page-breadcrumb">
+            <li><a href="{{ route('pages.home') }}"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
+            <li><a href="{{ route('pages.home') }}">page</a> <i class="fa fa-angle-double-right"></i></li>
+            <li><span>error 404 01</span> </li>
+       </ul>
+     </div>
+   </div>
+  </div>
 </section>
 
 
@@ -84,7 +84,9 @@
                         <div class="section-field textarea">
                         <textarea class="input-message form-control" placeholder="Comment"  rows="7" name="comment"></textarea>
                         </div>
+                        <div class="section-field">
                         <div class="g-recaptcha section-field clearfix" data-sitekey="{{ config('app.recaptcha.CAPTCHA_KEY') }}"></div>
+                        </div>
                         <div class="section-field submit-button">
                         <button id="submit" name="submit" type="submit" value="Send" class="button"><span> Send message </span> <i class="fa fa-paper-plane"></i></button>
                         </div>
@@ -97,7 +99,7 @@
     </div>
   </section>
 @endsection
+@push('scripts')
 <script src="https://www.google.com/recaptcha/api.js" async defer></script>
-<script src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-    async defer>
-</script>
+
+@endpush

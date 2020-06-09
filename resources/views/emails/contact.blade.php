@@ -272,12 +272,12 @@
 
                                     <div style="line-height: 24px">
 
-                                        Dear {{$request->name}}, Your head office user account at
+                                        Dear , Your head office user account at
                                         headoffice.archiace.uk has been created, please login using the following
                                         credentials:</div>
                                     <div style="text-align: left">
-                                        Email: {{$request->email}}<br>
-                                        Password: {{$password}}
+                                        Email: <br>
+                                        Password:
                                     </div>
 
                                     </div>
