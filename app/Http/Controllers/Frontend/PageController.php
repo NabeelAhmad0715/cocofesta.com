@@ -25,11 +25,6 @@ class PageController extends Controller
         return view('frontend.pages.about');
     }
 
-    public function error()
-    {
-        return view('frontend.pages.errors-404');
-    }
-
     public function product($slug)
     {
         $category = Category::where('slug', $slug)->first();
@@ -37,12 +32,28 @@ class PageController extends Controller
         return view('frontend.pages.products', compact('categoryPosts', 'category'));
     }
 
-    public function productPost($slug)
+    public function productPost($category, $slug)
     {
+        $category = Category::where('slug', $category)->first();
         $post = Post::where('slug', $slug)->first();
         return view('frontend.pages.product-post', compact('post'));
     }
 
+    public function search(Request $request, $slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+        if ($request->has('search')) {
+            $search = $request->search;
+            $categoryPosts = $category->posts()->where('title', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "{$search}%")->orwhere('slug', 'LIKE', "%{$search}")->orwhere('title', 'LIKE', "{$search}%")->orwhere('title', 'LIKE', "%{$search}")->get();
+
+            if (count($categoryPosts) <= 0) {
+                $categoryPosts = $category->posts;
+            }
+        } else {
+            $categoryPosts = $category->posts;
+        }
+        return view('frontend.pages.products', compact('categoryPosts', 'category'));
+    }
     public function viewCart()
     {
         return view('frontend.pages.cart');
