@@ -17,6 +17,8 @@ class PageController extends Controller
 {
     public function index()
     {
+        // $category = Category::where('slug', 'mens')->first();
+        // $category = Category::where('slug', 'womens')->first();
         return view('frontend.pages.home');
     }
 
