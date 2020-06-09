@@ -31,13 +31,15 @@
         <div class="container">
                <div class="row">
                   <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
+                    <form method="GET" action="{{ route('pages.search', [$category->slug]) }}">
                     <div class="sidebar-widget mb-40">
                       <h5 class="mb-20">search</h5>
                         <div class="widget-search">
                          <i class="fa fa-search"></i>
-                         <input type="search" class="form-control placeholder" placeholder="Search Products....">
+                         <input type="search" name="search" class="form-control placeholder" placeholder="Search Products....">
                        </div>
                      </div>
+                    </form>
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
                     <h5 class="mb-20">Sort By</h5>
@@ -138,7 +140,7 @@
                               <div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">{{ $post->getMetaData('discount') }}% Discount</div>
                         @endif
                         <div class="product mb-70">
-                           <a href="{{ route('pages.products',[$post->slug]) }}">
+                           <a href="{{ route('pages.product-post',[$category->parent->slug, $post->slug]) }}">
                            <div class="product-image">
                                  <img class="img-fluid mx-auto" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="">
                            </div>
