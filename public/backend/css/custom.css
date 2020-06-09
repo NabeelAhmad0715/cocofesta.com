@@ -1,0 +1,89 @@
+.image:hover {
+    outline: 5px solid #26a69a;
+}
+
+.modal-dialog{
+    overflow-y: initial !important
+}
+
+.image-text{
+    position: absolute;
+    bottom: 10px;
+    right: 0px;
+    background-color: #444444;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.modal-body{
+    height: 800px;
+    overflow-y: auto;
+}
+
+.custom-file-label {
+    text-align: initial;
+}
+.close {
+    position: absolute;
+    right: 5px;
+}
+.modal-image {
+    display: block;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100%;
+    min-height: 20vh;
+}
+
+.select {
+    outline: 5px solid #26a69a;
+}
+
+.resolution {
+    position: absolute;
+    top: 0;
+    right:0px;
+    width: 120px;
+    background-color: #26a69a;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.del-position {
+    position: absolute;
+    top: 0;
+    left: 0px;
+}
+
+body {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.content .card.has-table {
+    min-height: 70vh;
+}
+
+.navbar-brand img {
+    height: 1.5rem;
+}
+
+span.action.btn.btn-light {
+    background-color: #26a69a;
+    color: white;
+}
+
+.btn-primary:hover,
+.btn-primary {
+    color: #fff;
+    background-color: #26a69a;
+}
+
+.text-red {
+    color: red;
+}
+
+.fs-30 {
+    font-size: 30px;
+}
