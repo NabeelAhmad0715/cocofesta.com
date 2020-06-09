@@ -17,8 +17,6 @@ class PageController extends Controller
 {
     public function index()
     {
-        // $category = Category::where('slug', 'mens')->first();
-        // $category = Category::where('slug', 'womens')->first();
         return view('frontend.pages.home');
     }
 
@@ -91,7 +89,7 @@ class PageController extends Controller
 
         Mail::to($request->email)->send(new ContactMail());
 
-        $request->session()->flash('message', 'Your Request Submit successfully');
+        $request->session()->flash('contact-message', 'Your Request Submit successfully');
         $request->session()->flash('alert-class', 'alert alert-success');
         return Redirect::to(URL::previous());
     }

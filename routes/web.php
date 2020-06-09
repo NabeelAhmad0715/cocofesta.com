@@ -99,7 +99,7 @@ Route::get('create/post/whishlist', 'Frontend\WhishlistController@create')->name
 Route::get('remove/post/whishlist', 'Frontend\WhishlistController@remove')->name('whishlist.remove');
 
 Route::get('products/{slug}', 'Frontend\PageController@product')->name('pages.products');
-Route::get('/product/{category}/{slug}', 'Frontend\PageController@productPost')->name('pages.product-post');
+Route::get('/products/{category}/{slug}', 'Frontend\PageController@productPost')->name('pages.product-post');
 Route::get('products-search/{slug}', 'Frontend\PageController@search')->name('pages.search');
 
 Route::get('/create-symlink', function () {

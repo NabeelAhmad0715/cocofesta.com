@@ -7,6 +7,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Validation\ValidationException;
 
 class LoginController extends Controller
@@ -29,7 +30,7 @@ class LoginController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function showLoginForm()
+    public function showLoginForm(Request $request)
     {
         return view('frontend.auth.login');
     }
@@ -79,7 +80,7 @@ class LoginController extends Controller
     {
         $request->session()->flash('message', 'Login Successful! Welcome to the dashboard.');
         $request->session()->flash('alert-class', 'alert-success');
-        return redirect()->back();
+        return Redirect::to($request->session()->get('link'));
     }
     public function login(Request $request)
     {

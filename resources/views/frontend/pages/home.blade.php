@@ -7,7 +7,7 @@
 @endsection
 
 @section('content')
-
+{{ session(['link' => url()->current()]) }}
 <section class="rev-slider">
     <div id="rev_slider_266_1_wrapper" class="rev_slider_wrapper fullwidthbanner-container" data-alias="webster-shop-2" data-source="gallery" style="margin:0px auto;background:transparent;padding:0px;margin-top:0px;margin-bottom:0px;">
   <!-- START REVOLUTION SLIDER 5.4.6.3 fullwidth mode -->
