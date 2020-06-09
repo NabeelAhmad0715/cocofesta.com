@@ -42,8 +42,8 @@ return [
     'debug' => (bool) env('APP_DEBUG', false),
 
     'recaptcha' => [
-        'CAPTCHA_KEY' => env('CAPTCHA_KEY', '6LeJUgEVAAAAABCn4D3CcsJ3krtX1szn3WwNNLZk'),
-        'CAPTCHA_SECRET' => env('CAPTCHA_SECRET', '6LeJUgEVAAAAAH34xFAox18etbdpJiC7jndKisof'),
+        'CAPTCHA_KEY' => env('CAPTCHA_KEY', "6LduvwEVAAAAABwuIo0AFvx5JdVQm1Varkekx_J8"),
+        'CAPTCHA_SECRET' => env('CAPTCHA_SECRET', "6LduvwEVAAAAAHojB7FQOm2oWUOl22Asi1UIF-gL"),
     ],
 
     /*

@@ -79,8 +79,8 @@ class PageController extends Controller
     public function contactEnquiry(Request $request)
     {
         $data = $request->validate([
-            'name' => ['required', 'string', 'max:191'],
-            'phone' => ['required', 'string', 'max:191'],
+            'name' => ['required', 'string', 'max:255'],
+            'phone' => ['required', 'string', 'max:255'],
             'email' => ['required', 'email'],
             'comment' => ['nullable', 'string'],
             'g-recaptcha-response' => new Captcha()
