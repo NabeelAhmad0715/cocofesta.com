@@ -420,7 +420,7 @@
                               <div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">{{ $post->getMetaData('discount') }}% Discount</div>
                         @endif
                         <div class="product mb-70">
-                              <a href="{{ route('pages.product-post', $post->slug ) }}">
+                              <a href="{{ route('pages.product-post', [$post->categories[0]->slug,$post->slug] ) }}">
                               <div class="product-image">
                                     <img class="img-fluid mx-auto" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="">
                               </div>
