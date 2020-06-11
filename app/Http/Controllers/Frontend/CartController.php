@@ -21,7 +21,7 @@ class CartController extends Controller
 
     public function create(Request $request)
     {
-        $findPost = Cart::where('post_id', $request->product_id)->first();
+        $findPost = Cart::where('post_id', $request->product_id)->where('user_id', Auth::user()->id)->first();
         if (!$findPost) {
             if ($request->ajax()) {
                 $product_id = $request->product_id;
@@ -29,12 +29,16 @@ class CartController extends Controller
                     'user_id' => Auth::user()->id,
                     'post_id' => $product_id,
                     'price' => $request->price,
-                    'quantity' => 1
+                    'quantity' => 1,
+                    'in_stock' => 1
                 ]);
                 return response()->json($cart);
             }
         } else {
-            $cart = null;
+            $cart = $findPost->update([
+                'price' => ($findPost->price + $request->price),
+                'quantity' => ($findPost->quantity + 1),
+            ]);
             return response()->json($cart);
         }
     }

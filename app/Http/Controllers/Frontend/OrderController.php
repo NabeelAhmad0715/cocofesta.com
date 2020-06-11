@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Order;
 use Illuminate\Support\Facades\Auth;
 use App\Cart;
+use App\OrderDetail;
 
 class OrderController extends Controller
 {
@@ -23,9 +24,20 @@ class OrderController extends Controller
         ]);
 
         $data['user_id'] = Auth::user()->id;
-        Order::create($data);
+        $order = Order::create($data);
         $cartPosts = Cart::where('user_id', Auth::user()->id)->get();
+        $orderNumber = 'CF' . rand(1, 10000);
         foreach ($cartPosts as $post) {
+
+            OrderDetail::create([
+                'user_id' => $data['user_id'],
+                'order_id' => $order->id,
+                'post_id' => $post->id,
+                'price' => $post->price,
+                'quantity' => $post->quantity,
+                'order_number' => $orderNumber,
+            ]);
+
             $post->delete();
         }
         $request->session()->flash('message', 'Order has been placed successfully');
