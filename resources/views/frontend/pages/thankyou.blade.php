@@ -26,7 +26,7 @@
     </div>
 </section>
 
-@if (count($cartPosts) > 0)
+@if (count($cartPosts) <= 0)
     <section class="white-bg page-section-ptb">
         <div class="container">
         <div class="row justify-content-center">
@@ -67,7 +67,7 @@
               <i class="fa fa-shopping-cart"></i>
             </div>
             <div class="search-contant d-inline-block text-left position-relative mt-20 mt-sm-0">
-              <h2 class="theme-color">You Need To Continue Shopping</h2>
+              <h2 class="theme-color">You Need To First Place Order</h2>
               <div class="error-info mt-30">
                 <a class="button xs-mb-10" href="{{ route('pages.home') }}">Contiune Shopping</a>
               </div>
