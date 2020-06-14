@@ -30,6 +30,11 @@ class Post extends Model
         return $this->hasMany(MetaDataPost::class);
     }
 
+    public function reviews()
+    {
+        return $this->hasMany(Review::class);
+    }
+
     public function carts()
     {
         return $this->hasMany(Cart::class);
@@ -39,6 +44,12 @@ class Post extends Model
     {
         return $this->belongsToMany(Category::class);
     }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
+    }
+
 
     public function getMetaData($text)
     {

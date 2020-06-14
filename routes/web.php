@@ -101,7 +101,7 @@ Route::get('remove/post/whishlist', 'Frontend\WhishlistController@remove')->name
 Route::get('products/{slug}', 'Frontend\PageController@product')->name('pages.products');
 Route::get('/products/{category}/{slug}', 'Frontend\PageController@productPost')->name('pages.product-post');
 Route::get('products-search/{slug}', 'Frontend\PageController@search')->name('pages.search');
-
+Route::post('post/reviews', 'Frontend\PageController@setReviews');
 Route::get('/create-symlink', function () {
     $projectFolder = base_path() . '/../';
     // The file that you want to create a symlink of

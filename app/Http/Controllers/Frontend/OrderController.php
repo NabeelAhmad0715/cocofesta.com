@@ -32,7 +32,7 @@ class OrderController extends Controller
             OrderDetail::create([
                 'user_id' => $data['user_id'],
                 'order_id' => $order->id,
-                'post_id' => $post->id,
+                'post_id' => $post->post_id,
                 'price' => $post->price,
                 'quantity' => $post->quantity,
                 'order_number' => $orderNumber,
