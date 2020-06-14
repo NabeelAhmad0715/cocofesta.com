@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'name', 'email', 'password', 'provider_id', 'provider', 'google_id'
     ];
 
     /**
@@ -37,6 +37,15 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function addNew($input)
+    {
+        $check = static::where('google_id', $input['google_id'])->first();
+        if (is_null($check)) {
+
+            return static::create($input);
+        }
+        return $check;
+    }
     public function whishlist()
     {
         return $this->hasMany(Whishlist::class);
