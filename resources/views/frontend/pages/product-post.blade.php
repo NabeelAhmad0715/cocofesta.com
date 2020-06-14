@@ -77,11 +77,53 @@
               <div class="clearfix mb-30">
                 <div class="product-detail-price"><del>$39.99</del> <ins>$24.99</ins></div>
                   <div class="product-detail-rating float-right">
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star"></i>
-                      <i class="fa fa-star-half-o"></i>
-                      <i class="fa fa-star-o"></i>
+                    <div class='rating-stars' style="margin: 16px 0px 16px 0px;">
+                      <ul id='stars'>
+
+
+                        @for ($i = 0; $i < $totalReviews; $i++)
+                          <li class='starSelected selected'>
+                            <i class='fa fa-star fa-fw'></i>
+                          </li>
+                          @endfor
+                          @if ($totalReviews == 4)
+                            <li class='starSelected'>
+                              <i class='fa fa-star fa-fw'></i>
+                            </li>
+                          @elseif($totalReviews == 3)
+                            <li class='starSelected'>
+                              <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            <li class='starSelected'>
+                              <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            @elseif($totalReviews == 2)
+                              <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                            @elseif($totalReviews == 1)
+                              <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                            @endif
+
+                      </ul>
+                    </div>
                 </div>
              </div>
               <div class="product-detail-quantity clearfix mb-40">
@@ -133,7 +175,7 @@
               <a class="nav-link" id="additional-tab" data-toggle="tab" href="#additional" role="tab" aria-controls="additional" aria-selected="false">Profile </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Portfolio </a>
+              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews </a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
@@ -181,33 +223,103 @@
             </div>
             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
               <div class="blog-comments mt-40">
-                        <div class="comments-1">
-                            <div class="comments-photo">
-                                <img src="images/team/08.jpg" alt="">
-                            </div>
-                            <div class="comments-info">
-                                <h6> Michael Bean <span>Sep 15, 2018</span></h6>
-                                <div class="port-post-social float-right">
-                                    <a href="#">Reply</a>
-                                </div>
-                                <p class="mt-10">Imagine you are 10 years into the future but this time it’s different. Why? Because starting today you actually begin making changes in your life. Specific intentional changes are not easy.</p>
-                            </div>
+                <div id="review-success-message" class="alert alert-success alert-dismissible" style="display: none;" role="alert">
+                  <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                   Thank You For Your Feedback :)
+                 </div>
+                 @isset($reviewCheckUser)
+                    @if (count($reviewCheckUser) > 0)
+                      <form id="reviewForm" method="post" class="mb-20">
+                        <div class="form-group">
+                          <label for="Rating">Rating:</label>
+                          <div class='rating-stars'>
+                            <ul id='stars'>
+                              <li class='star' title='Poor' data-value='1'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='star' title='Fair' data-value='2'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='star' title='Good' data-value='3'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='star' title='Excellent' data-value='4'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                              <li class='star' title='WOW!!!' data-value='5'>
+                                <i class='fa fa-star fa-fw'></i>
+                              </li>
+                            </ul>
+                          </div>
                         </div>
-                        <div class="comments-1">
-                            <div class="comments-photo">
-                                <img src="images/team/08.jpg" alt="">
-                            </div>
-                            <div class="comments-info">
-                                <h6> Joana Williams <span>Oct 02, 2018</span></h6>
-                                <div class="port-post-social float-right">
-                                    <a href="#">Reply</a>
-                                </div>
-                                <p class="mt-10">This is the path of a different choice, a different decision. You have the freedom to be how you want to be. Absorb all you need from this moment in your future and the positive things that you can learn consciously and unconsciously and then drift and float back to the place where the path splits. </p>
-                            </div>
+                        <input type="hidden" id="post_id" value="{{ $post->id }}" />
+                        <input type="hidden" id="rating" value="" />
+                        <div class="form-group">
+                          <label for="Message">Message:</label>
+                          <textarea id="reviewMessage" name="message" rows="6" class="form-control" required></textarea>
                         </div>
+
                         <div class="comments review-button text-right">
-                            <a class="button" href="#">add a review</a>
+                          <input type="submit" class="button" value="Add a Review" />
                         </div>
+                      </form>
+                    @endif
+                 @endisset
+                      @forelse ($post->reviews as $review)
+                      <input type="hidden" value="{{ $review->rating }}" id="rating-star"/>
+                          <div class="comments-1">
+                              <div class="comments-info">
+                                  <h6> {{ $review->user->name }} <span id="date">{{ date('d M Y', strtotime($review->created_at)) }}</span></h6>
+                                  <div class='rating-stars' style="margin: 16px 0px 16px 0px;">
+                                    <ul id='stars'>
+                                      @for ($i = 0; $i < $review->rating; $i++)
+                                        <li class='starSelected selected'>
+                                          <i class='fa fa-star fa-fw'></i>
+                                        </li>
+                                      @endfor
+                                      @if ($review->rating == 4)
+                                        <li class='starSelected'>
+                                          <i class='fa fa-star fa-fw'></i>
+                                        </li>
+                                      @elseif($review->rating == 3)
+                                        <li class='starSelected'>
+                                          <i class='fa fa-star fa-fw'></i>
+                                        </li>
+                                        <li class='starSelected'>
+                                          <i class='fa fa-star fa-fw'></i>
+                                        </li>
+                                        @elseif($review->rating == 2)
+                                          <li class='starSelected'>
+                                            <i class='fa fa-star fa-fw'></i>
+                                          </li>
+                                          <li class='starSelected'>
+                                            <i class='fa fa-star fa-fw'></i>
+                                          </li>
+                                          <li class='starSelected'>
+                                            <i class='fa fa-star fa-fw'></i>
+                                          </li>
+                                        @elseif($review->rating == 1)
+                                          <li class='starSelected'>
+                                            <i class='fa fa-star fa-fw'></i>
+                                          </li>
+                                          <li class='starSelected'>
+                                            <i class='fa fa-star fa-fw'></i>
+                                          </li>
+                                          <li class='starSelected'>
+                                            <i class='fa fa-star fa-fw'></i>
+                                          </li>
+                                          <li class='starSelected'>
+                                            <i class='fa fa-star fa-fw'></i>
+                                          </li>
+                                        @endif
+                                    </ul>
+                                  </div>
+                                  <p id="review">{{ $review->message }}</p>
+                              </div>
+                          </div>
+                      @empty
+                          <h2>No Reviews yet</h2>
+                      @endforelse
                     </div>
                   </div>
                 </div>
@@ -439,4 +551,5 @@
     <script src="{{  asset('backend/js/plugins/forms/styling/uniform.min.js') }}"></script>
     <script src="{{asset('backend/js/whishlist-create.js') }}"></script>
     <script src="{{asset('backend/js/cart-create.js') }}"></script>
+    <script src="{{asset('backend/js/reviews.js') }}"></script>
 @endpush

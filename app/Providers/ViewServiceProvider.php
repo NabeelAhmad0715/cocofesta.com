@@ -8,9 +8,12 @@ use App\Type;
 use Illuminate\Support\Facades\View;
 use App\GeneralSetting;
 use App\ImageManager;
+use App\OrderDetail;
 use App\Post;
 use App\Whishlist;
+use App\Review;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ViewServiceProvider extends ServiceProvider
 {
@@ -42,6 +45,11 @@ class ViewServiceProvider extends ServiceProvider
             $parentCategories = $type->categories->where('parent_category', null);
             $childCategories = $type->categories->where('parent_category', '!=', null);
             $posts = Post::orderBy('created_at')->get();
+            $reviews = Review::all();
+            $topRatedPosts = Review::orderBy('rating', 'desc')->take(3)->get();
+
+            $popularPosts = OrderDetail::select('post_id', DB::raw('count(*) as total'))->groupBy('post_id')->orderBy('total', 'desc')->take(3)->get();
+
             if (Auth::user()) {
                 $whishlistPosts = Whishlist::where('user_id', Auth::user()->id)->get();
                 $whishlistCount = Whishlist::where('user_id', Auth::user()->id)->count();
@@ -53,7 +61,7 @@ class ViewServiceProvider extends ServiceProvider
 
                 $view->with(compact('type', 'parentCategories', 'posts', 'childCategories', 'whishlistPosts', 'whishlistCount', 'cartPosts', 'cartCount', 'totalPrice'));
             }
-            $view->with(compact('type', 'parentCategories', 'posts', 'childCategories'));
+            $view->with(compact('type', 'parentCategories', 'posts', 'reviews', 'childCategories'));
         });
     }
 }

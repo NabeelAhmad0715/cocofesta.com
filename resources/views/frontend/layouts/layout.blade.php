@@ -238,6 +238,41 @@
                 -ms-transition: all 0.5s ease-in-out;
                 -o-transition: all 0.5s ease-in-out;
             }
+
+            /* Rating Star Widgets Style */
+            .rating-stars ul {
+            list-style-type:none;
+            padding:0;
+
+            -moz-user-select:none;
+            -webkit-user-select:none;
+            }
+            .rating-stars ul > li.star {
+            display:inline-block;
+
+            }
+
+            /* Idle State of the stars */
+            .rating-stars ul > li.star > i.fa {
+            font-size:2.5em; /* Change the size of the stars */
+            color:#ccc; /* Color on idle state */
+            }
+
+            /* Hover state of the stars */
+            .rating-stars ul > li.star.hover > i.fa {
+            color:#FFCC36;
+            }
+
+            /* Selected state of the stars */
+            .rating-stars ul > li.star.selected > i.fa {
+            color:#FF912C;
+            }
+            .rating-stars ul > li.starSelected {
+                display: inline-block;
+            }
+            .rating-stars ul > li.starSelected.selected > i.fa {
+            color:#FF912C;
+            }
         </style>
       </head>
 

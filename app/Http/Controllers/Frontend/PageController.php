@@ -12,6 +12,8 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\URL;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
+use App\Review;
+use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
 {
@@ -36,7 +38,12 @@ class PageController extends Controller
     {
         $category = Category::where('slug', $category)->first();
         $post = Post::where('slug', $slug)->first();
-        return view('frontend.pages.product-post', compact('post'));
+        $totalReviews = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
+        if (Auth::user()) {
+            $reviewCheckUser = $post->orderDetails->where('user_id', Auth::user()->id);
+            return view('frontend.pages.product-post', compact('post', 'reviewCheckUser', 'totalReviews'));
+        }
+        return view('frontend.pages.product-post', compact('post', 'totalReviews'));
     }
 
     public function search(Request $request, $slug)
@@ -92,5 +99,29 @@ class PageController extends Controller
         $request->session()->flash('contact-message', 'Your Request Submit successfully');
         $request->session()->flash('alert-class', 'alert alert-success');
         return Redirect::to(URL::previous());
+    }
+
+    public function setReviews(Request $request)
+    {
+
+        $review = Review::where('post_id', $request->post_id)->where('user_id', Auth::user()->id)->first();
+        if ($request->ajax()) {
+            if ($review) {
+                $reviews = $review->update([
+                    'rating' => $request->rating,
+                    'message' => $review->message . $request->message,
+                ]);
+            } else {
+
+                Review::create([
+                    'rating' => $request->rating,
+                    'message' => $request->message,
+                    'user_id' => Auth::user()->id,
+                    'post_id' => $request->post_id
+                ]);
+                $reviews = Review::all();
+            }
+            return response()->json($reviews);
+        }
     }
 }
