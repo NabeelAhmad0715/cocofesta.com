@@ -102,6 +102,16 @@ Route::get('products/{slug}', 'Frontend\PageController@product')->name('pages.pr
 Route::get('/products/{category}/{slug}', 'Frontend\PageController@productPost')->name('pages.product-post');
 Route::get('products-search/{slug}', 'Frontend\PageController@search')->name('pages.search');
 Route::post('post/reviews', 'Frontend\PageController@setReviews');
+
+Route::get('login/{provider}', 'Auth\LoginController@redirect');
+Route::get('login/{provider}/callback', 'Auth\LoginController@Callback');
+
+Route::get('login/{provider}', 'Auth\LoginController@redirectToGoogle');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleGoogleCallback');
+
+Route::get('login/{provider}', 'Auth\LoginController@redirectToInstagram');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleInstagramCallback');
+
 Route::get('/create-symlink', function () {
     $projectFolder = base_path() . '/../';
     // The file that you want to create a symlink of

@@ -70,6 +70,30 @@
                         <input type="submit" value="Log in" class="button" />
                     </a>
                 </form>
+                <form method="get" action="{{ url('/login/facebook') }}">
+                  @csrf
+                  <div class="form-group row">
+                      <div class="col-md-6">
+                          <input type="submit" style="background: cornflowerblue;color:white" class="btn btn-facebook" value="Facebook">
+                      </div>
+                  </div>
+              </form>
+              <form method="get" action="{{ url('/login/google') }}">
+                @csrf
+                <div class="form-group row">
+                  <div class="col-md-6">
+                    <input type="submit" style="background: orange;color:white" class="btn btn-google" value="Google">
+                </div>
+              </div>
+              </form>
+                {{-- <form method="get" action="{{ url('/login/instagram') }}">
+                  @csrf
+                  <div class="form-group row">
+                    <div class="col-md-6">
+                      <input type="submit" style="background: purple;color:white" class="btn btn-instagram" value="Instagram">
+                  </div>
+                </div>
+                </form> --}}
             </div>
            </div>
           </div>
