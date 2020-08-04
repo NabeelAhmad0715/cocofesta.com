@@ -120,9 +120,7 @@
                                     <i class='fa fa-star fa-fw'></i>
                                 </li>
                                 @endif
-
                         @endisset
-
                       </ul>
                     </div>
                 </div>

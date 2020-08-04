@@ -20,7 +20,8 @@ class PageController extends Controller
 {
     public function index()
     {
-        return view('frontend.pages.home');
+        $latestPosts = Post::latest()->take(9)->get();
+        return view('frontend.pages.home', compact('latestPosts'));
     }
 
     public function about()
@@ -30,14 +31,15 @@ class PageController extends Controller
 
     public function product(Type $type)
     {
-        $posts = $type->posts;
-        return view('frontend.pages.products', compact('type', 'posts'));
+        $records = $type->posts;
+        return view('frontend.pages.products', compact('type', 'records'));
     }
 
     public function productPost(Type $type, Post $post)
     {
         if ($post->reviews->count() == 0) {
-            return view('frontend.pages.product-post', compact('post'));
+            $reviewCheckUser = $post->orderDetails->where('user_id', Auth::user()->id);
+            return view('frontend.pages.product-post', compact('post', 'reviewCheckUser'));
         } else {
             $totalReviews = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
             if (Auth::user()) {
@@ -52,15 +54,15 @@ class PageController extends Controller
     {
         if ($request->has('search')) {
             $search = $request->search;
-            $posts = $type->posts()->where('title', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "{$search}%")->orwhere('slug', 'LIKE', "%{$search}")->orwhere('title', 'LIKE', "{$search}%")->orwhere('title', 'LIKE', "%{$search}")->get();
+            $records = $type->posts()->where('title', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "{$search}%")->orwhere('slug', 'LIKE', "%{$search}")->orwhere('title', 'LIKE', "{$search}%")->orwhere('title', 'LIKE', "%{$search}")->get();
 
-            if (count($posts) <= 0) {
-                $posts = $type->posts;
+            if (count($records) <= 0) {
+                $records = $type->posts;
             }
         } else {
-            $posts = $type->posts;
+            $records = $type->posts;
         }
-        return view('frontend.pages.products', compact('posts', 'type'));
+        return view('frontend.pages.products', compact('records', 'type'));
     }
     public function viewCart()
     {
@@ -107,21 +109,15 @@ class PageController extends Controller
 
         $review = Review::where('post_id', $request->post_id)->where('user_id', Auth::user()->id)->first();
         if ($request->ajax()) {
-            if ($review) {
-                $reviews = $review->update([
-                    'rating' => $request->rating,
-                    'message' => $review->message . $request->message,
-                ]);
-            } else {
-
+            if (!$review) {
                 Review::create([
                     'rating' => $request->rating,
                     'message' => $request->message,
                     'user_id' => Auth::user()->id,
                     'post_id' => $request->post_id
                 ]);
-                $reviews = Review::all();
             }
+            $reviews = Review::all();
             return response()->json($reviews);
         }
     }

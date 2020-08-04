@@ -134,7 +134,7 @@
                 </div>
             <div class="col-lg-9 col-md-9">
                <div class="row">
-                  @forelse ($posts as $post)
+                  @forelse ($records as $post)
                   <div class="col-lg-4 col-md-4 col-sm-6">
                         @if ($post->getMetaData('discount') != null)
                               <div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">{{ $post->getMetaData('discount') }}% Discount</div>
