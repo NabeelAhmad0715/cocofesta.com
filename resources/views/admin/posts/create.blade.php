@@ -12,8 +12,8 @@
 @section('breadcrumbs')
     <div class="breadcrumb">
         <a href="{{ route('admin.pages.home') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-        <span class="breadcrumb-item"><a href="{{ route('posts.index',['slug' => $type->slug]) }}">{{$type->title}} - Post </a></span>
-        <span class="breadcrumb-item active">Create</span>
+        <span class="breadcrumb-item"><a href="{{ route('posts.index',['slug' => $type->slug]) }}">{{$type->title}} </a></span>
+        <span class="breadcrumb-item active">Add</span>
     </div>
 @endsection
 
@@ -24,7 +24,7 @@
 
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Create {{$type->title}} Post</h5>
+                <h5 class="card-title">Add {{$type->title}}</h5>
             </div>
 
             <div class="card-body">
@@ -41,10 +41,32 @@
                         <input type="text" class="form-control" name="title" value="{{ old('title') }}" required>
                         @if ($errors->has('title')) <p style="color:red;">{{ $errors->first('title') }}</p> @endif
                     </div>
+                    <div class="form-group">
+                        <label class="@error('category_id') text-danger @enderror">Category</label>
+                        <div class="form-group-feedback form-group-feedback-right">
+                            <select name="category_id[]"
+                                    class="form-control multiselect-select-all-filtering @error('category_id') text-danger @enderror"
+                                     multiple="multiple">
+                                @forelse($categories as $category)
+                                    <option value="{{ $category->id}}">{{  $category->title  }}</option>
+                                @empty
+                                    <option value="">Empty</option>
+                                @endforelse
+                            </select>
+                            @error('category_id')
+                            <div class="form-control-feedback text-danger">
+                                <i class="icon-cancel-circle2"></i>
+                            </div>
+                            @enderror
+                        </div>
+                        @error('category_id')
+                        <span class="form-text text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
                     @forelse ($type->metaData as $field)
                     <div class="form-group">
                         <label
-                            class="font-weight-semibold @error('{{ $field->label_name }}') text-danger @enderror">
+                            class=" @error('{{ $field->label_name }}') text-danger @enderror">
                             {{ $field->label_name }}
                             <span class="text-red"> {{ $field->required == '1' ? '*' : ''}}</span></label>
                             <div class="form-group-feedback form-group-feedback-right">
@@ -73,31 +95,8 @@
                         <h3> Create Fields in Type module </h3>
                     @endforelse
                     <div class="form-group">
-                        <label class="font-weight-semibold @error('category_id') text-danger @enderror">Category <span
-                                class="text-red">*</span></label>
-                        <div class="form-group-feedback form-group-feedback-right">
-                            <select name="category_id[]"
-                                class="form-control multiselect-select-all-filtering @error('category_id') text-danger @enderror"
-                                required multiple="multiple">
-                                @forelse($categories as $category)
-                                <option value="{{ $category->id}}">{{  $category->title  }}</option>
-                                @empty
-                                <option value="">Empty</option>
-                                @endforelse
-                            </select>
-                            @error('category_id')
-                            <div class="form-control-feedback text-danger">
-                                <i class="icon-cancel-circle2"></i>
-                            </div>
-                            @enderror
-                        </div>
-                        @error('category_id')
-                        <span class="form-text text-danger">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="form-group">
                         <label>Tags:</label>
-                        <input type="text" id="tags" name="tags" class="form-control" value="">
+                        <input type="text" name="tags" class="form-control tokenfield" value="">
                     </div>
                     <input type="hidden" value="{{ $type->id }}" name="type_id">
                     <div class="text-right">
@@ -116,29 +115,4 @@
     <script src="{{  asset('backend/js/demo_pages/form_tags_input.js') }}"></script>
     <script src="{{  asset('backend/js/plugins/forms/tags/tagsinput.min.js') }}"></script>
     <script src="{{  asset('backend/js/plugins/forms/tags/tokenfield.min.js') }}"></script>
-    <script type="text/javascript">
-        var tags = [];
-        var token = $('meta[name="csrf-token"]').attr("content");
-        var url = "/admin/view/tags";
-        $.ajax({
-            headers: {
-                "X-CSRF-TOKEN": token,
-            },
-            method: "GET",
-            url: url,
-            dataType: 'JSON',
-            success: function(data) {
-                data.forEach(tag => {
-                    tags.push(tag.name);
-                });
-                $('input[id="tags"]').amsifySuggestags({
-                    type: 'amsify',
-                    suggestions: tags
-                });
-            },
-            error: function (request, status, error) {
-                console.log(request);
-            },
-        });
-    </script>
 @endpush

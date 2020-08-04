@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Image;
 use App\ImageManager;
+use App\Type;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
@@ -16,7 +18,7 @@ class ImagesController extends Controller
     public function upload(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'image' => 'required |mimes:jpeg,jpg,png',
+            'image' => 'required | image',
         ]);
         if (!$validator->passes()) {
             return response()->json(['error' => $validator->errors()->all()]);
@@ -46,11 +48,8 @@ class ImagesController extends Controller
         $fileName = $request->name;
         Storage::delete('public/' . $fileName);
         $image->delete();
-        return response()->json([
-            'name' => $fileName,
-            'message'   => 'Image Deleted Successfully',
-            'className'  => 'alert-success'
-        ]);
+        $images = ImageManager::orderBy('id', 'desc')->get();
+        return response()->json($images);
     }
 
     function fetchData(Request $request)

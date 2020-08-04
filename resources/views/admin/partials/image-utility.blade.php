@@ -2,11 +2,9 @@
 <div id="image-utility" class="modal fade" tabindex="-1" style="overflow-y: auto;">
     <div class="modal-dialog modal-dialog-scrollable modal-lg">
         <div class="modal-content" style="max-height: 90vh;">
-            <div class="modal-header text-center">
-                <h3 class="text-left m-auto pb-2">Image Manager</h3>
-                <button type="button" class="close pt-0" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true" style="font-size: 45px;">&times;</span>
-                </button>
+            <div class="modal-header">
+                <h3 class="modal-title w-100 text-center">Image Manager</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">&times;</button>
             </div>
             <div class="modal-body">
                 <div class="nav-tabs-responsive bg-light border-top">
@@ -32,13 +30,18 @@
                     </ul>
                 </div>
                 <div class="tab-content">
+                    <img id="loading-image" style="display:none;position: absolute;top: 50%;left: 38%;" src="{{ asset('backend/images/loading.gif') }}" alt="Loading Bar" style="width:48px;height:48px;">
                     <div class="tab-pane fade show active" id="uploader">
-                        <form method="post" id="imageForm" class="form-horizontal mt-5" enctype="multipart/form-data">
+                        <div id="image-upload-message" class="alert alert-success alert-dismissible" role="alert" style="display: none">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            Image Uploaded
+                        </div>
+                        <form method="post" id="imageForm" class="form-horizontal mt-4" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label for="file">Image:</label>
                                 <input type="file" name="image" class="form-input-styled" id="file" data-fouc>
-                                <span class="form-text text-muted">Accepted formats: jpeg, png</span>
+                                <span class="form-text text-muted">Accepted formats: jpeg, png, bmp, gif, svg, or webp</span>
                             </div>
                             <div class="form-group">
                                 <label for="alt">Alt:</label>
@@ -53,14 +56,19 @@
                         </form>
                     </div>
                     <div class="tab-pane fade show mt-4" id="gallery">
-                        <div class="alert alert-success" id="message" style="display:none;"></div>
+                        <div id="message" class="alert alert-success alert-dismissible" role="alert" style="display: none">
+                            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            Image Deleted Successfully
+                        </div>
                         <div class="row">
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control form-control-lg" name="search" id="searchInput"
-                                       placeholder="Search image by name...">
-                                <div class="input-group-append">
-                                    <button type="submit" class="btn bg-primary-600 btn-icon btn-lg" id="searchButton">
-                                        <i class="icon-search4"></i></button>
+                            <div class="col-md-12">
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control form-control-lg" name="search" id="searchInput"
+                                           placeholder="Search image by name...">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn bg-primary-600 btn-icon btn-lg" id="searchButton">
+                                            <i class="icon-search4"></i></button>
+                                    </div>
                                 </div>
                             </div>
 
@@ -83,22 +91,22 @@
                         </div>
                         <div class="row" id="imageUpload">
                             @forelse($images as $image)
-                                <div class=" col-md-3">
-                                    <div class=" box modal-image image card-img-top mb-2" data-id="{{$image->id}}"
+                                <div class="col-md-3">
+                                    <div class="box modal-image image card-img-top mb-2" data-id="{{$image->id}}"
                                          data-name="{{$image->name}}"
                                          style="background-image: url({{asset('/storage/'.$image->name)}}); position: relative; background-position: center;
                                              background-size: cover; background-repeat: no-repeat">
                                         <p class="resolution"></p>
-                                        <button class="btn btn-danger del-position" data-id="{{$image->id}}"
-                                                data-name="{{$image->name}}"
-                                                onclick="return confirm('Be careful it will remove this image from all places ?')">
+                                        <button class="rounded-0 btn btn-danger del-position" data-id="{{$image->id}}"
+                                                data-name="{{$image->name}}">
                                             <i class="icon-diff-removed"></i></button>
                                         <p class="image-text">{{$image->alt}}</p>
                                     </div>
+                                    <h5>{{ $image->name }}</h5>
                                 </div>
                             @empty
-                                <div class="text-center">
-                                    <h6>No Image found</h6>
+                                <div class="w-100 text-center">
+                                    <h2>No Image found</h2>
                                 </div>
                             @endforelse
                             <div class="col-md-12">
@@ -111,7 +119,7 @@
                         <div class="modal-footer"
                              style="position: -webkit-sticky; /* Safari */ position: sticky; bottom: -22px; padding: 20px 0px; background-color: white">
                             <button class="btn btn-primary" id="confirm-button">Confirm</button>
-                            <button type="button" class="btn bg-danger" data-dismiss="modal">Close</button>
+                            <button type="button" id="close-button" class="btn bg-danger" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                     <div class="tab-pane fade show mt-4" id="selected-image">

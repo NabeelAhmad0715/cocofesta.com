@@ -23,7 +23,8 @@ class PostsController extends Controller
     {
         $type = Type::where('slug', $slug)->first();
         $posts = Post::where('type_id', $type->id)->get();
-        return view('admin.posts.index', compact('posts', 'type'));
+        $columns = $type->metaData()->where("is_visible", 1)->get();
+        return view('admin.posts.index', compact('posts', 'type', 'columns'));
     }
 
     /**
@@ -84,13 +85,9 @@ class PostsController extends Controller
             ]);
         }
 
-
-        $catgoryIds = [];
-        foreach ($request->category_id as $key => $category_id) {
-            $category = Category::where('id', $category_id)->first();
-            $catgoryIds[] = $category->id;
+        if ($request->category_id) {
+            $post->categories()->sync($request->category_id);
         }
-        $post->categories()->sync($catgoryIds);
 
         if ($request->tags) {
             $tagList = explode(",", $request->tags);
@@ -120,7 +117,7 @@ class PostsController extends Controller
         $categories = $type->categories;
         $names = array_column($post->tags->toArray(), 'name');
         $tags = implode(',', $names);
-        return view('admin.posts.update', compact('post', 'type', 'categories', 'tags'));
+        return view('admin.posts.edit', compact('post', 'type', 'categories', 'tags'));
     }
 
     /**
@@ -217,13 +214,9 @@ class PostsController extends Controller
                 ]);
             }
         }
-
-        $catgoryIds = [];
-        foreach ($request->category_id as $key => $category_id) {
-            $category = Category::where('id', $category_id)->first();
-            $catgoryIds[] = $category->id;
+        if ($request->category_id) {
+            $post->categories()->sync($request->category_id);
         }
-        $post->categories()->sync($catgoryIds);
 
         if ($request->tags) {
             $post->tags()->detach();

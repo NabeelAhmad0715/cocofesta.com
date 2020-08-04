@@ -9,11 +9,7 @@
         @endisset
         <!-- CSRF Token -->
         <meta name="csrf-token" content="{{ csrf_token() }}">
-        @isset($settings)
-            <title>{{ $settings->site_name }} | Admin Panel</title>
-        @else
-            <title> ContentBay | Admin Panel</title>
-        @endisset
+        <title>{{ $settings ? $settings->site_name : "ContentBay" }} | Admin Panel</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,100,500,700,900" rel="stylesheet">
         <link href="{{ asset("assets/css/icons/icomoon/styles.css") }}" rel="stylesheet">
         <link href="{{ asset("assets/css/bootstrap.min.css") }}" rel="stylesheet">
@@ -37,12 +33,7 @@
                     </div>
                     <div class="navbar-collapse collapse" id="navbar-footer">
                         <span class="navbar-text">
-                            &copy; 2019
-                            @isset($settings)
-                                <title>{{ $settings->site_name }} </title>
-                            @else
-                                <title> ContentBay</title>
-                            @endisset
+                            &copy; 2019 {{ $settings ? $settings->site_name : "ContentBay" }}
                         </span>
                     </div>
                 </div>

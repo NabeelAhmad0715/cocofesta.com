@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\URL;
 use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use App\Review;
+use App\Type;
 use Illuminate\Support\Facades\Auth;
 
 class PageController extends Controller
@@ -27,39 +28,39 @@ class PageController extends Controller
         return view('frontend.pages.about');
     }
 
-    public function product($slug)
+    public function product(Type $type)
     {
-        $category = Category::where('slug', $slug)->first();
-        $categoryPosts = $category->posts;
-        return view('frontend.pages.products', compact('categoryPosts', 'category'));
+        $posts = $type->posts;
+        return view('frontend.pages.products', compact('type', 'posts'));
     }
 
-    public function productPost($category, $slug)
+    public function productPost(Type $type, Post $post)
     {
-        $category = Category::where('slug', $category)->first();
-        $post = Post::where('slug', $slug)->first();
-        $totalReviews = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
-        if (Auth::user()) {
-            $reviewCheckUser = $post->orderDetails->where('user_id', Auth::user()->id);
-            return view('frontend.pages.product-post', compact('post', 'reviewCheckUser', 'totalReviews'));
+        if ($post->reviews->count() == 0) {
+            return view('frontend.pages.product-post', compact('post'));
+        } else {
+            $totalReviews = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
+            if (Auth::user()) {
+                $reviewCheckUser = $post->orderDetails->where('user_id', Auth::user()->id);
+                return view('frontend.pages.product-post', compact('post', 'reviewCheckUser', 'totalReviews'));
+            }
+            return view('frontend.pages.product-post', compact('post', 'totalReviews'));
         }
-        return view('frontend.pages.product-post', compact('post', 'totalReviews'));
     }
 
-    public function search(Request $request, $slug)
+    public function search(Request $request, Type $type)
     {
-        $category = Category::where('slug', $slug)->first();
         if ($request->has('search')) {
             $search = $request->search;
-            $categoryPosts = $category->posts()->where('title', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "{$search}%")->orwhere('slug', 'LIKE', "%{$search}")->orwhere('title', 'LIKE', "{$search}%")->orwhere('title', 'LIKE', "%{$search}")->get();
+            $posts = $type->posts()->where('title', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "{$search}%")->orwhere('slug', 'LIKE', "%{$search}")->orwhere('title', 'LIKE', "{$search}%")->orwhere('title', 'LIKE', "%{$search}")->get();
 
-            if (count($categoryPosts) <= 0) {
-                $categoryPosts = $category->posts;
+            if (count($posts) <= 0) {
+                $posts = $type->posts;
             }
         } else {
-            $categoryPosts = $category->posts;
+            $posts = $type->posts;
         }
-        return view('frontend.pages.products', compact('categoryPosts', 'category'));
+        return view('frontend.pages.products', compact('posts', 'type'));
     }
     public function viewCart()
     {

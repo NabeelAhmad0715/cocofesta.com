@@ -19,7 +19,6 @@
     <link href="{{ asset('backend/css/components.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/css/colors.min.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('backend/css/custom.css') }}" rel="stylesheet" type="text/css">
-    <link href="{{ asset('backend/css/amsify.suggestags.css') }}" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -89,11 +88,6 @@
             <div class="sidebar-content">
                 <div class="card card-sidebar-mobile">
                     <ul class="nav nav-sidebar" data-nav-type="accordion">
-
-                        <li class="nav-item-header">
-                            <div class="text-uppercase font-size-xs line-height-xs">Main</div> <i class="icon-menu"
-                                title="Main"></i>
-                        </li>
 
                         <li class="nav-item  {{ (request()->routeIs('index')) ? 'nav-item-open' : '' }}">
                             <a href="{{ route('admin.pages.home') }}" class="nav-link">
@@ -202,8 +196,6 @@
     <script src="{{ asset("assets/js/plugins/forms/styling/uniform.min.js") }}"></script>
     <script src="{{ asset("assets/js/plugins/notifications/pnotify.min.js") }}"></script>
     <script src="{{ asset("assets/js/plugins/forms/selects/bootstrap_multiselect.js") }}"></script>
-    <script src="{{ asset("backend/js/jquery.amsify.suggestags.js") }}"></script>
-    <script src="{{ asset("backend/js/jquery1.amsify.suggestags.js") }}"></script>
     <script src="{{ asset("assets/js/app.js") }}"></script>
     @stack('scripts')
 </body>

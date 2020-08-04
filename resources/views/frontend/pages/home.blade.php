@@ -304,7 +304,7 @@
                                                             <del>
                                                             @php
                                                             $price = $post->getMetaData('price');
-                                                            $discount = $price * ($post->getMetaData('discount')/10);
+                                                            $discount = $price / ($post->getMetaData('discount'));
                                                             @endphp
                                                             @if ($discount)
                                                                   {{ $price }}
@@ -346,19 +346,36 @@
            <h2>Recent  <span class="theme-color"> Places </span>  </h2>
            <p>You will sail along until you collide with an immovable object, after which you will sink to the bottom</p>
           </div>
+          <div id="whishlist-success-message" class="alert alert-success alert-dismissible" style="display: none;" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             Product is added to whishlist
+           </div>
+           <div id="whishlist-danger-message" class="alert alert-danger alert-dismissible" style="display: none;" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              Product is already added to whishlist
+           </div>
+           <div id="cart-success-message" class="alert alert-success alert-dismissible" style="display: none;" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+             Product is added to cart
+           </div>
+           <div id="cart-danger-message" class="alert alert-danger alert-dismissible" style="display: none;" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+              Product is already added to cart
+           </div>
          </div>
        </div>
        <div class="row popup-gallery">
+        @forelse ($posts as $post)
          <div class="col-lg-4 col-md-6 mb-30">
             <div class="listing-post">
-                  <a class="popup portfolio-img" href="{{ asset('images/portfolio/small/01.jpg') }}"><i class="fa fa-arrows-alt"></i></a>
+                  <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
                   <div class="blog-overlay">
 
                         <div class="blog-image">
-                              <img class="img-fluid" src="{{ asset('images/blog/big/01.jpg') }}" alt="">
+                              <img class="img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
                         </div>
                         <div class="blog-icon clearfix">
-                              <span class="date float-left bg-danger">Discount </span>
+                              <span class="date float-left bg-danger">Discount {{ $post->getMetaData('discount') }}%</span>
                         </div>
                         <div class="blog-name clearfix pl-20">
                               <div class="blog-name-left bg-info">
@@ -366,7 +383,7 @@
                               </div>
                               <a href="#">
                                     <div class="blog-name-right" style="padding: 7px 0px 0px 0px;">
-                                          <h4 class="text-white"><a href="#">Honey spa beauty</a></h4>
+                                          <h4 class="text-white"><a href="{{ route('pages.product-post', [$post->type->slug,$post->slug] ) }}">{{ $post->title }}</a></h4>
                                     </div>
                               </a>
                         </div>
@@ -377,23 +394,38 @@
                         <li>
                               <div class="product-price">
                                     <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
-                                    <del>3000</del>
-                                    <ins>2565</ins>
+                                    @if ($post->getMetaData('discount'))
+                                                <del>
+                                                @php
+                                                $price = $post->getMetaData('price');
+                                                $discount = $price / ($post->getMetaData('discount'));
+                                                @endphp
+                                                @if ($discount)
+                                                      {{ $price }}
+                                                @endif
+                                                </del>
+                                          @endif
+                                          <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
                               </div>
                         </li>
                      </ul>
                      <div class="float-right">
-                       <h6 class="theme-color"><a href="#">Add to Cart</a></h6>
+                       <h6 class="theme-color">
+                        <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="addtocart" href='javascript:;'>Add to cart</a>
+                        {{-- <a href="{{ route('pages.cart') }}">Add to Cart</a> --}}
+                    </h6>
                      </div>
                  </div>
               </div>
           </div>
          </div>
+         @empty
+         @endforelse
        </div>
      </div>
 </section>
 
-<section class="portfolio o-hidden">
+{{-- <section class="portfolio o-hidden">
       <div class="page-section-pt">
         <div class="container">
           <div class="row">
@@ -440,7 +472,7 @@
                                                 <del>
                                                 @php
                                                 $price = $post->getMetaData('price');
-                                                $discount = $price * ($post->getMetaData('discount')/10);
+                                                $discount = $price / ($post->getMetaData('discount'));
                                                 @endphp
                                                 @if ($discount)
                                                       {{ $price }}
@@ -471,7 +503,7 @@
           </div>
 
       </div>
-</section>
+</section> --}}
 
 <section class="page-section-ptb theme-bg text-white position-relative">
       <div class="container">
@@ -689,3 +721,8 @@
       </div>
 </section>
 @endsection
+@push('scripts')
+    <script src="{{asset('backend/js/whishlist-create.js') }}"></script>
+    <script src="{{asset('backend/js/cart-create.js') }}"></script>
+    <script src="{{asset('backend/js/reviews.js') }}"></script>
+@endpush

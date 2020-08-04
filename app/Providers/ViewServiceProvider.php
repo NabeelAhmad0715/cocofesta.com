@@ -42,8 +42,6 @@ class ViewServiceProvider extends ServiceProvider
         });
         View::composer(['frontend.*'], function ($view) {
             $type = Type::first();
-            $parentCategories = $type->categories->where('parent_category', null);
-            $childCategories = $type->categories->where('parent_category', '!=', null);
             $posts = Post::orderBy('created_at')->get();
             $reviews = Review::all();
             $topRatedPosts = Review::orderBy('rating', 'desc')->take(3)->get();
@@ -59,9 +57,9 @@ class ViewServiceProvider extends ServiceProvider
 
                 $totalPrice = Cart::where('user_id', Auth::user()->id)->where('in_stock', 1)->sum('price');
 
-                $view->with(compact('type', 'parentCategories', 'posts', 'childCategories', 'whishlistPosts', 'whishlistCount', 'cartPosts', 'cartCount', 'totalPrice'));
+                $view->with(compact('type', 'posts', 'whishlistPosts', 'whishlistCount', 'cartPosts', 'cartCount', 'totalPrice'));
             }
-            $view->with(compact('type', 'parentCategories', 'posts', 'reviews', 'childCategories'));
+            $view->with(compact('type', 'posts', 'reviews'));
         });
     }
 }

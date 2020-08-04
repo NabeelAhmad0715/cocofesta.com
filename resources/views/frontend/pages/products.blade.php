@@ -31,7 +31,7 @@
         <div class="container">
                <div class="row">
                   <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
-                    <form method="GET" action="{{ route('pages.search', [$category->slug]) }}">
+                    <form method="GET" action="{{ route('pages.search',[$type->slug]) }}">
                     <div class="sidebar-widget mb-40">
                       <h5 class="mb-20">search</h5>
                         <div class="widget-search">
@@ -57,9 +57,9 @@
                     <h5 class="mb-20">categories</h5>
                         <div class="widget-link">
                             <ul>
-                               @foreach ($category->children as $category)
+                               {{-- @foreach ($category->children as $category)
                                   <li> <a href="shop-single.html"> <i class="fa fa-angle-double-right"></i> {{ $category->title }} </a></li>
-                               @endforeach
+                               @endforeach --}}
                             </ul>
                         </div>
                      </div>
@@ -134,13 +134,13 @@
                 </div>
             <div class="col-lg-9 col-md-9">
                <div class="row">
-                  @forelse ($categoryPosts as $post)
+                  @forelse ($posts as $post)
                   <div class="col-lg-4 col-md-4 col-sm-6">
                         @if ($post->getMetaData('discount') != null)
                               <div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">{{ $post->getMetaData('discount') }}% Discount</div>
                         @endif
                         <div class="product mb-70">
-                           <a href="{{ route('pages.product-post',[$category->parent->slug, $post->slug]) }}">
+                           <a href="{{ route('pages.product-post',[$post->type->slug, $post->slug]) }}">
                            <div class="product-image">
                                  <img class="img-fluid mx-auto" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="">
                            </div>
@@ -160,7 +160,7 @@
                                              <del>
                                              @php
                                              $price = $post->getMetaData('price');
-                                             $discount = $price * ($post->getMetaData('discount')/10);
+                                             $discount = $price / ($post->getMetaData('discount'));
                                              @endphp
                                              @if ($discount)
                                                    {{ $price }}

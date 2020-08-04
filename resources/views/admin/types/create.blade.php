@@ -13,7 +13,7 @@
     <div class="breadcrumb">
         <a href="{{ route('admin.pages.home') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
         <span class="breadcrumb-item"><a href="{{ route('types.index') }}"> Types </a></span>
-        <span class="breadcrumb-item active">Create</span>
+        <span class="breadcrumb-item active">Add</span>
     </div>
 @endsection
 
@@ -24,17 +24,17 @@
         @include('common.partials.flash')
         <div class="card">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">Create Type</h5>
+                <h5 class="card-title">Add Type</h5>
             </div>
 
             <div class="card-body">
                 <form action="{{ route('types.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <fieldset class="mb-3">
-                        <legend class="text-uppercase font-size-sm font-weight-bold">Fill the form below to create a new post type</legend>
+                        <legend class="text-uppercase font-size-sm font-weight-bold">Fill the form below to add a new post type</legend>
                     </fieldset>
                     <div class="form-group">
-                        <label class="font-weight-semibold @error('title') text-danger @enderror">Title <span
+                        <label class=" @error('title') text-danger @enderror">Title <span
                                 class="text-red">*</span></label>
                         <div class="form-group-feedback form-group-feedback-right">
                             <input type="text" name="title"  value="{{ old('title') }}"
@@ -51,7 +51,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="font-weight-semibold @error('subtitle') text-danger @enderror">Subtitle</label>
+                        <label class=" @error('subtitle') text-danger @enderror">Subtitle</label>
                         <div class="form-group-feedback form-group-feedback-right">
                             <input type="text" name="subtitle"  value="{{ old('subtitle') }}"
                                 class="form-control @error('subtitle') border-danger @enderror">
@@ -69,33 +69,38 @@
 
 
                     <div class="form-group">
-                        <label class="font-weight-semibold @error('feature_image') text-danger @enderror">Featured Image</label>
+                        <label class=" @error('feature_image') text-danger @enderror">Featured Image
+                            </label>
                         <div class="form-group-feedback form-group-feedback-right">
                             <div style="display: block">
-                                <input type="text" style="display: none" name="featured_image" id="featured-image">
+                                <input type="hidden" name="featured_image" id="featured-image">
+                                <div id="featured-image-selected" style="margin-bottom: 10px;"></div>
                                 <button type="button" class="btn btn-primary  trigger-image-utility" data-target="featured-image" data-type="single">Upload Feature Image </button>
+                                <label id="featured-image-label"></label>
                             </div>
-                            <span class="form-text text-muted">Accepted formats: jpeg, png, jpg.</span>
+                            <span class="form-text text-muted">Accepted formats: jpeg, png, bmp, gif, svg, or webp</span>
                             @error('feature_image')
                             <div class="form-control-feedback text-danger">
                                 <i class="feature_image-cancel-circle2"></i>
                             </div>
                             @enderror
                         </div>
-                        @error('feature_image')
+                        @error('featured_image')
                         <span class="form-text text-danger">{{ $message }}</span>
                         @enderror
                     </div>
 
                     <div class="form-group">
-                        <label class="font-weight-semibold @error('header_image') text-danger @enderror">Header
+                        <label class=" @error('header_image') text-danger @enderror">Header
                             Image </label>
                         <div class="form-group-feedback form-group-feedback-right">
                             <div style="display:block;">
-                                <input type="text" style="display: none" name="header_image" id="header-images">
-                                <button type="button" class="btn btn-primary  trigger-image-utility" data-target="header-images">Upload Header Image </button>
+                                <input type="hidden" name="header_image" id="header-image">
+                                <div id="header-image-selected" style="margin-bottom: 10px;"></div>
+                                <button type="button" class="btn btn-primary  trigger-image-utility" data-target="header-image" data-type="single">Upload Header Image </button>
+                                <label id="header-image-label"></label>
                             </div>
-                            <span class="form-text text-muted">Accepted formats: jpeg, png, jpg.</span>
+                            <span class="form-text text-muted">Accepted formats: jpeg, png, bmp, gif, svg, or webp</span>
                             @error('header_image')
                             <div class="form-control-feedback text-danger">
                                 <i class="icon-cancel-circle2"></i>
@@ -108,7 +113,7 @@
                     </div>
 
                     <div class="form-group">
-                        <label class="font-weight-semibold @error('introduction') text-danger @enderror">Introduction <span
+                        <label class=" @error('introduction') text-danger @enderror">Introduction <span
                                 class="text-red">*</span></label>
                         <div class="form-group-feedback form-group-feedback-right">
                             <textarea name="introduction"  value="{{ old('introduction') }}"
@@ -134,7 +139,7 @@
                                 <legend class="text-uppercase font-size-sm font-weight-bold">Field <span class="countFields"></span></legend>
                                 <div class="col-md-4" style="margin-bottom:20px">
                                     <div class="form-group">
-                                        <label class="font-weight-semibold ">
+                                        <label class="">
                                             HTML field label
                                         </label>
                                         <input type="text" name="label_name[]" class="form-input-styled form-control">
@@ -143,7 +148,7 @@
 
                                 <div class="col-md-4" style="margin-bottom:20px">
                                     <div class="form-group">
-                                        <label class=" font-weight-semibold">Field type</label>
+                                        <label class="">Field type</label>
                                         <select name="field_type[]" id="field_type" class="form-input-styled form-control">
                                             <option value="">Select a field type</option>
                                             <option value="text">Text</option>
@@ -160,7 +165,7 @@
                                 </div>
                                 <div class="col-md-4" style="margin-bottom:20px">
                                     <div class="form-group">
-                                        <label class=" font-weight-semibold">HTML field name</label>
+                                        <label class="">HTML field name</label>
                                         <input type="text" name="name[]" class="form-input-styled form-control" required>
                                     </div>
                                 </div>
@@ -183,7 +188,7 @@
                                 </div>
                                 <div id="multipleImage" class="col-md-4" style="margin-bottom:20px">
                                     <div class="form-group">
-                                        <label class=" font-weight-semibold">Is multiple?</label>
+                                        <label class="">Is multiple?</label>
                                         <select name="multiple[]" class="form-input-styled form-control">
                                             <option value="0">No</option>
                                             <option value="1">Yes</option>
@@ -192,7 +197,7 @@
                                 </div>
                                 <div class="col-md-4" style="margin-bottom:12px">
                                     <div class="form-group">
-                                        <label class=" font-weight-semibold">Table visibility</label>
+                                        <label class="">Table visibility</label>
                                         <select name="field_visible[]" class="form-input-styled form-control">
                                             <option value="0">Off</option>
                                             <option value="1">On</option>
