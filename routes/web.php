@@ -20,54 +20,53 @@ use Illuminate\Support\Facades\Route;
 
 // Backend
 
-Route::group(['prefix' => 'admin'], function () {
+Route::group(['prefix' => 'admin', "namespace" => "AdminAuth", "as" => "admin."], function () {
     Route::get('/', function () {
         return redirect(route("admin.login"));
     });
-    Route::get('login', 'AdminAuth\LoginController@showLoginForm')->name('admin.login');
-    Route::post('login', 'AdminAuth\LoginController@login')->name('admin.login');
-    Route::post('/password/email', 'AdminAuth\ForgotPasswordController@sendResetLinkEmail')->name('admin.password.email');
-    Route::get('/password/reset', 'AdminAuth\ForgotPasswordController@showLinkRequestForm')->name('admin.password.request');
-    Route::post('/password/reset', 'AdminAuth\ResetPasswordController@reset')->name('admin.password.update');
-    Route::get('password/reset/{token}', 'AdminAuth\ResetPasswordController@showResetForm')->name('admin.password.reset');
-    Route::post('logout', 'AdminAuth\LoginController@logout')->name('admin.logout');
+    Route::get('login', 'LoginController@showLoginForm')->name('login');
+    Route::post('login', 'LoginController@login')->name('login');
+    Route::post('/password/email', 'ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('/password/reset', 'ForgotPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('/password/reset', 'ResetPasswordController@reset')->name('password.update');
+    Route::get('password/reset/{token}', 'ResetPasswordController@showResetForm')->name('password.reset');
 });
 
-Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin'], function () {
-    Route::get('/', 'Admin\PageController@index')->name('admin.pages.home');
+Route::group(['prefix' => 'admin', "middleware" => "auth:admin", "namespace" => "AdminAuth", "as" => "admin."], function () {
+    Route::get('/change-password', 'ChangePasswordController@changePassword')->name('change-password.edit');
+    Route::put('/change-password', 'ChangePasswordController@updatePassword')->name('change-password.update');
+    Route::post('logout', 'LoginController@logout')->name('logout');
+});
+
+Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', "namespace" => "Admin"], function () {
+    Route::get('/', 'PageController@index')->name('admin.pages.home');
     // Categories
-    Route::resource('/categories', 'Admin\CategoriesController');
-    Route::get('/category/image-delete/{id}', 'Admin\CategoriesController@delete')->name('category.delete');
+    Route::resource('/categories', 'CategoriesController');
+    Route::get('/category/image-delete/{id}', 'CategoriesController@delete')->name('category.delete');
 
     // Image Utility
-    Route::get('/image-gallery/selected', 'Admin\ImagesController@selectedImage')->name('image-gallery.selected');
-    Route::get('/image-gallery/image/deselect', 'Admin\ImagesController@deselectImage')->name('image-gallery.deselect');
-    Route::get('/pagination/fetch-data', 'Admin\ImagesController@fetchData')->name('pagination.fetch-data');
-    Route::post('/upload-image', 'Admin\ImagesController@upload')->name('images.upload');
-    Route::post('/delete-image', 'Admin\ImagesController@delete')->name('images.delete');
+    Route::get('/image-gallery/selected', 'ImagesController@selectedImage')->name('image-gallery.selected');
+    Route::get('/image-gallery/image/deselect', 'ImagesController@deselectImage')->name('image-gallery.deselect');
+    Route::get('/pagination/fetch-data', 'ImagesController@fetchData')->name('pagination.fetch-data');
+    Route::post('/upload-image', 'ImagesController@upload')->name('images.upload');
+    Route::post('/delete-image', 'ImagesController@delete')->name('images.delete');
 
     // Types
-    Route::resource('types', 'Admin\TypesController');
-    Route::get('posts/create/{slug}', 'Admin\PostsController@create')->name('posts.create');
-    Route::get('posts/{slug}', 'Admin\PostsController@index')->name('posts.index');
-    Route::post('posts/{slug}', 'Admin\PostsController@store')->name('posts.store');
-    Route::get('posts/{slug}/{id}/edit', 'Admin\PostsController@edit')->name('posts.edit');
-    Route::put('posts/{slug}/{id}', 'Admin\PostsController@update')->name('posts.update');
-    Route::delete('posts/{slug}/{id}', 'Admin\PostsController@destroy')->name('posts.destroy');
-    Route::get('/set-stock-status/{id}/{in_stock}', 'Admin\PageController@setStockStatus')->name('admin.set-stock-status');
-
-    Route::get('view/tags', 'Admin\PageController@tags')->name('posts.tags');
-    Route::get('/types/image-delete/{id}/{postId}/{image}', 'Admin\PostsController@delete')->name('type.delete');
+    Route::resource('types', 'TypesController');
+    Route::get('posts/create/{slug}', 'PostsController@create')->name('posts.create');
+    Route::get('posts/{slug}', 'PostsController@index')->name('posts.index');
+    Route::post('posts/{slug}', 'PostsController@store')->name('posts.store');
+    Route::get('posts/{slug}/{id}/edit', 'PostsController@edit')->name('posts.edit');
+    Route::put('posts/{slug}/{id}', 'PostsController@update')->name('posts.update');
+    Route::delete('posts/{slug}/{id}', 'PostsController@destroy')->name('posts.destroy');
+    Route::get('/types/image-delete/{id}/{postId}/{image}', 'PostsController@delete')->name('type.delete');
 
     // Contact Inquiries
-    Route::get('/general-settings/create', "Admin\GeneralSettingController@create")->name("general-settings.create");
-    Route::post('/general-settings', "Admin\GeneralSettingController@store")->name("general-settings.store");
-    Route::get('/general-settings/edit', "Admin\GeneralSettingController@edit")->name("general-settings.edit");
-    Route::put('/general-settings', "Admin\GeneralSettingController@update")->name("general-settings.update");
-    Route::resource('contact-enquiries', 'Admin\ContactEnquiryController');
-
-    Route::get('/change-password', 'AdminAuth\ChangePasswordController@changePassword')->name('admin.change-password.edit');
-    Route::put('/change-password', 'AdminAuth\ChangePasswordController@updatePassword')->name('admin.change-password.update');
+    Route::get('/general-settings/create', "GeneralSettingController@create")->name("general-settings.create");
+    Route::post('/general-settings', "GeneralSettingController@store")->name("general-settings.store");
+    Route::get('/general-settings/edit', "GeneralSettingController@edit")->name("general-settings.edit");
+    Route::put('/general-settings', "GeneralSettingController@update")->name("general-settings.update");
+    Route::resource('contact-enquiries', 'ContactEnquiryController');
 });
 
 Auth::routes();
@@ -98,9 +97,9 @@ Route::get('count/post/whishlist', 'Frontend\WhishlistController@count')->name('
 Route::get('create/post/whishlist', 'Frontend\WhishlistController@create')->name('whishlist.create');
 Route::get('remove/post/whishlist', 'Frontend\WhishlistController@remove')->name('whishlist.remove');
 
-Route::get('products/{slug}', 'Frontend\PageController@product')->name('pages.products');
-Route::get('/products/{category}/{slug}', 'Frontend\PageController@productPost')->name('pages.product-post');
-Route::get('products-search/{slug}', 'Frontend\PageController@search')->name('pages.search');
+
+
+
 Route::post('post/reviews', 'Frontend\PageController@setReviews');
 
 Route::get('login/{provider}', 'Auth\LoginController@redirect');
@@ -141,3 +140,6 @@ Route::get('/remove-symlink', function () {
         return "<h1>Symlink does not exist</h1>";
     }
 });
+Route::get('products-search/{type:slug}', 'Frontend\PageController@search')->name('pages.search');
+Route::get('{type:slug}', 'Frontend\PageController@product')->name('pages.products');
+Route::get('/{type:slug}/{post:slug}', 'Frontend\PageController@productPost')->name('pages.product-post');

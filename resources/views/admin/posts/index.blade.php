@@ -12,7 +12,7 @@
 @section('breadcrumbs')
     <div class="breadcrumb">
         <a href="{{ route('admin.pages.home') }}" class="breadcrumb-item"><i class="icon-home2 mr-2"></i> Home</a>
-        <span class="breadcrumb-item"><a href="{{ route('posts.index',['slug' => $type->slug]) }}">{{$type->title}} - Post </a></span>
+        <span class="breadcrumb-item"><a href="{{ route('posts.index',['slug' => $type->slug]) }}">{{$type->title}} </a></span>
         <span class="breadcrumb-item active">View All</span>
     </div>
 @endsection
@@ -23,10 +23,10 @@
         @include('common.partials.flash')
         <div class="card has-table">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">All {{ $type->title }} Posts</h5>
+                <h5 class="card-title">{{ $type->title }}</h5>
                 <div class="header-elements">
                     <a href="{{ route('posts.create',['slug' => $type->slug]) }}" class="mt-2 btn btn-primary">
-                        Create New Post
+                        Add New Post
                     </a>
                 </div>
             </div>
@@ -34,32 +34,39 @@
                 <table class="table datatable-pagination">
                     <thead>
                         <tr>
+                            <th>#</th>
                             <th>Title</th>
-                            <th>SubTitlle</th>
-                            <th>Image</th>
-                            <td>In Stock</td>
+                            @foreach($columns as $column)
+                                <th>{{ $column->label_name }}</th>
+                            @endforeach
+                            <th>Category</th>
+                            <th>Created At</th>
+                            <th>Last Modified</th>
                             <th class="text-center">Actions</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse ($posts as $key => $post)
                         <tr>
+                            <td>{{ $key+1 }}</td>
                             <td>{{ $post->title }}</td>
-                            <td>{{ $post->getMetaData('subtitle') }}</td>
+                            @foreach($columns as $column)
+                                @if ($column->field_type == 'file')
+                                <td> <img style="height:100px;width:100px" src="{{ asset('/storage/'. $post->getMetaData($column->name) ) }}" /></td>
+                                @else
+                                    <td>{{ $post->getMetaData($column->name) }}</td>
+                                @endif
+                            @endforeach
                             <td>
-                                @isset($post->getMetaData("featured_image")[0])
-                                    <img src="{{asset('/storage/' . $post->getMetaData("featured_image"))}}" style="width:150px;height:100px" alt="{{ $post->title }}">
+                                @isset($post->categories)
+                                    @foreach($post->categories as $category)
+                                        {{ $category->title }}
+
+                                    @endforeach
                                 @endisset
                             </td>
-                            <td class="data">
-                                <select data-id="{{ $post->id }}" class="inStock form-control" name="in_stock"
-                                    id="in_stock">
-                                        <option {{ $post->in_stock == 1 ? 'selected' : '' }} value="1" name="hidden_in_stock" class="hidden_in_stock" id="hidden_in_stock" >Yes</option>
-                                        <option {{ $post->in_stock == 0 ? 'selected' : '' }} value="0" name="hidden_in_stock" class="hidden_in_stock" id="hidden_in_stock">No</option>
-                                </select>
-                                <input type="hidden" class="post_id" name="post_id" id="post_id"
-                                    value="{{ $post->id }}" />
-                            </td>
+                            <td>{{ $post->created_at }}</td>
+                            <td>{{ $post->updated_at }}</td>
                             <td class="text-center">
                                 <div class="list-icons">
                                     <div class="dropdown">
@@ -86,12 +93,12 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="7">
+                            <td colspan=" 6 {{ $type->metaData()->where("is_visible", 1)->count() + 4 }}">
                                 <div class="alert alert-info text-center">
                                     No Posts Added So Far
                                     <br>
                                     <a href="{{ route('posts.create',['slug' => $type->slug]) }}" class="mt-2 btn btn-primary">
-                                        Create New Post
+                                        Add New Post
                                     </a>
                                 </div>
                             </td>
@@ -107,25 +114,4 @@
 @push('scripts')
     <script src="{{asset('backend/js/plugins/tables/datatables/datatables.min.js')}}"></script>
     <script src="{{asset('backend/js/demo_pages/datatables_basic.js')}}"></script>
-    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
-    <script>
-        $('.inStock').change(function(in_stock){
-            var post_id = this.getAttribute('data-id');
-            $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                method: 'get',
-                url: "/admin/set-stock-status/" + post_id + "/" + in_stock.target.value,
-                dataType: 'json',
-                success:function(data){
-                    if(data == 'done')
-                    {
-                    $('#in_stock').bootstrapToggle('on');
-                    alert("Data Inserted");
-                    }
-                }
-            });
-        });
-    </script>
 @endpush

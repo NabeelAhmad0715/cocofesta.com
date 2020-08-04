@@ -10,6 +10,7 @@ use App\Category;
 use App\Type;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use Illuminate\Validation\Rule;
 
 class CategoriesController extends Controller
 {
@@ -47,7 +48,9 @@ class CategoriesController extends Controller
     {
         $request->validate([
             'parent_category' => ['nullable', 'exists:categories,id'],
-            'title' => ['required', 'max:255', 'unique:categories,title'],
+            'title' => Rule::unique('categories', 'title')->where(function ($query) {
+                return $query->where('type_id', request("type_id"));
+            }),
             'display_order' => 'numeric',
             'type_id' => ['required', 'integer'],
         ]);
@@ -119,7 +122,7 @@ class CategoriesController extends Controller
         $types = Type::all();
         $headerImages = $category->images('header');
         $featuredImage = $category->images('featured');
-        return view('admin.category.update', compact('category', 'allCategories', 'headerImages', 'featuredImage', 'images', 'types'));
+        return view('admin.category.edit', compact('category', 'allCategories', 'headerImages', 'featuredImage', 'images', 'types'));
     }
 
     /**
@@ -133,7 +136,7 @@ class CategoriesController extends Controller
     {
 
         $request->validate([
-            'parent_category' => ['nullable', 'exists:categories,id'],
+            'parent_category' => ['sometimes', 'nullable', 'exists:categories,id'],
             'title' => ['required', 'max:255', 'unique:categories,title,' . $category->id],
             'display_order' => 'numeric',
             'type_id' => ['required', 'integer'],

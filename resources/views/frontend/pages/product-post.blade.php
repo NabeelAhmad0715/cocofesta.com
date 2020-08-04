@@ -79,48 +79,49 @@
                   <div class="product-detail-rating float-right">
                     <div class='rating-stars' style="margin: 16px 0px 16px 0px;">
                       <ul id='stars'>
+                        @isset($totalReviews)
+                            @for ($i = 0; $i < $totalReviews; $i++)
+                            <li class='starSelected selected'>
+                                <i class='fa fa-star fa-fw'></i>
+                            </li>
+                            @endfor
+                            @if ($totalReviews == 4)
+                                <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                                </li>
+                            @elseif($totalReviews == 3)
+                                <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='starSelected'>
+                                <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                @elseif($totalReviews == 2)
+                                <li class='starSelected'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='starSelected'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='starSelected'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                @elseif($totalReviews == 1)
+                                <li class='starSelected'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='starSelected'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='starSelected'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='starSelected'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                @endif
 
-
-                        @for ($i = 0; $i < $totalReviews; $i++)
-                          <li class='starSelected selected'>
-                            <i class='fa fa-star fa-fw'></i>
-                          </li>
-                          @endfor
-                          @if ($totalReviews == 4)
-                            <li class='starSelected'>
-                              <i class='fa fa-star fa-fw'></i>
-                            </li>
-                          @elseif($totalReviews == 3)
-                            <li class='starSelected'>
-                              <i class='fa fa-star fa-fw'></i>
-                            </li>
-                            <li class='starSelected'>
-                              <i class='fa fa-star fa-fw'></i>
-                            </li>
-                            @elseif($totalReviews == 2)
-                              <li class='starSelected'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                              <li class='starSelected'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                              <li class='starSelected'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                            @elseif($totalReviews == 1)
-                              <li class='starSelected'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                              <li class='starSelected'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                              <li class='starSelected'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                              <li class='starSelected'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                            @endif
+                        @endisset
 
                       </ul>
                     </div>
@@ -133,7 +134,7 @@
                   <div class="product-detail add-to-cart">
                       @php
                       $price = $post->getMetaData('price');
-                      $discount = $price * ($post->getMetaData('discount')/10);
+                      $discount = $price / ($post->getMetaData('discount'));
                       @endphp
                       <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="button small addtocart" href='javascript:;'>Add to cart</a>
                   </div>

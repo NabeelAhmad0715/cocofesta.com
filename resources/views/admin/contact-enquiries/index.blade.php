@@ -20,7 +20,7 @@
 @section('content')
     @include('admin.partials.header')
     <div class="content">
-        @include('admin.partials.alerts')
+        @include('common.partials.flash')
         <div class="card has-table">
             <div class="card-header header-elements-inline">
                 <h5 class="card-title">All Contact Enquiries</h5>
@@ -29,6 +29,7 @@
             <table class="table datatable-pagination">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Name</th>
                         <th>Email</th>
                         <th>Phone</th>
@@ -37,8 +38,9 @@
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($contactEnquiries as $contactEnquiry)
+                    @forelse ($contactEnquiries as $key =>  $contactEnquiry)
                     <tr>
+                        <td>{{ $key+1 }}</td>
                         <td>{{ $contactEnquiry->name }}</td>
                         <td>{{ $contactEnquiry->email }}</td>
                         <td>{{ $contactEnquiry->phone }}</td>
@@ -56,9 +58,9 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="7">
+                        <td colspan="6">
                             <div class="alert alert-info text-center">
-                                No Contact Enquiries so far
+                                No Contact Enquiries So Far
                             </div>
                         </td>
                     </tr>

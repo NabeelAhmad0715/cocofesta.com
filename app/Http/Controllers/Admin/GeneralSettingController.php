@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-
 use Illuminate\Http\Request;
 use App\GeneralSetting;
+use App\Image;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
+use App\ImageManager;
 
 class GeneralSettingController extends Controller
 {
@@ -23,11 +24,11 @@ class GeneralSettingController extends Controller
             'site_logo' => ['required', 'image'],
             'favicon_icon' => ['required', 'image'],
             'site_name' => ['required', 'string', 'max:255'],
-            'admin_email' => ['required', 'email'],
-            'from_email' => ['required', 'email'],
-            'reply_email' => ['required', 'email'],
-            'auto_respond_email' => ['required', 'email'],
-            'support_email' => ['required', 'email'],
+            'admin_email' => ['nullable', 'email'],
+            'from_email' => ['nullable', 'email'],
+            'reply_email' => ['nullable', 'email'],
+            'auto_respond_email' => ['nullable', 'email'],
+            'support_email' => ['nullable', 'email'],
         ]);
 
         $siteLogo = $request->site_logo;
@@ -55,7 +56,7 @@ class GeneralSettingController extends Controller
     {
         $generalSettings = GeneralSetting::first();
         if ($generalSettings) {
-            return view('admin.general-settings.update', compact('generalSettings'));
+            return view('admin.general-settings.edit', compact('generalSettings'));
         } else {
             return view('admin.general-settings.create');
         }
@@ -76,11 +77,11 @@ class GeneralSettingController extends Controller
             'site_logo' => ['nullable'],
             'favicon_icon' => ['nullable'],
             'site_name' => ['required', 'string', 'max:255'],
-            'admin_email' => ['required', 'email'],
-            'from_email' => ['required', 'email'],
-            'reply_email' => ['required', 'email'],
-            'auto_respond_email' => ['required', 'email'],
-            'support_email' => ['required', 'email'],
+            'admin_email' => ['nullable', 'email'],
+            'from_email' => ['nullable', 'email'],
+            'reply_email' => ['nullable', 'email'],
+            'auto_respond_email' => ['nullable', 'email'],
+            'support_email' => ['nullable', 'email'],
         ]);
 
         if ($request->site_logo) {

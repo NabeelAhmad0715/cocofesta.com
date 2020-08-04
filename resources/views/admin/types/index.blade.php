@@ -23,10 +23,10 @@
         @include('common.partials.flash')
         <div class="card has-table">
             <div class="card-header header-elements-inline">
-                <h5 class="card-title">All Types</h5>
+                <h5 class="card-title">Types</h5>
                 <div class="header-elements">
                     <a href="{{ route('types.create') }}" class="mt-2 btn btn-primary">
-                        Create New Type
+                        Add New Type
                     </a>
                 </div>
             </div>
@@ -34,44 +34,61 @@
             <table class="table datatable-pagination">
                 <thead>
                     <tr>
+                        <th>#</th>
                         <th>Image</th>
                         <th>Title</th>
-                        <th>Introduction</th>
-                        <th>created_at</th>
+                        <th>Created At</th>
+                        <th>Last Modified</th>
                         <th class="text-center">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @forelse ($types as $type)
+                    @forelse ($types as $key=> $type)
                     <tr>
+                        <td>{{$key+1}}</td>
                         <td>
                             @isset($type->images('featured')[0])
-                            <img src="{{asset('/storage/' . $type->images('featured')[0]->name)}}" style="width:150px;height:100px" alt="{{ $type->title }}">
+                                <img src="{{asset('/storage/' . $type->images('featured')[0]->name)}}" style="width:150px;height:100px" alt="{{ $type->title }}">
+                            @else
+                                <img src="{{asset('/backend/images/noimage.png')}}" style="width:120px;height:110px" alt="No Image Found">
                             @endisset
                         </td>
                         <td>{{ $type->title }}</td>
-                        <td style="width:300px"> {!! $type->introduction !!} </td>
                         <td>{{ $type->created_at }}</td>
+                        <td>{{ $type->updated_at }}</td>
                         <td class="text-center">
                             <div class="list-icons">
-                                <a href="{{route('types.edit',$type->id) }}" class="list-icons-item text-primary-600"><i class="icon-pencil7"></i></a>
-                                <form action="{{route('types.destroy',$type->id) }}"   method="POST">
-                                    @csrf
-                                    @method('Delete')
-                                    <button type="submit" class=" list-icons-item text-danger-600" onclick="return confirm('Are you sure you want to delete this type?')" style="background-color: Transparent; border: none;cursor:pointer;"><i class="icon-trash"></i></button>
-                                </form>
+                                <div class="dropdown">
+                                    <a href="#" class="list-icons-item" data-toggle="dropdown">
+                                        <i class="icon-menu9"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right">
+                                        <a href="{{route('types.edit',$type->id) }}"
+                                            class="dropdown-item"><i class="icon-pencil5"></i> Edit</a>
+                                        <a href="#" class="dropdown-item"
+                                            onclick="event.preventDefault(); if(confirm('Are you sure you want to delete this type?')){document.getElementById('delete-type-{{ $type->id }}-form').submit();}">
+                                            <i class="icon-trash"></i>
+                                            Delete
+                                        </a>
+                                        <form action="{{route('types.destroy',$type->id) }}"
+                                            id="delete-type-{{ $type->id }}-form" method="POST" style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </div>
+                                </div>
                             </div>
                         </td>
-                        <td style="display: none"></td>
+
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="7">
+                        <td colspan="6">
                             <div class="alert alert-info text-center">
                                 No Types Added So Far
                                 <br>
                                 <a href="{{ route('types.create') }}" class="mt-2 btn btn-primary">
-                                    Create New
+                                    Add New Type
                                 </a>
                             </div>
                         </td>

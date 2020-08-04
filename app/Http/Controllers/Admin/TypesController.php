@@ -135,7 +135,7 @@ class TypesController extends Controller
         $images = ImageManager::all()->sortByDesc("id");
         $headerImages = $type->images('header');
         $featuredImage = $type->images('featured');
-        return view('admin.types.update', compact('type', 'images', 'headerImages', 'featuredImage'));
+        return view('admin.types.edit', compact('type', 'images', 'headerImages', 'featuredImage'));
     }
 
     /**

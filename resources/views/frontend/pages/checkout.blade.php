@@ -90,7 +90,7 @@
                       </td>
                       <td><p>{{ $post->title }}</p></td>
                       @php
-                      $discount = $post->getMetaData('price') * ($post->getMetaData('discount')/10);
+                      $discount = $post->getMetaData('price') / ($post->getMetaData('discount'));
                       @endphp
                       <td><p>Rs {{ $cartPost->price ? $cartPost->price : ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) }}</p></td>
                     </tr>

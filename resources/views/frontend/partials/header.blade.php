@@ -49,14 +49,10 @@
 
           <li><a href="{{ route('pages.home') }}">Home</a></li>
           <li><a href="{{ route('pages.about') }}">About</a></li>
-          <li><a href="javascript:void(0)"> {{ $type->title }} <i class="fa fa-angle-down fa-indicator"></i></a>
-                 <!-- drop down multilevel  -->
-                 <ul class="drop-down-multilevel">
-                  @foreach ($parentCategories as $category)
-                    <li><a href="{{ route('pages.products',[$category->slug]) }}">{{ $category->title }}</a></li>
-                  @endforeach
-                </ul>
+          @if ($type)
+            <li><a href="{{ route('pages.products',[$type->slug]) }}"> {{ $type->title }}</a>
             </li>
+          @endif
             <li><a href="{{ route('pages.contact-us') }}">Contact Us</a></li>
             @auth
             <li class="active"><a href="javascript:void(0)">{{ auth()->user()->name }}<i class="fa fa-angle-down fa-indicator"></i></a>
@@ -99,7 +95,7 @@
             </strong></a>
           </div>
 
-          <div class="shpping-cart" style="padding:10px">
+          <div class="shpping-cart" style="padding: 20px 20px 20px 10px;">
            <a class="cart-btn" href="#"> <i class="fa fa-shopping-cart icon"></i> <strong id="cartCount" class="item">
             @isset($cartCount)
            {{ $cartCount }}
