@@ -56,7 +56,7 @@
               data-paddingbottom="[0,0,0,0]"
               data-paddingleft="[0,0,0,0]"
 
-              style="z-index: 6; white-space: nowrap; font-size: 90px; line-height: 90px; font-weight: 700; color: #ffffff; letter-spacing: 0px;font-family:Montserrat;">WOMAN </div>
+              style="z-index: 6; white-space: nowrap; font-size: 90px; line-height: 90px; font-weight: 700; color: #ffffff; letter-spacing: 0px;font-family:Montserrat;">FINE </div>
 
       <!-- LAYER NR. 3 -->
       <div class="tp-caption   tp-resizeme"
@@ -76,7 +76,7 @@
               data-paddingbottom="[0,0,0,0]"
               data-paddingleft="[0,0,0,0]"
 
-              style="z-index: 7; white-space: nowrap; font-size: 90px; line-height: 90px; font-weight: 700; color: #ffffff; letter-spacing: 0px;font-family:Montserrat;">LOOKBOOK </div>
+              style="z-index: 7; white-space: nowrap; font-size: 90px; line-height: 90px; font-weight: 700; color: #ffffff; letter-spacing: 0px;font-family:Montserrat;">LEATHER </div>
 
       <!-- LAYER NR. 4 -->
       <div class="tp-caption   tp-resizeme"
@@ -271,7 +271,7 @@
   </div>
 </section>
 
-<section class="shop-06-product page-section-ptb">
+{{-- <section class="shop-06-product page-section-ptb">
       <div class="container">
             <div class="row">
                   <div class="col-lg-12 col-md-12">
@@ -284,7 +284,7 @@
             <div class="row">
                   <div class="col-md-12">
                         <div class="owl-carousel" data-nav-dots="false" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="3" data-xs-items="2" data-xx-items="1" data-space="20">
-                        @forelse ($posts as $post)
+                        @forelse ($latestPosts as $post)
                               <div class="item">
                                     <div class="product">
                                           <div class="product-image">
@@ -295,11 +295,12 @@
                                                 </div>
                                                 </div>
                                           </div>
-                                          <div class="product-des">
+                                          <div class="product-des text-center">
                                                 <div class="product-title">
                                                 <a class="text-black" href="shop-single.html">{{ $post->title }}</a>
                                                 </div>
                                                 <div class="product-price">
+                                                    <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
                                                       @if ($post->getMetaData('discount'))
                                                             <del>
                                                             @php
@@ -323,27 +324,14 @@
                   </div>
             </div>
       </div>
-</section>
-
-<section class="shop-block page-section-ptb bg-overlay-black-40 parallax" data-jarallax='{"speed": 0.6}' style="background-image: url({{ asset('images/05.jpg') }});">
-      <div class="container">
-       <div class="row justify-content-center">
-         <div class="col-md-10 text-center pt-50 pb-50">
-          <h2 class="text-white">Women’s lookbook </h2>
-            <p class="text-white mt-20 mb-30">Best Watches available on the cheapest prices at Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-             <a class="button white button-border" href="#">Shop Now </a>
-             <a class="button white ml-10" href="#">Get deale</a>
-         </div>
-        </div>
-      </div>
-</section>
+</section> --}}
 
 <section class="page-section-ptb gray-bg" >
       <div class="container">
        <div class="row justify-content-center">
          <div class="col-lg-8">
            <div class="section-title text-center">
-           <h2>Recent  <span class="theme-color"> Places </span>  </h2>
+           <h2>New  <span class="theme-color"> Collections </span>  </h2>
            <p>You will sail along until you collide with an immovable object, after which you will sink to the bottom</p>
           </div>
           <div id="whishlist-success-message" class="alert alert-success alert-dismissible" style="display: none;" role="alert">
@@ -365,7 +353,7 @@
          </div>
        </div>
        <div class="row popup-gallery">
-        @forelse ($posts as $post)
+        @forelse ($latestPosts as $post)
          <div class="col-lg-4 col-md-6 mb-30">
             <div class="listing-post">
                   <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
@@ -374,15 +362,20 @@
                         <div class="blog-image">
                               <img class="img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
                         </div>
+                        @if ($post->getMetaData('discount'))
                         <div class="blog-icon clearfix">
                               <span class="date float-left bg-danger">Discount {{ $post->getMetaData('discount') }}%</span>
                         </div>
+                        @endif
                         <div class="blog-name clearfix pl-20">
-                              <div class="blog-name-left bg-info">
-                                    <span> 3.5</span>
-                              </div>
+                            @if ($post->reviews->count() != 0)
+                                  <div class="blog-name-left bg-info">
+                                    <span>
+                                    {{ round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', '')) }}</span>
+                                </div>
+                            @endif
                               <a href="#">
-                                    <div class="blog-name-right" style="padding: 7px 0px 0px 0px;">
+                                    <div class="blog-name-right" style="padding: 12px 0px 0px 0px;">
                                           <h4 class="text-white"><a href="{{ route('pages.product-post', [$post->type->slug,$post->slug] ) }}">{{ $post->title }}</a></h4>
                                     </div>
                               </a>
@@ -421,6 +414,9 @@
          </div>
          @empty
          @endforelse
+         <div class="w-100 text-center">
+          <a class="button ml-10" href="{{ route('pages.products',[$type->slug]) }}">Explore All</a>
+         </div>
        </div>
      </div>
 </section>
@@ -505,31 +501,16 @@
       </div>
 </section> --}}
 
-<section class="page-section-ptb theme-bg text-white position-relative">
-      <div class="container">
-       <div class="row">
-            <div class="col-lg-4 col-sm-6 sm-mb-30">
-            <div class="counter left-icon text-white">
-              <span class="icon ti-user theme-color" aria-hidden="true"></span>
-              <span class="timer" data-to="4905" data-speed="10000">4905</span>
-              <label>ORDERED PRODUCT's</label>
-            </div>
-          </div>
-           <div class="col-lg-4 col-sm-6 sm-mb-30">
-            <div class="counter left-icon text-white">
-             <span class="icon ti-help-alt theme-color" aria-hidden="true"></span>
-              <span class="timer" data-to="3750" data-speed="10000">3750</span>
-              <label>CUSTOMER REVIEW</label>
-            </div>
-          </div>
-           <div class="col-lg-4 col-sm-6">
-            <div class="counter left-icon text-white">
-              <span class="icon ti-face-smile theme-color" aria-hidden="true"></span>
-              <span class="timer" data-to="3237" data-speed="10000">3237</span>
-              <label>HAPPY CLIENTS</label>
-            </div>
-          </div>
-        </div>
+<section class="shop-block page-section-ptb bg-overlay-black-40 parallax" data-jarallax='{"speed": 0.6}' style="background-image: url({{ asset('images/05.jpg') }});">
+    <div class="container">
+     <div class="row justify-content-center">
+       <div class="col-md-10 text-center pt-50 pb-50">
+        <h2 class="text-white">Women’s lookbook </h2>
+          <p class="text-white mt-20 mb-30">Best Watches available on the cheapest prices at Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+           <a class="button white button-border" href="#">Shop Now </a>
+           <a class="button white ml-10" href="#">Get deale</a>
+       </div>
+      </div>
     </div>
 </section>
 
@@ -538,129 +519,125 @@
          <div class="row">
           <div class="col-lg-4 col-sm-6">
             <h4 class="mb-30">Top Rated</h4>
-            <div class="product left clearfix mb-40">
-             <div class="product-image">
-               <a href="#"><img class="img-fluid mx-auto" alt="" src="images/shop/10.jpg">
-               </a>
-             </div>
-             <div class="product-description">
-               <div class="product-title">
-                <h5> <a href="#"> Product name </a> </h5>
-               </div>
-               <div class="product-price"><del>$30.00</del><ins>$15.00</ins>
-               </div>
-               <div class="product-rate">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-               </div>
-             </div>
-           </div>
-           <div class="product left clearfix mb-40">
-             <div class="product-image">
-               <a href="#"><img class="img-fluid mx-auto" alt="" src="images/shop/11.jpg">
-               </a>
-             </div>
-             <div class="product-description">
-               <div class="product-title">
-                <h5> <a href="#"> Product name </a> </h5>
-               </div>
-               <div class="product-price"><del>$30.00</del><ins>$15.00</ins>
-               </div>
-               <div class="product-rate">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-               </div>
-             </div>
-           </div>
-           <div class="product left clearfix">
-             <div class="product-image">
-               <a href="#"><img class="img-fluid mx-auto" alt="" src="images/shop/12.jpg">
-               </a>
-             </div>
-             <div class="product-description">
-               <div class="product-title">
-                <h5> <a href="#"> Product name </a> </h5>
-               </div>
-               <div class="product-price"><del>$30.00</del><ins>$15.00</ins>
-               </div>
-               <div class="product-rate">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-               </div>
-             </div>
-           </div>
+            @forelse ($topRatedPosts as $post)
+                @php
+                    $post = $post->post;
+                @endphp
+                <div class="product left clearfix mb-40">
+                    <div class="product-image">
+                        <a href="#"><img class="img-fluid mx-auto" alt="{{ $post->title }}" style="height: 88px;" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}">
+                        </a>
+                    </div>
+                    <div class="product-description">
+                        <div class="product-title">
+                            <h5> <a href="#"> {{ $post->title }} </a> </h5>
+                        </div>
+                        <div class="product-price">
+                            <span class="text-black" style="font-size:10px"><b>PKR.</b></span>
+                            @if ($post->getMetaData('discount'))
+                                        <del>
+                                        @php
+                                        $price = $post->getMetaData('price');
+                                        $discount = $price / ($post->getMetaData('discount'));
+                                        @endphp
+                                        @if ($discount)
+                                              {{ $price }}
+                                        @endif
+                                        </del>
+                                  @endif
+                                  <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
+                      </div>
+                        <div class="product-rate">
+                            @php
+                                $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
+                            @endphp
+                            @for ($i = 0; $i < $star; $i++)
+                                <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
+                            @endfor
+                            @if ($star == 4)
+                                <i class='fa fa-star-o'></i>
+                            @elseif($star == 3)
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                            @elseif($star == 2)
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                            @elseif($star == 1)
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                            @endif
+                        </div>
+                    </div>
+            </div>
+            @empty
+            <div class="w-100">
+                <h2 class="text-center">No post top rated</h2>
+            </div>
+            @endforelse
           </div>
           <div class="col-lg-4 col-sm-6">
             <h4 class="mb-30 xs-mt-30">Popular</h4>
-            <div class="product left clearfix mb-40">
-             <div class="product-image">
-               <a href="#"><img class="img-fluid mx-auto" alt="" src="images/shop/01.jpg">
-               </a>
-             </div>
-             <div class="product-description">
-               <div class="product-title">
-                <h5> <a href="#"> Product name </a> </h5>
-               </div>
-               <div class="product-price"><del>$30.00</del><ins>$15.00</ins>
-               </div>
-               <div class="product-rate">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-               </div>
-             </div>
-           </div>
-           <div class="product left clearfix mb-40">
-             <div class="product-image">
-               <a href="#"><img class="img-fluid mx-auto" alt="" src="images/shop/02.jpg">
-               </a>
-             </div>
-             <div class="product-description">
-               <div class="product-title">
-                <h5> <a href="#"> Product name </a> </h5>
-               </div>
-               <div class="product-price"><del>$30.00</del><ins>$15.00</ins>
-               </div>
-               <div class="product-rate">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-               </div>
-             </div>
-           </div>
-           <div class="product left clearfix">
-             <div class="product-image">
-               <a href="#"><img class="img-fluid mx-auto" alt="" src="images/shop/03.jpg">
-               </a>
-             </div>
-             <div class="product-description">
-               <div class="product-title">
-                <h5> <a href="#"> Product name </a> </h5>
-               </div>
-               <div class="product-price"><del>$30.00</del><ins>$15.00</ins>
-               </div>
-               <div class="product-rate">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-               </div>
-             </div>
-           </div>
+            @forelse ($popularPosts as $post)
+                @php
+                    $post = $post->post;
+                @endphp
+                <div class="product left clearfix mb-40">
+                    <div class="product-image">
+                        <a href="#"><img class="img-fluid mx-auto" alt="{{ $post->title }}" style="height: 88px;" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}">
+                        </a>
+                    </div>
+                    <div class="product-description">
+                        <div class="product-title">
+                            <h5> <a href="#"> {{ $post->title }} </a> </h5>
+                        </div>
+                        <div class="product-price">
+                            <span class="text-black" style="font-size:10px"><b>PKR.</b></span>
+                            @if ($post->getMetaData('discount'))
+                                        <del>
+                                        @php
+                                        $price = $post->getMetaData('price');
+                                        $discount = $price / ($post->getMetaData('discount'));
+                                        @endphp
+                                        @if ($discount)
+                                              {{ $price }}
+                                        @endif
+                                        </del>
+                                  @endif
+                                  <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
+                      </div>
+                        <div class="product-rate">
+                            @php
+                                $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
+                            @endphp
+                            @for ($i = 0; $i < $star; $i++)
+                                <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
+                            @endfor
+                            @if ($star == 4)
+                                <i class='fa fa-star-o'></i>
+                            @elseif($star == 3)
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                            @elseif($star == 2)
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                            @elseif($star == 1)
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                                <i class='fa fa-star-o'></i>
+                            @endif
+                        </div>
+                    </div>
+            </div>
+            @empty
+            <div class="w-100">
+                <h2 class="text-center">No post top rated</h2>
+            </div>
+            @endforelse
           </div>
           <div class="col-lg-4">
              <div class="offer-banner-1 text-center sm-mt-40">

@@ -140,6 +140,6 @@ Route::get('/remove-symlink', function () {
         return "<h1>Symlink does not exist</h1>";
     }
 });
-Route::get('products-search/{type:slug}', 'Frontend\PageController@search')->name('pages.search');
+Route::get('{type:slug}/products-search/', 'Frontend\PageController@search')->name('pages.search');
 Route::get('{type:slug}', 'Frontend\PageController@product')->name('pages.products');
 Route::get('/{type:slug}/{post:slug}', 'Frontend\PageController@productPost')->name('pages.product-post');

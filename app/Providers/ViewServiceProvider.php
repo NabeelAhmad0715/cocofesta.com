@@ -45,7 +45,6 @@ class ViewServiceProvider extends ServiceProvider
             $posts = Post::orderBy('created_at')->get();
             $reviews = Review::all();
             $topRatedPosts = Review::orderBy('rating', 'desc')->take(3)->get();
-
             $popularPosts = OrderDetail::select('post_id', DB::raw('count(*) as total'))->groupBy('post_id')->orderBy('total', 'desc')->take(3)->get();
 
             if (Auth::user()) {
@@ -57,9 +56,9 @@ class ViewServiceProvider extends ServiceProvider
 
                 $totalPrice = Cart::where('user_id', Auth::user()->id)->where('in_stock', 1)->sum('price');
 
-                $view->with(compact('type', 'posts', 'whishlistPosts', 'whishlistCount', 'cartPosts', 'cartCount', 'totalPrice'));
+                $view->with(compact('type', 'posts', 'whishlistPosts', 'whishlistCount', 'cartPosts', 'cartCount', 'totalPrice', 'topRatedPosts', 'popularPosts'));
             }
-            $view->with(compact('type', 'posts', 'reviews'));
+            $view->with(compact('type', 'posts', 'reviews', 'topRatedPosts', 'popularPosts'));
         });
     }
 }
