@@ -59,6 +59,7 @@ class CartController extends Controller
             $cart = Cart::where('user_id', $user_id)->where('post_id', $post_id)->delete();
             return response()->json($cart);
         } else {
+            dd("not ok");
             $cart = null;
             return response()->json($cart);
         }

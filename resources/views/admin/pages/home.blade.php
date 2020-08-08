@@ -73,6 +73,51 @@
                     @endforeach
                     <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
                         <div class="card bg-teal-400">
+                            <a href="{{ route('customers.index') }}" class="text-white">
+                                <div class="text-center card-body">
+                                    <div>
+                                        <h1 class="font-weight-semibold mb-0"><i class="icon-3x mr-1 icon-users"></i>
+                                        </h1>
+                                    </div>
+                                    <div class="pt-2">
+                                        <h1 class="font-weight-semibold mb-0">Customers</h1>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <div class="card bg-teal-400">
+                            <a href="{{ route('reviews.index') }}" class="text-white">
+                                <div class="text-center card-body">
+                                    <div>
+                                        <h1 class="font-weight-semibold mb-0"><i class="icon-3x mr-1 icon-stars"></i>
+                                        </h1>
+                                    </div>
+                                    <div class="pt-2">
+                                        <h1 class="font-weight-semibold mb-0">Reviews</h1>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <div class="card bg-teal-400">
+                            <a href="{{ route('orders.index') }}" class="text-white">
+                                <div class="text-center card-body">
+                                    <div>
+                                        <h1 class="font-weight-semibold mb-0"><i class="icon-3x mr-1 icon-cart"></i>
+                                        </h1>
+                                    </div>
+                                    <div class="pt-2">
+                                        <h1 class="font-weight-semibold mb-0">Orders</h1>
+                                    </div>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-6">
+                        <div class="card bg-teal-400">
                             <a href="{{ route('contact-enquiries.index') }}" class="text-white">
                                 <div class="text-center card-body">
                                     <div>

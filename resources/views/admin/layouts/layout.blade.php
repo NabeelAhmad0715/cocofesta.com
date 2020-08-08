@@ -143,7 +143,18 @@
                             </ul>
                         </li>
                         @endforeach
-
+                        <li
+                        class="nav-item  {{ (request()->routeIs('customers.*')) ? 'nav-item-open' : '' }}">
+                        <a href="{{ route('customers.index') }}" class="nav-link"><i class="fa fa-users"></i> <span>Customers</span></a>
+                        </li>
+                        <li
+                        class="nav-item  {{ (request()->routeIs('reviews.*')) ? 'nav-item-open' : '' }}">
+                        <a href="{{ route('reviews.index') }}" class="nav-link"><i class="fa fa-star"></i> <span>Reviews</span></a>
+                        </li>
+                        <li
+                            class="nav-item  {{ (request()->routeIs('orders.*')) ? 'nav-item-open' : '' }}">
+                            <a href="{{ route('orders.index') }}" class="nav-link"><i class="icon-cart"></i> <span>Orders</span></a>
+                        </li>
                         <li
                             class="nav-item  {{ (request()->routeIs('contact-enquiries.*')) ? 'nav-item-open' : '' }}">
                             <a href="{{ route('contact-enquiries.index') }}" class="nav-link"><i class="icon-phone2"></i> <span>Contact Enquiries</span></a>

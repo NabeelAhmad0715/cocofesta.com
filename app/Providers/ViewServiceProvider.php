@@ -53,7 +53,6 @@ class ViewServiceProvider extends ServiceProvider
 
                 $cartPosts = Cart::where('user_id', Auth::user()->id)->where('deleted_at', null)->get();
                 $cartCount = Cart::where('user_id', Auth::user()->id)->count();
-
                 $totalPrice = Cart::where('user_id', Auth::user()->id)->where('in_stock', 1)->sum('price');
 
                 $view->with(compact('type', 'posts', 'whishlistPosts', 'whishlistCount', 'cartPosts', 'cartCount', 'totalPrice', 'topRatedPosts', 'popularPosts'));

@@ -15,10 +15,17 @@ use Illuminate\Http\Request;
 use App\Review;
 use App\Type;
 use Illuminate\Support\Facades\Auth;
+use App\Cart;
 
 class PageController extends Controller
 {
     public function index()
+    {
+        $latestPosts = Post::latest()->take(9)->get();
+        return view('frontend.pages.home', compact('latestPosts'));
+    }
+
+    public function dashboard()
     {
         $latestPosts = Post::latest()->take(9)->get();
         return view('frontend.pages.home', compact('latestPosts'));
@@ -37,16 +44,25 @@ class PageController extends Controller
 
     public function productPost(Type $type, Post $post)
     {
+        $relatedPosts = Post::where('id', '!=', $post->id)->get();
         if ($post->reviews->count() == 0) {
-            $reviewCheckUser = $post->orderDetails->where('user_id', Auth::user()->id);
-            return view('frontend.pages.product-post', compact('post', 'reviewCheckUser'));
+            if (Auth::user()) {
+                $reviewCheckUser = $post->orderDetails->where('user_id', Auth::user()->id);
+                $orderCheck = $post->orderDetails->where('user_id', Auth::user()->id)->count();
+                $reviewCheck = $post->reviews->where('user_id', Auth::user()->id)->count();
+                return view('frontend.pages.product-post', compact('post', 'reviewCheckUser', 'relatedPosts', 'reviewCheck', 'orderCheck'));
+            } else {
+                return view('frontend.pages.product-post', compact('post', 'relatedPosts'));
+            }
         } else {
             $totalReviews = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
             if (Auth::user()) {
                 $reviewCheckUser = $post->orderDetails->where('user_id', Auth::user()->id);
-                return view('frontend.pages.product-post', compact('post', 'reviewCheckUser', 'totalReviews'));
+                $orderCheck = $post->orderDetails->where('user_id', Auth::user()->id)->count();
+                $reviewCheck = $post->reviews->where('user_id', Auth::user()->id)->count();
+                return view('frontend.pages.product-post', compact('post', 'reviewCheckUser', 'totalReviews', 'relatedPosts', 'reviewCheck', 'orderCheck'));
             }
-            return view('frontend.pages.product-post', compact('post', 'totalReviews'));
+            return view('frontend.pages.product-post', compact('post', 'totalReviews', 'relatedPosts'));
         }
     }
 
@@ -71,7 +87,8 @@ class PageController extends Controller
 
     public function checkout()
     {
-        return view('frontend.pages.checkout');
+        $postCarts = Cart::where('user_id', Auth::user()->id)->where('deleted_at', null)->where('in_stock', 1)->get();
+        return view('frontend.pages.checkout', compact('postCarts'));
     }
 
     public function contactUs()
@@ -106,10 +123,12 @@ class PageController extends Controller
 
     public function setReviews(Request $request)
     {
-
         $review = Review::where('post_id', $request->post_id)->where('user_id', Auth::user()->id)->first();
+        $post = Post::where('id', $request->post_id)->first();
+        $placeOrderCheck = $post->orderDetails->where('user_id', Auth::user()->id)->count();
+        $reviewCheck = $post->reviews->where('user_id', Auth::user()->id)->count();
         if ($request->ajax()) {
-            if (!$review) {
+            if ($placeOrderCheck > $reviewCheck) {
                 Review::create([
                     'rating' => $request->rating,
                     'message' => $request->message,

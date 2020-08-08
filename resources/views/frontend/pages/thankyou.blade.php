@@ -25,7 +25,7 @@
        </div>
     </div>
 </section>
-
+@isset($cartPosts)
 @if (count($cartPosts) <= 0)
     <section class="white-bg page-section-ptb">
         <div class="container">
@@ -78,5 +78,28 @@
     </div>
   </section>
 @endif
-
+@else
+<section class="page-section-ptb">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-12">
+          <div class="search-no-result text-left text-sm-center clearfix position-relative">
+            <div class="bg-title">
+              <h2>oops</h2>
+            </div>
+            <div class="search-icon d-inline-block mr-30 mr-sm-40 position-relative theme-color">
+              <i class="fa fa-shopping-cart"></i>
+            </div>
+            <div class="search-contant d-inline-block text-left position-relative mt-20 mt-sm-0">
+              <h2 class="theme-color">You Need To First Place Order</h2>
+              <div class="error-info mt-30">
+                <a class="button xs-mb-10" href="{{ route('pages.home') }}">Contiune Shopping</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+@endisset
 @endsection

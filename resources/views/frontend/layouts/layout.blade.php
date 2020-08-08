@@ -273,9 +273,20 @@
             .rating-stars ul > li.starSelected.selected > i.fa {
             color:#FF912C;
             }
+            i.fa.fa-star-o {
+                width: 1.28571429em;
+                text-align: center;
+            }
+            .listing-post-meta.clearfix .float-right{
+                margin-top:5px
+            }
+            a.disabled {
+                pointer-events: none;
+                cursor: default;
+                opacity: 0.6;
+            }
         </style>
       </head>
-
 <body>
 
     <div class="wrapper">

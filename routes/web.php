@@ -61,12 +61,17 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', "namespace" => 
     Route::delete('posts/{slug}/{id}', 'PostsController@destroy')->name('posts.destroy');
     Route::get('/types/image-delete/{id}/{postId}/{image}', 'PostsController@delete')->name('type.delete');
 
+    Route::resource('customers', 'CustomerController');
+    Route::resource('reviews', 'ReviewController');
+    Route::resource('orders', 'OrderController');
     // Contact Inquiries
     Route::get('/general-settings/create', "GeneralSettingController@create")->name("general-settings.create");
     Route::post('/general-settings', "GeneralSettingController@store")->name("general-settings.store");
     Route::get('/general-settings/edit', "GeneralSettingController@edit")->name("general-settings.edit");
     Route::put('/general-settings', "GeneralSettingController@update")->name("general-settings.update");
     Route::resource('contact-enquiries', 'ContactEnquiryController');
+
+    Route::get('/{id}/set-status/{is_active}', 'CustomerController@setStatus')->name('custpmers.user-status');
 });
 
 Auth::routes();
@@ -76,26 +81,27 @@ Auth::routes();
 // });
 
 Route::get('/', 'Frontend\PageController@index')->name('pages.home');
+// Route::get('/home', 'Frontend\PageController@dashboard')->name('pages.home');
 Route::get('/about', 'Frontend\PageController@about')->name('pages.about');
 Route::get('/contact-us', 'Frontend\PageController@contactUs')->name('pages.contact-us');
 Route::post('/contact-enquiry', 'Frontend\PageController@contactEnquiry')->name('pages.contact-enquiry');
 
 Route::get('/cart', 'Frontend\PageController@viewCart')->name('pages.cart')->middleware('auth');
-Route::get('count/post/cart', 'Frontend\CartController@count')->name('cart.count');
+Route::get('count/post/cart', 'Frontend\CartController@count')->name('cart.count')->middleware('auth');
 
-Route::get('create/post/cart', 'Frontend\CartController@create')->name('cart.create');
-Route::get('remove/post/cart', 'Frontend\CartController@remove')->name('cart.remove');
-Route::get('cart/change/quantity', 'Frontend\CartController@quantity')->name('cart.quantity');
+Route::get('create/post/cart', 'Frontend\CartController@create')->name('cart.create')->middleware('auth');
+Route::get('remove/post/cart', 'Frontend\CartController@remove')->name('cart.remove')->middleware('auth');
+Route::get('cart/change/quantity', 'Frontend\CartController@quantity')->name('cart.quantity')->middleware('auth');
 
-Route::get('/checkout', 'Frontend\PageController@checkout')->name('pages.checkout');
-Route::post('/place-order', 'Frontend\OrderController@order')->name('generate.order');
+Route::get('/checkout', 'Frontend\PageController@checkout')->name('pages.checkout')->middleware('auth');
+Route::post('/place-order', 'Frontend\OrderController@order')->name('generate.order')->middleware('auth');
 Route::get('/thankyou', 'Frontend\PageController@thankyou')->name('pages.thankyou');
 
 Route::get('/whishlist', 'Frontend\WhishlistController@index')->name('pages.whishlist')->middleware('auth');
-Route::get('count/post/whishlist', 'Frontend\WhishlistController@count')->name('whishlist.count');
+Route::get('count/post/whishlist', 'Frontend\WhishlistController@count')->name('whishlist.count')->middleware('auth');
 
-Route::get('create/post/whishlist', 'Frontend\WhishlistController@create')->name('whishlist.create');
-Route::get('remove/post/whishlist', 'Frontend\WhishlistController@remove')->name('whishlist.remove');
+Route::get('create/post/whishlist', 'Frontend\WhishlistController@create')->name('whishlist.create')->middleware('auth');
+Route::get('remove/post/whishlist', 'Frontend\WhishlistController@remove')->name('whishlist.remove')->middleware('auth');
 
 
 
@@ -140,6 +146,7 @@ Route::get('/remove-symlink', function () {
         return "<h1>Symlink does not exist</h1>";
     }
 });
+
 Route::get('{type:slug}/products-search/', 'Frontend\PageController@search')->name('pages.search');
 Route::get('{type:slug}', 'Frontend\PageController@product')->name('pages.products');
 Route::get('/{type:slug}/{post:slug}', 'Frontend\PageController@productPost')->name('pages.product-post');

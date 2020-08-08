@@ -8,18 +8,17 @@
 
 @section('content')
 {{ session(['link' => url()->current()]) }}
-<section class="page-title bg-overlay-black-60 parallax" data-jarallax='{"speed": 0.6}' style="background-image: url({{ asset('images/bg/02.jpg') }});">
+<section class="page-title bg-overlay-black-60 parallax" data-jarallax='{"speed": 0.6}' style="background-image: url({{ asset('/storage/' . $post->getMetaData('header_image')) }});">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
         <div class="page-title-name">
-            <h1>Products</h1>
-            <p>We know the secret of your success</p>
+            <h1>{{ $post->title }}</h1>
+            <p>{{ $post->getMetaData('subtitle') }}</p>
           </div>
             <ul class="page-breadcrumb">
               <li><a href="#"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><a href="#">page</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><span>Products</span> </li>
+              <li><span>{{ $post->type->title }}</span> </li>
          </ul>
        </div>
        </div>
@@ -51,33 +50,47 @@
            <div class="col-lg-6">
              <div class="slider-slick">
               <div class="slider slider-for detail-big-car-gallery">
-                    <img class="img-fluid" src="{{ asset('images/11.jpg') }}" alt="">
-                    <img class="img-fluid" src="images/shop/detail/big/02.jpg" alt="">
-                    <img class="img-fluid" src="images/shop/detail/big/03.jpg" alt="">
-                    <img class="img-fluid" src="images/shop/detail/big/04.jpg" alt="">
-                    <img class="img-fluid" src="images/shop/detail/big/05.jpg" alt="">
-                    <img class="img-fluid" src="images/shop/detail/big/06.jpg" alt="">
+                    @foreach ($post->getMetaData('multiple_thumbnail') as $image)
+                        <img class="img-fluid" style="height: 500px;
+                    }" src="{{ asset('/storage/'. $image) }}" alt="{{ $post->title }}">
+                    @endforeach
                 </div>
                 <div class="slider slider-nav">
-                    <img class="img-fluid" src="{{ asset('images/11.jpg') }}" alt="">
-                    <img class="img-fluid" src="images/shop/detail/thum/02.jpg" alt="">
-                    <img class="img-fluid" src="images/shop/detail/thum/03.jpg" alt="">
-                    <img class="img-fluid" src="images/shop/detail/thum/04.jpg" alt="">
-                    <img class="img-fluid" src="images/shop/detail/thum/05.jpg" alt="">
-                    <img class="img-fluid" src="images/shop/detail/thum/06.jpg" alt="">
+                    @foreach ($post->getMetaData('thumbnails') as $image)
+                        <img class="img-fluid" style="height:100px;" src="{{ asset('/storage/'. $image) }}" alt="{{ $post->title }}">
+                    @endforeach
                 </div>
              </div>
            </div>
            <div class="col-lg-6">
              <div class="product-detail clearfix">
-              <div class="product-detail-title mb-20 sm-mt-40">
-                  <h4 class="mb-10"> Product name</h4>
-                  <span>Consectetur lorem ipsum dolor sit amet, adipisicing elit. Accusamus officiis pariatur optio nobis culpa magni labor!  </span>
+              <div class="product-detail-title mb-20 sm-mt-40" style="display:flex;">
+                  <h4 class="mb-10 w-100"> {{ $post->title }}</h4>
+                  <ul style="width:60%;">
+                    @if ($post->in_stock == 1)
+                        <li style="list-style: none;font-size: 20px;text-align: right;color: green;">Available</li>
+                    @else
+                        <li style="list-style: none;font-size: 20px;text-align: right;color: red;">Out of stock</li>
+                    @endif
+                  </ul>
               </div>
               <div class="clearfix mb-30">
-                <div class="product-detail-price"><del>$39.99</del> <ins>$24.99</ins></div>
+                <div class="product-detail-price"><span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                    @if ($post->getMetaData('discount'))
+                                <del>
+                                @php
+                                $price = $post->getMetaData('price');
+                                $discount = $price - ($price * ($post->getMetaData('discount')/100));
+                                @endphp
+                                @if ($discount)
+                                      {{ $price }}
+                                @endif
+                                </del>
+                          @endif
+                          <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
+                        </div>
                   <div class="product-detail-rating float-right">
-                    <div class='rating-stars' style="margin: 16px 0px 16px 0px;">
+                    <div class='rating-stars'>
                       <ul id='stars'>
                         @isset($totalReviews)
                             @for ($i = 0; $i < $totalReviews; $i++)
@@ -126,40 +139,14 @@
                 </div>
              </div>
               <div class="product-detail-quantity clearfix mb-40">
-                <div class="input-group">
-                      <input type="number" name="quant[1]" class="form-control input-number" value="1" min="1" max="10">
-                  </div>
                   <div class="product-detail add-to-cart">
-                      @php
-                      $price = $post->getMetaData('price');
-                      $discount = $price / ($post->getMetaData('discount'));
-                      @endphp
-                      <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="button small addtocart" href='javascript:;'>Add to cart</a>
+                      <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? ($post->getMetaData('price') - ($post->getMetaData('price') * ($post->getMetaData('discount')/100))) : $post->getMetaData('price') }}" class="@if(!auth()->user())disabled @endif button small addtocart" href='javascript:;'>Add to cart</a>
                   </div>
-                    <a style="margin-top:10px;" data-data="{{ $post->id }}" class="button small addtowishlist" href='javascript:;' >Add to Whishlist</a>
+                    <a style="margin-top:10px;" data-data="{{ $post->id }}" class="@if(!auth()->user())disabled @endif button small addtowishlist" href='javascript:;' >Add to Whishlist</a>
+                    @if(!auth()->user())<p class="mt-3" style="color:red"><b>*You Need To First Login</b></p>@endif
                 </div>
                 <div class="product-detail-des mb-30">
-                     <p class="mb-30">Adipisicing elit lorem ipsum dolor sit amet, consectetur. Dicta fugit cupiditate voluptates architecto nam totam ut, aperiam consequuntur aliquam voluptatem provident .</p>
-                   <ul class="list list-unstyled list-arrow">
-                     <li>Voluptatem provident</li>
-                     <li>Aperiam consequuntur</li>
-                     <li>Officia doloremque</li>
-                  </ul>
-             </div>
-             <div class="product-detail-meta">
-                 <span>SKU: 8465415 </span>
-                 <span>Category: <a href="#">Shop</a>  </span>
-                 <span>Tags: <a href="#">Shoes,</a> <a href="#">T-Shirt,</a> <a href="#">Shirt</a>  </span>
-             </div>
-             <div class="product-detail-social">
-                <span>Share:</span>
-                 <ul class="list-style-none">
-                     <li><a href="#"> <i class="fa fa-facebook"></i> </a></li>
-                     <li><a href="#"> <i class="fa fa-twitter"></i> </a></li>
-                     <li><a href="#"> <i class="fa fa-google-plus"></i> </a></li>
-                     <li><a href="#"> <i class="fa fa-rss"></i> </a></li>
-                     <li><a href="#"> <i class="fa fa-envelope-o"></i> </a></li>
-                 </ul>
+                    {!! $post->getMetaData('introduction') !!}
              </div>
           </div>
          </div>
@@ -171,54 +158,12 @@
               <a class="nav-link active show" id="description-tab" data-toggle="tab" href="#description" role="tab" aria-controls="description" aria-selected="true">Home</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="additional-tab" data-toggle="tab" href="#additional" role="tab" aria-controls="additional" aria-selected="false">Profile </a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews </a>
+            <a class="nav-link" id="reviews-tab" data-toggle="tab" href="#reviews" role="tab" aria-controls="reviews" aria-selected="false">Reviews </a>
             </li>
           </ul>
           <div class="tab-content" id="myTabContent">
             <div class="tab-pane fade active show" id="description" role="tabpanel" aria-labelledby="description-tab">
-              <h6>Consectetur adipisicing elit</h6>
-                 <p class="mt-20">Temporibus possimus quasi beatae, consectetur adipisicing elit. Obcaecati unde molestias sunt officiis aliquid sapiente, numquam, porro perspiciatis neque voluptatem sint hic quam eveniet ad adipisci laudantium corporis ipsam ea!</p>
-
-                  <p class="mt-20">Consectetur adipisicing elit. Dicta, amet quia ad debitis fugiat voluptatem neque dolores tempora iste saepe cupiditate, molestiae iure voluptatibus est beatae? Culpa, illo a You will begin to realize why, consectetur adipisicing elit. Commodi, doloribus, earum modi consectetur molestias asperiores sequi ipsam neque error itaque veniam culpa eligendi similique ducimus nulla, blanditiis, perspiciatis atque saepe! veritatis.</p>
-
-
-                  <p class="mt-20">Adipisicing consectetur elit. Dicta, amet quia ad debitis fugiat voluptatem neque dolores tempora iste saepe cupiditate, molestiae iure voluptatibus est beatae? Culpa, illo a You will begin to realize why, consectetur adipisicing elit. Commodi, doloribus, earum modi consectetur molestias asperiores.</p>
-
-
-                  <p class="mt-20">Voluptatem adipisicing elit. Dicta, amet quia ad debitis fugiat neque dolores tempora iste saepe cupiditate, molestiae iure voluptatibus est beatae? Culpa, illo a You will begin to realize why, consectetur adipisicing elit. Commodi, You will begin to realize why, consectetur adipisicing elit. Laudantium nisi eaque maxime totam, iusto accusantium esse placeat rem at temporibus minus architecto ipsum eveniet. Delectus cum sunt, ea cumque quas! doloribus, earum modi consectetur molestias asperiores sequi ipsam neque error itaque veniam culpa eligendi similique ducimus nulla, blanditiis, perspiciatis atque saepe! veritatis. </p>
-            </div>
-            <div class="tab-pane fade" id="additional" role="tabpanel" aria-labelledby="additional-tab">
-              <table class="table table-bordered">
-                    <tbody>
-                      <tr>
-                        <th scope="row"> Air Conditioning</th>
-                        <td>Mark</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"> Alloy Wheels</th>
-                        <td>Jacob</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"> Anti-Lock Brakes (ABS)</th>
-                        <td>Larry</td>
-                      </tr>
-                      <tr>
-                        <th scope="row"> Anti-Theft</th>
-                        <td>Larry</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Anti-Starter</th>
-                        <td>Larry</td>
-                      </tr>
-                      <tr>
-                        <th scope="row">Alloy Wheels</th>
-                        <td>Larry</td>
-                      </tr>
-                    </tbody>
-                  </table>
+                {!! $post->getMetaData('description') !!}
             </div>
             <div class="tab-pane fade" id="reviews" role="tabpanel" aria-labelledby="reviews-tab">
               <div class="blog-comments mt-40">
@@ -226,50 +171,54 @@
                   <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                    Thank You For Your Feedback :)
                  </div>
-                 @isset($reviewCheckUser)
-                    @if (count($reviewCheckUser) > 0)
-                      <form id="reviewForm" method="post" class="mb-20">
-                        <div class="form-group">
-                          <label for="Rating">Rating:</label>
-                          <div class='rating-stars'>
-                            <ul id='stars'>
-                              <li class='star' title='Poor' data-value='1'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                              <li class='star' title='Fair' data-value='2'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                              <li class='star' title='Good' data-value='3'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                              <li class='star' title='Excellent' data-value='4'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                              <li class='star' title='WOW!!!' data-value='5'>
-                                <i class='fa fa-star fa-fw'></i>
-                              </li>
-                            </ul>
-                          </div>
-                        </div>
-                        <input type="hidden" id="post_id" value="{{ $post->id }}" />
-                        <input type="hidden" id="rating" value="" />
-                        <div class="form-group">
-                          <label for="Message">Message:</label>
-                          <textarea id="reviewMessage" name="message" rows="6" class="form-control" required></textarea>
-                        </div>
+                @isset($orderCheck)
+                 @if ($orderCheck > $reviewCheck)
+                    @isset($reviewCheckUser)
+                        @if (count($reviewCheckUser) > 0)
+                        <form id="reviewForm" method="post" class="mb-20">
+                            <div class="form-group">
+                            <label for="Rating">Rating:</label>
+                            <div class='rating-stars'>
+                                <ul id='stars'>
+                                <li class='star' title='Poor' data-value='1'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star' title='Fair' data-value='2'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star' title='Good' data-value='3'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star' title='Excellent' data-value='4'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                <li class='star' title='WOW!!!' data-value='5'>
+                                    <i class='fa fa-star fa-fw'></i>
+                                </li>
+                                </ul>
+                            </div>
+                            </div>
+                            <input type="hidden" id="post_id" value="{{ $post->id }}" />
+                            <input type="hidden" id="rating" value="" />
+                            <div class="form-group">
+                            <label for="Message">Message:</label>
+                            <textarea id="reviewMessage" name="message" rows="6" class="form-control" required></textarea>
+                            </div>
 
-                        <div class="comments review-button text-right">
-                          <input type="submit" class="button" value="Add a Review" />
-                        </div>
-                      </form>
-                    @endif
-                 @endisset
-                      @forelse ($post->reviews as $review)
+                            <div class="comments review-button text-right">
+                            <input type="submit" class="button" value="Add a Review" />
+                            </div>
+                        </form>
+                        @endif
+                    @endisset
+                 @endif
+                @endisset
+                    @forelse ($post->reviews as $review)
                       <input type="hidden" value="{{ $review->rating }}" id="rating-star"/>
                           <div class="comments-1">
-                              <div class="comments-info">
+                              <div class="comments-info w-100">
                                   <h6> {{ $review->user->name }} <span id="date">{{ date('d M Y', strtotime($review->created_at)) }}</span></h6>
-                                  <div class='rating-stars' style="margin: 16px 0px 16px 0px;">
+                                  <div class='rating-stars'>
                                     <ul id='stars'>
                                       @for ($i = 0; $i < $review->rating; $i++)
                                         <li class='starSelected selected'>
@@ -328,100 +277,69 @@
        </div>
        <div class="col-lg-3">
            <div class="sidebar-widgets-wrap">
+            <form method="GET" action="{{ route('pages.search',[$type->slug]) }}">
                <div class="sidebar-widget mb-40">
                    <h5 class="mb-20">Search</h5>
                      <div class="widget-search">
                      <i class="fa fa-search"></i>
-                     <input type="search" class="form-control placeholder" placeholder="Search....">
+                     <input type="search" name="search" class="form-control placeholder" placeholder="Search Products....">
                    </div>
                  </div>
-                <div class="sidebar-widget mb-40">
-                <h5 class="mb-20">Categories</h5>
-                    <div class="widget-link">
-                        <ul>
-                            <li> <a href="shop-single.html"> <i class="fa fa-angle-double-right"></i> Product name </a></li>
-                            <li> <a href="shop-single.html"> <i class="fa fa-angle-double-right"></i> Product name </a> </li>
-                            <li> <a href="shop-single.html"> <i class="fa fa-angle-double-right"></i> Product name (10) </a> </li>
-                            <li> <a href="shop-single.html"> <i class="fa fa-angle-double-right"></i> Product name </a> </li>
-                            <li> <a href="shop-single.html"> <i class="fa fa-angle-double-right"></i> Product name (20) </a> </li>
-                        </ul>
-                    </div>
-                 </div>
+            </form>
                 <div class="sidebar-widget mb-0">
                 <h5 class="mb-20">Popular items</h5>
+                @forelse ($topRatedPosts as $topRatedPost)
                  <div class="recent-item clearfix">
                     <div class="recent-image">
-                        <a href="shop-single.html"><img class="img-fluid" src="images/shop/08.jpg" alt=""></a>
+                        <a href="shop-single.html"><img style="height: 50px;" class="img-fluid" src="{{ asset('/storage/'. $topRatedPost->post->getMetaData('featured_image')) }}" alt=""></a>
                     </div>
                     <div class="recent-info">
                         <div class="recent-title">
-                             <a href="shop-single.html">Product name</a>
+                             <a href="shop-single.html">{{ $topRatedPost->post->title }}</a>
                         </div>
                         <div class="recent-meta">
                            <ul class="list-style-unstyled">
-                            <li class="color">$29.99 /</li>
-                            <li><i class="icon-star3"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></li>
+                            <li class="color">PKR. {{ $topRatedPost->post->getMetaData('price') - ($topRatedPost->post->getMetaData('price') * ($topRatedPost->post->getMetaData('discount')/100)) }} /</li>
+                            <li>
+                            @php
+                            $star = round(number_format((float) ($topRatedPost->post->reviews->sum('rating') / $topRatedPost->post->reviews->count()), 2, '.', ''));
+                            @endphp
+                                @for ($i = 0; $i < $star; $i++)
+                                    <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
+                                @endfor
+                                @if ($star == 4)
+                                    <i class='fa fa-star-o'></i>
+                                @elseif($star == 3)
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                @elseif($star == 2)
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                @elseif($star == 1)
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                @endif
+                            </li>
                         </ul>
                        </div>
-                      </div>
-                  </div>
-                  <div class="recent-item clearfix">
-                    <div class="recent-image">
-                        <a href="shop-single.html"><img class="img-fluid" src="images/shop/09.jpg" alt=""></a>
                     </div>
-                    <div class="recent-info">
-                        <div class="recent-title">
-                             <a href="shop-single.html">Product name</a>
-                        </div>
-                        <div class="recent-meta">
-                           <ul class="list-style-unstyled">
-                            <li class="color">$29.99 /</li>
-                            <li><i class="icon-star3"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></li>
-                        </ul>
-                       </div>
-                      </div>
                   </div>
-                  <div class="recent-item clearfix">
-                    <div class="recent-image">
-                        <a href="shop-single.html"><img class="img-fluid" src="images/shop/10.jpg" alt=""></a>
-                    </div>
-                    <div class="recent-info">
-                        <div class="recent-title">
-                             <a href="shop-single.html">Product name</a>
-                        </div>
-                        <div class="recent-meta">
-                           <ul class="list-style-unstyled">
-                            <li class="color">$29.99 /</li>
-                            <li><i class="icon-star3"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></li>
-                        </ul>
-                       </div>
-                      </div>
+                  @empty
+                  <div class="w-100">
+                      <h2 class="text-center">No post top rated</h2>
                   </div>
-                  <div class="recent-item mb-0 clearfix">
-                    <div class="recent-image">
-                        <a href="shop-single.html"><img class="img-fluid" src="images/shop/11.jpg" alt=""></a>
-                    </div>
-                    <div class="recent-info">
-                        <div class="recent-title">
-                             <a href="shop-single.html">Product name</a>
-                        </div>
-                        <div class="recent-meta">
-                           <ul class="list-style-unstyled">
-                            <li class="color">$29.99 /</li>
-                            <li><i class="icon-star3"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></li>
-                        </ul>
-                       </div>
-                      </div>
-                  </div>
-                </div>
-
+                  @endforelse
+            </div>
         </div>
        </div>
       </div>
     </div>
  </section>
 
-<section class="page-section-ptb">
+<section class="page-section-ptb gray-bg">
     <div class="container">
     <div class="row">
       <div class="col-lg-12 col-md-12">
@@ -432,114 +350,70 @@
         </div>
      </div>
      <div class="row">
-       <div class="col-lg-3 col-sm-6 sm-mb-30">
-        <div class="product">
-            <div class="product-image">
-                <img class="img-fluid mx-auto" src="images/shop/01.jpg" alt="">
-                <div class="product-overlay">
-                  <div class="add-to-cart">
-                     <a href="shop-single.html">add to cart</a>
+        @forelse ($relatedPosts as $post)
+         <div class="col-lg-4 col-md-4 mb-30">
+            <div class="listing-post">
+                  <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
+                  <div class="blog-overlay">
+
+                        <div class="blog-image">
+                              <img class="img-fluid" style="width: 500px;height:200px;" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
+                        </div>
+                        @if ($post->getMetaData('discount'))
+                        <div class="blog-icon clearfix">
+                              <span class="date float-left bg-danger">Discount {{ $post->getMetaData('discount') }}%</span>
+                        </div>
+                        @endif
+                        <div class="blog-name clearfix pl-20">
+                            @if ($post->reviews->count() != 0)
+                                  <div class="blog-name-left bg-info">
+                                    <span>
+                                    {{ round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', '')) }}</span>
+                                </div>
+                            @endif
+                              <a href="#">
+                                    <div class="blog-name-right" style="padding: 12px 0px 0px 0px;">
+                                          <h4 class="text-white"><a href="{{ route('pages.product-post', [$post->type->slug,$post->slug] ) }}">{{ $post->title }}</a></h4>
+                                    </div>
+                              </a>
+                        </div>
                   </div>
-                </div>
-             </div>
-             <div class="product-des">
-                <div class="product-title">
-                  <a href="shop-single.html">Product name</a>
-                </div>
-                <div class="product-rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-                 <i class="fa fa-star-o"></i>
-             </div>
-             <div class="product-price">
-                   <del>$24.99</del> <ins>$12.49</ins>
-                </div>
-           </div>
-        </div>
-      </div>
-      <div class="col-lg-3 col-sm-6 sm-mb-30">
-        <div class="product ">
-            <div class="product-image">
-                <img class="img-fluid mx-auto" src="images/shop/02.jpg" alt="">
-                <div class="product-overlay">
-                  <div class="add-to-cart">
-                     <a href="shop-single.html">add to cart</a>
-                  </div>
-                </div>
-             </div>
-             <div class="product-des">
-                <div class="product-title">
-                  <a href="shop-single.html">Product name</a>
-                </div>
-                <div class="product-rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-                 <i class="fa fa-star-o"></i>
-             </div>
-             <div class="product-price">
-                   <del>$24.99</del> <ins>$12.49</ins>
-                </div>
-           </div>
-        </div>
-       </div>
-       <div class="col-lg-3 col-sm-6 xs-mb-30">
-        <div class="product">
-            <div class="product-image">
-                <img class="img-fluid mx-auto" src="images/shop/03.jpg" alt="">
-                <div class="product-overlay">
-                  <div class="add-to-cart">
-                     <a href="shop-single.html">add to cart</a>
-                  </div>
-                </div>
-             </div>
-             <div class="product-des">
-                <div class="product-title">
-                  <a href="shop-single.html">Product name</a>
-                </div>
-                <div class="product-rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-                 <i class="fa fa-star-o"></i>
-             </div>
-             <div class="product-price">
-                   <del>$24.99</del> <ins>$12.49</ins>
-                </div>
-           </div>
-        </div>
-       </div>
-       <div class="col-lg-3 col-sm-6">
-        <div class="product">
-            <div class="product-image">
-                <img class="img-fluid mx-auto" src="images/shop/04.jpg" alt="">
-                <div class="product-overlay">
-                  <div class="add-to-cart">
-                     <a href="shop-single.html">add to cart</a>
-                  </div>
-                </div>
-             </div>
-             <div class="product-des">
-                <div class="product-title">
-                  <a href="shop-single.html">Product name</a>
-                </div>
-                <div class="product-rating">
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star"></i>
-                 <i class="fa fa-star-half-o"></i>
-                 <i class="fa fa-star-o"></i>
-             </div>
-             <div class="product-price">
-                   <del>$24.99</del> <ins>$12.49</ins>
-                </div>
-           </div>
-        </div>
-       </div>
+              <div class="listing-post-info">
+                <div class="listing-post-meta clearfix">
+                     <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
+                        <li>
+                              <div class="product-price">
+                                    <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                                    @if ($post->getMetaData('discount'))
+                                                <del>
+                                                @php
+                                                $price = $post->getMetaData('price');
+                                                $discount = $price - ($price * ($post->getMetaData('discount')/100));
+                                                @endphp
+                                                @if ($discount)
+                                                      {{ $price }}
+                                                @endif
+                                                </del>
+                                          @endif
+                                          <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
+                              </div>
+                        </li>
+                     </ul>
+                     <div class="float-right">
+                       <h6 class="theme-color">
+                        <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="@if(!auth()->user())disabled @endif addtocart" href='javascript:;'>Add to cart</a>
+                    </h6>
+                     </div>
+                 </div>
+                 @if(!auth()->user())<p class="text-right mt-3" style="color:red"><b>*You Need To First Login</b></p>@endif
+              </div>
+          </div>
+         </div>
+         @empty
+         <div class="w-100">
+             <h2 class="text-center">No New Collections</h2>
+         </div>
+         @endforelse
       </div>
       </div>
 </section>
