@@ -61,7 +61,7 @@
                               <a href="#">{{ $post->title }}</a>
                             </td>
                               @php
-                              $discount = $post->getMetaData('price') / ($post->getMetaData('discount'));
+                              $discount = round($post->getMetaData('price') - ($post->getMetaData('price') * ($post->getMetaData('discount')/100)));
                               @endphp
                               <td data-id="{{ $cartPost->id }}" id="cartPrice{{ $cartPost->id }}" class="price">
                                 {{ $cartPost->price ? $cartPost->price : ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) }}

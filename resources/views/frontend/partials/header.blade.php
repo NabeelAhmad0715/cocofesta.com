@@ -104,39 +104,33 @@
            @endisset
          </strong></a>
             <div class="cart">
+                <div id="cart-success-remove-message">
               <div class="cart-title">
                  <h6 class="uppercase mb-0">Shopping cart</h6>
               </div>
-              <div class="cart-item">
-                <div class="cart-image">
-                  <img class="img-fluid" src="images/shop/01.jpg" alt="">
+              @isset($cartPosts)
+              @forelse ($cartPosts as $cart)
+                <div class="cart-item">
+                    <div class="cart-image">
+                    <img class="img-fluid" src="images/shop/01.jpg" alt="">
+                    </div>
+                    <div class="cart-name clearfix">
+                    <a href="#">{{ $cart->post->title }} <strong>x{{ $cart->quantity }}</strong></a>
+                    <div class="cart-price">
+                        <del>{{ $cart->price }}</del>
+                          <ins>{{ $cart->post->getMetaData('discount') ? round($cart->post->getMetaData('price') - ($cart->post->getMetaData('price') * ($cart->post->getMetaData('discount')/100))) : $cart->post->getMetaData('price') }}</ins>
+                    </div>
+                    </div>
+                    <div class="cart-close">
+                        <a data-data="{{ $cart->post->id }}" class="removetocart" href='javascript:;'><i class="fa fa-times-circle"></i></a>
+                    </div>
                 </div>
-                <div class="cart-name clearfix">
-                  <a href="#">Product name <strong>x2</strong> </a>
-                  <div class="cart-price">
-                    <del>$24.99</del> <ins>$12.49</ins>
-                 </div>
-                </div>
-                <div class="cart-close">
-                    <a href="#"> <i class="fa fa-times-circle"></i> </a>
-                 </div>
-              </div>
-              <div class="cart-item">
-                <div class="cart-image">
-                  <img class="img-fluid" src="images/shop/01.jpg" alt="">
-                </div>
-                <div class="cart-name clearfix">
-                  <a href="#">Product name <strong>x2</strong></a>
-                  <div class="cart-price">
-                    <del>$24.99</del> <ins>$12.49</ins>
-                 </div>
-                </div>
-                 <div class="cart-close">
-                    <a href="#"> <i class="fa fa-times-circle"></i> </a>
-                 </div>
-              </div>
+              @empty
+                  <h2>Cart is Empty</h2>
+              @endforelse
+              @endisset
               <div class="cart-total">
-                <h6 class="mb-15"> Total: $104.00</h6>
+                <h6 class="mb-15"> Total: $@isset($cartPosts) {{ $cartPosts->sum('price') }}@endisset</h6>
                 <a class="button" href="{{ route('pages.cart') }}">View Cart</a>
                   <a class="button black" href="{{ route('pages.checkout') }}">Checkout</a>
               </div>
@@ -152,3 +146,6 @@
    </div>
   <!-- menu end -->
 </header>
+@push('scripts')
+    <script src="{{asset('backend/js/cart-remove.js') }}"></script>
+@endpush

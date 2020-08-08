@@ -30,7 +30,7 @@
 <section class="shop grid page-section-ptb">
         <div class="container">
                <div class="row">
-                  <div class="col-lg-9 col-md-9 col-sm-6 col-xs-12">
+                  <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <form method="GET" action="{{ route('pages.search',[$type->slug]) }}">
                     <div class="sidebar-widget mb-40">
                       <h5 class="mb-20">search</h5>
@@ -40,14 +40,6 @@
                        </div>
                      </div>
                     </form>
-                  </div>
-                  <div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
-                    <h5 class="mb-20">Sort By</h5>
-                    <select name="sort-price" id="sort-price" class="form-control">
-                      <option value="">Popularity</option>
-                      <option value="low-to-high">Low To High</option>
-                      <option value="high-to-low">High To Low</option>
-                  </select>
                   </div>
                </div>
             <div class="row">
@@ -65,134 +57,120 @@
                      </div>
                     <div class="sidebar-widget mb-40">
                     <h5 class="mb-20">Popular items</h5>
+                    @forelse ($topRatedPosts as $post)
+                    @php
+                        $post = $post->post;
+                    @endphp
                      <div class="recent-item clearfix">
                         <div class="recent-image">
-                            <a href="shop-single.html"><img class="img-fluid" src="{{ asset('images/shop/08.jpg') }}" alt=""></a>
+                            <a href="shop-single.html"><img style="height: 50px;" class="img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt=""></a>
                         </div>
                         <div class="recent-info">
                             <div class="recent-title">
-                                 <a href="shop-single.html">Product name</a>
+                                 <a href="shop-single.html">{{ $post->title }}</a>
                             </div>
                             <div class="recent-meta">
                                <ul class="list-style-unstyled">
-                                <li class="color">$29.99 /</li>
-                                <li><i class="icon-star3"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></li>
+                                <li class="color">PKR. {{ round($post->getMetaData('price') / $post->getMetaData('discount')) }} /</li>
+                                <li>
+                                @php
+                                $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
+                                @endphp
+                                    @for ($i = 0; $i < $star; $i++)
+                                        <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
+                                    @endfor
+                                    @if ($star == 4)
+                                        <i class='fa fa-star-o'></i>
+                                    @elseif($star == 3)
+                                        <i class='fa fa-star-o'></i>
+                                        <i class='fa fa-star-o'></i>
+                                    @elseif($star == 2)
+                                        <i class='fa fa-star-o'></i>
+                                        <i class='fa fa-star-o'></i>
+                                        <i class='fa fa-star-o'></i>
+                                    @elseif($star == 1)
+                                        <i class='fa fa-star-o'></i>
+                                        <i class='fa fa-star-o'></i>
+                                        <i class='fa fa-star-o'></i>
+                                        <i class='fa fa-star-o'></i>
+                                    @endif
+                                </li>
                             </ul>
                            </div>
-                          </div>
-                      </div>
-                      <div class="recent-item clearfix">
-                        <div class="recent-image">
-                            <a href="shop-single.html"><img class="img-fluid" src="images/shop/09.jpg" alt=""></a>
                         </div>
-                        <div class="recent-info">
-                            <div class="recent-title">
-                                 <a href="shop-single.html">Product name</a>
-                            </div>
-                            <div class="recent-meta">
-                               <ul class="list-style-unstyled">
-                                <li class="color">$29.99 /</li>
-                                <li><i class="icon-star3"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></li>
-                            </ul>
-                           </div>
-                          </div>
                       </div>
-                      <div class="recent-item clearfix">
-                        <div class="recent-image">
-                            <a href="shop-single.html"><img class="img-fluid" src="images/shop/10.jpg" alt=""></a>
-                        </div>
-                        <div class="recent-info">
-                            <div class="recent-title">
-                                 <a href="shop-single.html">Product name</a>
-                            </div>
-                            <div class="recent-meta">
-                               <ul class="list-style-unstyled">
-                                <li class="color">$29.99 /</li>
-                                <li><i class="icon-star3"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></li>
-                            </ul>
-                           </div>
-                          </div>
+                      @empty
+                      <div class="w-100">
+                          <h2 class="text-center">No post top rated</h2>
                       </div>
-                      <div class="recent-item mb-0 clearfix">
-                        <div class="recent-image">
-                            <a href="shop-single.html"><img class="img-fluid" src="images/shop/11.jpg" alt=""></a>
-                        </div>
-                        <div class="recent-info">
-                            <div class="recent-title">
-                                 <a href="shop-single.html">Product name</a>
-                            </div>
-                            <div class="recent-meta">
-                               <ul class="list-style-unstyled">
-                                <li class="color">$29.99 /</li>
-                                <li><i class="icon-star3"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i class="fa fa-star-o"></i></li>
-                            </ul>
-                           </div>
-                          </div>
-                      </div>
+                      @endforelse
                     </div>
                     </div>
                 </div>
             <div class="col-lg-9 col-md-9">
                <div class="row">
                   @forelse ($records as $post)
-                  <div class="col-lg-4 col-md-4 col-sm-6">
-                        @if ($post->getMetaData('discount') != null)
-                              <div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">{{ $post->getMetaData('discount') }}% Discount</div>
-                        @endif
-                        <div class="product mb-70">
-                           <a href="{{ route('pages.product-post',[$post->type->slug, $post->slug]) }}">
-                           <div class="product-image">
-                                 <img class="img-fluid mx-auto" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="">
-                           </div>
-                           <div class="product-des">
-                                 <div class="product-title">
-                                       <span>{{ $post->title }}</span>
-                                 </div>
-                                 <div class="product-rating">
-                                       <i class="fa fa-star"></i>
-                                       <i class="fa fa-star"></i>
-                                       <i class="fa fa-star"></i>
-                                       <i class="fa fa-star-half-o"></i>
-                                       <i class="fa fa-star-o"></i>
-                                 </div>
-                                 <div class="product-price">
-                                       @if ($post->getMetaData('discount'))
-                                             <del>
-                                             @php
-                                             $price = $post->getMetaData('price');
-                                             $discount = $price / ($post->getMetaData('discount'));
-                                             @endphp
-                                             @if ($discount)
-                                                   {{ $price }}
-                                             @endif
-                                             </del>
-                                       @endif
-                                       <ins>{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}</ins>
-                                 </div>
-                                 <div style="margin-top: 10px;">
-                                       <span>
-                                             <a style="padding: 10px 10px 10px 10px;
-                                             background: #007bff;
-                                             width: 50%;
-                                             text-align: center;
-                                             color: white;
-                                             float: left;" href="{{ route('pages.whishlist') }}">WHISTLIST</a>
-                                       </span>
-                                       <span>
-                                             <a style="padding: 10px;
-                                             background: #84ba3f;
-                                             color: white;
-                                             float: right;
-                                             width: 48%;" data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="button small addtocart" href='javascript:;'>ADD TO CART</a>
-                                       </span>
-                                 </div>
-                           </div>
-                           </a>
-                     </div>
+                  <div class="col-lg-6 col-md-6 mb-30">
+                    <div class="listing-post">
+                          <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
+                          <div class="blog-overlay">
+                                <div class="blog-image">
+                                      <img class="img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
+                                </div>
+                                @if ($post->getMetaData('discount'))
+                                <div class="blog-icon clearfix">
+                                      <span class="date float-left bg-danger">Discount {{ $post->getMetaData('discount') }}%</span>
+                                </div>
+                                @endif
+                                <div class="blog-name clearfix pl-20">
+                                    @if ($post->reviews->count() != 0)
+                                          <div class="blog-name-left bg-info">
+                                            <span>
+                                            {{ round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', '')) }}</span>
+                                        </div>
+                                    @endif
+                                      <a href="#">
+                                            <div class="blog-name-right" style="padding: 12px 0px 0px 0px;">
+                                                  <h4 class="text-white"><a href="{{ route('pages.product-post', [$post->type->slug,$post->slug] ) }}">{{ $post->title }}</a></h4>
+                                            </div>
+                                      </a>
+                                </div>
+                          </div>
+                      <div class="listing-post-info" style="background:#f7f7f7 !important;">
+                        <div class="listing-post-meta clearfix">
+                             <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
+                                <li>
+                                      <div class="product-price">
+                                            <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                                            @if ($post->getMetaData('discount'))
+                                                        <del>
+                                                        @php
+                                                        $price = $post->getMetaData('price');
+                                                        $discount = $price - ($price * ($post->getMetaData('discount')/100));
+                                                        @endphp
+                                                        @if ($discount)
+                                                              {{ $price }}
+                                                        @endif
+                                                        </del>
+                                                  @endif
+                                                  <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
+                                      </div>
+                                </li>
+                             </ul>
+                             <div class="float-right">
+                               <h6 class="theme-color">
+                                <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="@if(!auth()->user())disabled @endif addtocart" href='javascript:;'>Add to cart</a>
+                            </h6>
+                             </div>
+                         </div>
+                         @if(!auth()->user())<p class="text-right mt-3" style="color:red"><b>*You Need To First Login</b></p>@endif
+                      </div>
+                  </div>
                  </div>
-
                   @empty
-                     <h1 class="text-center"> Records Not Found</h1>
+                  <div class="w-100">
+                    <h2 class="text-center">Records Not Found</h2>
+                  </div>
                   @endforelse
                </div>
               </div>

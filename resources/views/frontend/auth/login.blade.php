@@ -66,26 +66,28 @@
                             <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
                             <label class="form-check-label" for="emember">Remember me</label>
                         </div>
-                        </div>
+                    </div>
                         <input type="submit" value="Log in" class="button" />
                     </a>
                 </form>
-                <form method="get" action="{{ url('/login/facebook') }}">
-                  @csrf
-                  <div class="form-group row">
-                      <div class="col-md-6">
-                          <input type="submit" style="background: cornflowerblue;color:white" class="btn btn-facebook" value="Facebook">
-                      </div>
-                  </div>
-              </form>
-              <form method="get" action="{{ url('/login/google') }}">
-                @csrf
-                <div class="form-group row">
-                  <div class="col-md-6">
-                    <input type="submit" style="background: orange;color:white" class="btn btn-google" value="Google">
+                <div class="social-buttons mt-10">
+                    <form method="get" action="{{ url('/login/facebook') }}">
+                        @csrf
+                        <div class="section-field mb-2" style="width:100%">
+                            <div class="form-check" style="padding-left:0px;">
+                                    <input type="submit" style="width:100%;background: #3B5998;color:white" class="btn btn-facebook" value="Login with Facebook">
+                            </div>
+                        </div>
+                    </form>
+                    <form method="get" action="{{ url('/login/google') }}">
+                        @csrf
+                        <div class="section-field mb-2" style="width:100%">
+                            <div class="form-check" style="padding-left:0px;">
+                                <input type="submit" style="width:100%;background: #dd4b39;color:white" class="btn btn-google" value="Login with Google+">
+                            </div>
+                        </div>
+                    </form>
                 </div>
-              </div>
-              </form>
                 {{-- <form method="get" action="{{ url('/login/instagram') }}">
                   @csrf
                   <div class="form-group row">

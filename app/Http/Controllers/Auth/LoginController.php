@@ -168,7 +168,7 @@ class LoginController extends Controller
      */
     protected function credentials(Request $request)
     {
-        $credentials = ['email' => $request->email, 'password' => $request->password];
+        $credentials = ['email' => $request->email, 'password' => $request->password, 'is_active' => 1];
         return $credentials;
     }
 

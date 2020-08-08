@@ -56,7 +56,7 @@
               data-paddingbottom="[0,0,0,0]"
               data-paddingleft="[0,0,0,0]"
 
-              style="z-index: 6; white-space: nowrap; font-size: 90px; line-height: 90px; font-weight: 700; color: #ffffff; letter-spacing: 0px;font-family:Montserrat;">FINE </div>
+              style="z-index: 6; white-space: nowrap; font-size: 90px; line-height: 90px; font-weight: 700; color: #ffffff; letter-spacing: 0px;font-family:Montserrat;">AS FINE </div>
 
       <!-- LAYER NR. 3 -->
       <div class="tp-caption   tp-resizeme"
@@ -270,62 +270,6 @@
   <div class="tp-bannertimer tp-bottom" style="visibility: hidden !important;"></div> </div>
   </div>
 </section>
-
-{{-- <section class="shop-06-product page-section-ptb">
-      <div class="container">
-            <div class="row">
-                  <div class="col-lg-12 col-md-12">
-                      <div class="section-title text-center">
-                         <h6>We want to create a range of beautiful</h6>
-                         <h2 class="title-effect">New Collections</h2>
-                       </div>
-                    </div>
-                 </div>
-            <div class="row">
-                  <div class="col-md-12">
-                        <div class="owl-carousel" data-nav-dots="false" data-nav-arrow="true" data-items="4" data-md-items="4" data-sm-items="3" data-xs-items="2" data-xx-items="1" data-space="20">
-                        @forelse ($latestPosts as $post)
-                              <div class="item">
-                                    <div class="product">
-                                          <div class="product-image">
-                                                <img class="img-fluid mx-auto" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
-                                                <div class="product-overlay">
-                                                <div class="add-to-cart">
-                                                      <a href="shop-single.html">view detail</a>
-                                                </div>
-                                                </div>
-                                          </div>
-                                          <div class="product-des text-center">
-                                                <div class="product-title">
-                                                <a class="text-black" href="shop-single.html">{{ $post->title }}</a>
-                                                </div>
-                                                <div class="product-price">
-                                                    <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
-                                                      @if ($post->getMetaData('discount'))
-                                                            <del>
-                                                            @php
-                                                            $price = $post->getMetaData('price');
-                                                            $discount = $price / ($post->getMetaData('discount'));
-                                                            @endphp
-                                                            @if ($discount)
-                                                                  {{ $price }}
-                                                            @endif
-                                                            </del>
-                                                      @endif
-                                                      <ins>{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}</ins>
-                                                </div>
-                                          </div>
-                                    </div>
-                              </div>
-                        @empty
-                            <h1>No Records Found</h1>
-                        @endforelse
-                        </div>
-                  </div>
-            </div>
-      </div>
-</section> --}}
-
 <section class="page-section-ptb gray-bg" >
       <div class="container">
        <div class="row justify-content-center">
@@ -391,7 +335,7 @@
                                                 <del>
                                                 @php
                                                 $price = $post->getMetaData('price');
-                                                $discount = $price / ($post->getMetaData('discount'));
+                                                $discount = $price - ($price * ($post->getMetaData('discount')/100));
                                                 @endphp
                                                 @if ($discount)
                                                       {{ $price }}
@@ -404,15 +348,18 @@
                      </ul>
                      <div class="float-right">
                        <h6 class="theme-color">
-                        <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="addtocart" href='javascript:;'>Add to cart</a>
-                        {{-- <a href="{{ route('pages.cart') }}">Add to Cart</a> --}}
+                        <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="@if(!auth()->user())disabled @endif addtocart" href='javascript:;'>Add to cart</a>
                     </h6>
                      </div>
                  </div>
+                 @if(!auth()->user())<p class="text-right mt-3" style="color:red"><b>*You Need To First Login</b></p>@endif
               </div>
           </div>
          </div>
          @empty
+         <div class="w-100">
+             <h2 class="text-center">No New Collections</h2>
+         </div>
          @endforelse
          <div class="w-100 text-center">
           <a class="button ml-10" href="{{ route('pages.products',[$type->slug]) }}">Explore All</a>
@@ -420,86 +367,6 @@
        </div>
      </div>
 </section>
-
-{{-- <section class="portfolio o-hidden">
-      <div class="page-section-pt">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="section-title text-center">
-                <h6>Our Portfolio</h6>
-                <h2 class="title-effect">Webster's Creativity!</h2>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="isotope-filters">
-          <button data-filter="" class="active">All</button>
-          @foreach ($parentCategories as $category)
-            <button data-filter=".{{ $category->slug }}">{{ $category->title }}</button>
-          @endforeach
-        </div>
-      </div>
-      <div class="container page-section-pb">
-        <div class="isotope popup-gallery columns-4">
-              @forelse ($posts as $post)
-                  <div class="grid-item @foreach($post->categories as $category) {{ $category->slug }} @endforeach">
-                        @if ($post->getMetaData('discount') != null)
-                              <div class="c-label c-bg-red c-font-uppercase c-font-white c-font-13 c-font-bold">{{ $post->getMetaData('discount') }}% Discount</div>
-                        @endif
-                        <div class="product mb-70">
-                              <a href="{{ route('pages.product-post', [$post->categories[0]->slug,$post->slug] ) }}">
-                              <div class="product-image">
-                                    <img class="img-fluid mx-auto" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="">
-                              </div>
-                              <div class="product-des">
-                                    <div class="product-title">
-                                          <span>{{ $post->title }}</span>
-                                    </div>
-                                    <div class="product-rating">
-                                          <i class="fa fa-star"></i>
-                                          <i class="fa fa-star"></i>
-                                          <i class="fa fa-star"></i>
-                                          <i class="fa fa-star-half-o"></i>
-                                          <i class="fa fa-star-o"></i>
-                                    </div>
-                                    <div class="product-price">
-                                          @if ($post->getMetaData('discount'))
-                                                <del>
-                                                @php
-                                                $price = $post->getMetaData('price');
-                                                $discount = $price / ($post->getMetaData('discount'));
-                                                @endphp
-                                                @if ($discount)
-                                                      {{ $price }}
-                                                @endif
-                                                </del>
-                                          @endif
-                                          <ins>{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}</ins>
-                                    </div>
-                                    <div style="margin-top: 10px;">
-                                          <span>
-                                                <a style="    padding: 10px;
-                                                background: #84ba3f;
-                                                color: white;
-                                                float: right;
-                                                width: 100%;" href="{{ route('pages.cart') }}">ADD TO CART</a>
-                                          </span>
-                                    </div>
-                              </div>
-                              </a>
-                        </div>
-                  </div>
-              @empty
-                  <h1 class="text-center"></h1>
-              @endforelse
-        </div>
-        <div class="banner-content" style="    display: flex;justify-content: center;">
-            <a class="button" href="#">View All <i class="fa fa-angle-right"></i></a>
-          </div>
-
-      </div>
-</section> --}}
 
 <section class="shop-block page-section-ptb bg-overlay-black-40 parallax" data-jarallax='{"speed": 0.6}' style="background-image: url({{ asset('images/05.jpg') }});">
     <div class="container">
@@ -538,7 +405,7 @@
                                         <del>
                                         @php
                                         $price = $post->getMetaData('price');
-                                        $discount = $price / ($post->getMetaData('discount'));
+                                        $discount = $price - ($price * ($post->getMetaData('discount')/100));
                                         @endphp
                                         @if ($discount)
                                               {{ $price }}
@@ -580,9 +447,9 @@
           </div>
           <div class="col-lg-4 col-sm-6">
             <h4 class="mb-30 xs-mt-30">Popular</h4>
-            @forelse ($popularPosts as $post)
+            @forelse ($popularPosts as $popular)
                 @php
-                    $post = $post->post;
+                    $post = $popular->post;
                 @endphp
                 <div class="product left clearfix mb-40">
                     <div class="product-image">
@@ -599,7 +466,7 @@
                                         <del>
                                         @php
                                         $price = $post->getMetaData('price');
-                                        $discount = $price / ($post->getMetaData('discount'));
+                                        $discount = $price - ($price * ($post->getMetaData('discount')/100));
                                         @endphp
                                         @if ($discount)
                                               {{ $price }}
@@ -609,26 +476,29 @@
                                   <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
                       </div>
                         <div class="product-rate">
-                            @php
-                                $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
-                            @endphp
-                            @for ($i = 0; $i < $star; $i++)
-                                <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
-                            @endfor
-                            @if ($star == 4)
-                                <i class='fa fa-star-o'></i>
-                            @elseif($star == 3)
-                                <i class='fa fa-star-o'></i>
-                                <i class='fa fa-star-o'></i>
-                            @elseif($star == 2)
-                                <i class='fa fa-star-o'></i>
-                                <i class='fa fa-star-o'></i>
-                                <i class='fa fa-star-o'></i>
-                            @elseif($star == 1)
-                                <i class='fa fa-star-o'></i>
-                                <i class='fa fa-star-o'></i>
-                                <i class='fa fa-star-o'></i>
-                                <i class='fa fa-star-o'></i>
+                            @if ($popular->post->reviews->count())
+                                @php
+                                    $popularStar = round(number_format((float) ($popular->post->reviews->sum('rating') / $popular->post->reviews->count()), 2, '.', ''));
+                                @endphp
+                                @for ($i = 0; $i < round($popularStar); $i++)
+                                    <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
+                                @endfor
+                                @if ($popularStar == 4)
+                                    <i class='fa fa-star-o'></i>
+                                @elseif($popularStar == 3)
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                @elseif($popularStar == 2)
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                @elseif($popularStar == 1)
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                    <i class='fa fa-star-o'></i>
+                                @endif
+
                             @endif
                         </div>
                     </div>
