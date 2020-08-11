@@ -37,8 +37,6 @@
       data-cc-on-file="false"
       data-stripe-publishable-key="{{ config('app.stripe_key') }}"
       id="payment-form" action="{{ route('generate.order') }}">
-      {{-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr"  target="_blank" method="post"> --}}
-        {{-- <form action="{{ route('paypal-payment') }}"  target="_blank" method="post"> --}}
         @csrf
       <div class="row">
             <div class="col-lg-6 col-md-6">
@@ -176,19 +174,6 @@
                     </div>
                     <div id="paypal-form">
 
-                            <input type="hidden" name="cmd" value="_cart">
-                            <input type="hidden" name="upload" value="1">
-                            <input type="hidden" name="business" value="nabeelahma7779@gmail.com">
-
-                            <input type="hidden" name="item_name_1" value="Name1">
-                            <input type="hidden" name="amount_1" value="{{ $postCarts->sum('price') }}">
-
-
-                             <input type="hidden" name="cancel_return" id="cancel_return" value="http://localhost:8000/checkout" />
-
-                            <input type="hidden" name="return" id="return" value="http://localhost:8000/thankyou" />
-
-                            <input target="_blank" type="submit" id="paypalId" style="background:#f9be37;color:#fff;" class="form-control btn btn-primary" value="Paypal">
                     </div>
                </div>
            </div>

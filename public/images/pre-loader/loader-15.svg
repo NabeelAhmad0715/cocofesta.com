@@ -9,7 +9,7 @@
             <use x="0" y="0" xlink:href="#text" opacity="1" fill="#ffffff"/>
         </mask>
         <g id="eff">
-            <use x="0" y="0" xlink:href="#text" fill="#84ba3f"/>
+            <use x="0" y="0" xlink:href="#text" fill="#2bb6aa"/>
             <rect class="water-fill" mask="url(#text-mask)" fill="url(#water)" x="-120" y="10" width="1200" height="120" opacity="0.3">
                 <animate attributeType="xml" attributeName="x" from="-300" to="0" repeatCount="indefinite" dur="3s"/>
             </rect>

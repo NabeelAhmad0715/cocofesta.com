@@ -111,7 +111,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
 }
 .topbar-call ul li i {
     margin-right: 5px;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .topbar-call ul li a {
     margin-right: 30px;
@@ -136,7 +136,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     margin-right: 0;
 }
 .topbar ul li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*menu*/
@@ -159,7 +159,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     -o-transition: 0.5s ease-in-out;
 }
 .search-cart i.icon:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .search-cart .search {
     display: inline-block;
@@ -184,7 +184,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     height: 16px;
     line-height: 16px;
     text-align: center;
-    background-color: #84ba3f;
+    background-color: #2bb6aa;
     border-radius: 50%;
 }
 
@@ -218,7 +218,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     top: 0;
 }
 .search .search-btn:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .search.search-open .search-btn:before {
     content: "";
@@ -275,7 +275,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     -o-transition: 0.5s ease-in-out;
 }
 .search .search-box button:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*cart*/
@@ -342,7 +342,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     color: #323232;
 }
 .cart-item .cart-name a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .cart-item .cart-name span {
     color: #323232;
@@ -359,7 +359,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
 }
 .cart-price ins {
     text-decoration: none;
-    color: #84ba3f;
+    color: #2bb6aa;
     font-size: 16px;
     font-weight: bold;
 }
@@ -418,25 +418,25 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     color: #555555;
 }
 .mega-menu .menu-links > li.active .drop-down-multilevel a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu .menu-links > li.active .drop-down a {
     color: #323232;
 }
 .mega-menu .menu-links > li.active .drop-down li.active a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu .menu-links > li.active .drop-down a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu .menu-links > li.active .drop-down li.active a i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu .menu-links > li.active .drop-down a i:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu .menu-links > li.active .drop-down-multilevel li.active a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #f7f7f7;
 }
 .mega-menu
@@ -458,7 +458,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li
     a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu
     .menu-links
@@ -468,7 +468,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #f7f7f7;
 }
 .mega-menu
@@ -495,7 +495,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li
     a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu
     .menu-links
@@ -507,11 +507,11 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #f7f7f7;
 }
 .mega-menu .menu-links > li.active .drop-down-multilevel li.active i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu
     .menu-links
@@ -521,7 +521,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu
     .menu-links
@@ -543,7 +543,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     li
     a:hover
     i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu
     .menu-links
@@ -555,7 +555,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li
     a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .mega-menu .row {
     margin-left: 0px;
@@ -603,10 +603,10 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     color: #323232;
 }
 .header.light .mega-menu .menu-links > li > a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.light .mega-menu .menu-links > li.active > a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.light .topbar {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -615,7 +615,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     color: #323232;
 }
 .header.light .search-cart i.icon:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.light .mega-menu.desktopTopFixed .menu-list-items {
     background: #ffffff;
@@ -624,7 +624,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     color: #323232;
 }
 .header.light .search .search-btn:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*dark*/
@@ -702,7 +702,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     border-bottom: 0;
 }
 .header.fancy .topbar {
-    background: #84ba3f;
+    background: #2bb6aa;
     padding: 15px 0px 70px;
 }
 .header.fancy .topbar .topbar-right li a:hover {
@@ -743,10 +743,10 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     line-height: 20px;
 }
 .header.fancy .mega-menu .menu-links > li > a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.fancy .mega-menu .menu-links > li.active > a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.fancy .mega-menu.desktopTopFixed .menu-links > li > a {
     color: #ffffff;
@@ -773,13 +773,13 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     line-height: 20px;
 }
 .header.fancy .search-cart i.icon:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.fancy .search .search-btn {
     color: #323232;
 }
 .header.fancy .search .search-btn:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.fancy .mega-menu.desktopTopFixed .drop-down.grid-col-5 {
     width: 21.66666666666667%;
@@ -797,7 +797,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     color: #323232;
 }
 .header.burger .menu-icon:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.burger {
     position: absolute;
@@ -822,7 +822,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     padding-left: 15px;
 }
 .side-menu-icon .menu-icon:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*************************
@@ -835,16 +835,16 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     color: #323232;
 }
 .header.text-dark .topbar ul li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .mega-menu .menu-links > li > a {
     color: #323232;
 }
 .header.text-dark .mega-menu .menu-links > li > a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .mega-menu .menu-links > li.active > a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .topbar {
     border-bottom: 1px solid rgba(0, 0, 0, 0.1);
@@ -853,7 +853,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     color: #323232;
 }
 .header.text-dark .search-cart i.icon:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .mega-menu.desktopTopFixed .menu-list-items {
     background: #ffffff;
@@ -862,7 +862,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     color: #323232;
 }
 .header.text-dark .search .search-btn:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .mega-menu .drop-down-multilevel {
     background: #323232;
@@ -887,20 +887,20 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
 }
 .header.text-dark .mega-menu .drop-down a:hover i.fa,
 .header.text-dark .mega-menu .drop-down-tab-bar a:hover i.fa {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .mega-menu .menu-links > li.active .drop-down a {
     color: #ffffff;
 }
 .header.text-dark .mega-menu .menu-links > li.active .drop-down li.active a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .mega-menu .menu-links > li.active .drop-down li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .mega-menu .drop-down a:hover,
 .header.text-dark .mega-menu .drop-down-tab-bar a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .mega-menu .menu-links > li.active .drop-down-multilevel a,
 .header.text-dark .mega-menu .drop-down-multilevel a {
@@ -928,7 +928,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     a:hover,
 .header.text-dark .mega-menu .drop-down-multilevel a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark
     .mega-menu
@@ -937,7 +937,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #282828;
 }
 .header.text-dark
@@ -961,7 +961,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li
     a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark
     .mega-menu
@@ -972,7 +972,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #282828;
 }
 .header.text-dark
@@ -1001,7 +1001,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li
     a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark
     .mega-menu
@@ -1014,7 +1014,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #282828;
 }
 .header.text-dark
@@ -1024,7 +1024,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark
     .mega-menu
@@ -1035,7 +1035,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark
     .mega-menu
@@ -1059,7 +1059,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     li
     a:hover
     i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark
     .mega-menu
@@ -1072,7 +1072,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li
     a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark
     .mega-menu
@@ -1083,17 +1083,17 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #282828;
 }
 .header.text-dark .mega-menu .drop-down-multilevel i.fa-indicator {
     color: #ffffff;
 }
 .header.text-dark .mega-menu .drop-down-multilevel a:hover i.fa-indicator {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.text-dark .mega-menu .drop-down-multilevel li.active a i.fa-indicator {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 /*dark-dropdown*/
 .header.dark-dropdown .mega-menu .drop-down-multilevel {
@@ -1119,7 +1119,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
 }
 .header.dark-dropdown .mega-menu .drop-down a:hover i.fa,
 .header.dark-dropdown .mega-menu .drop-down-tab-bar a:hover i.fa {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown .mega-menu .menu-links > li.active .drop-down a {
     color: #ffffff;
@@ -1131,14 +1131,14 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown .mega-menu .menu-links > li.active .drop-down li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown .mega-menu .drop-down a:hover,
 .header.dark-dropdown .mega-menu .drop-down-tab-bar a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown
     .mega-menu
@@ -1171,7 +1171,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     a:hover,
 .header.dark-dropdown .mega-menu .drop-down-multilevel a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown
     .mega-menu
@@ -1180,7 +1180,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #282828;
 }
 .header.dark-dropdown
@@ -1204,7 +1204,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li
     a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown
     .mega-menu
@@ -1215,7 +1215,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #282828;
 }
 .header.dark-dropdown
@@ -1244,7 +1244,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li
     a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown
     .mega-menu
@@ -1257,7 +1257,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #282828;
 }
 .header.dark-dropdown
@@ -1267,7 +1267,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown
     .mega-menu
@@ -1278,7 +1278,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown
     .mega-menu
@@ -1302,7 +1302,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     li
     a:hover
     i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown
     .mega-menu
@@ -1315,7 +1315,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li
     a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown
     .mega-menu
@@ -1326,14 +1326,14 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     .drop-down-multilevel
     li.active
     a {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: #282828;
 }
 .header.dark-dropdown .mega-menu .drop-down-multilevel i.fa-indicator {
     color: #ffffff;
 }
 .header.dark-dropdown .mega-menu .drop-down-multilevel a:hover i.fa-indicator {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .header.dark-dropdown
     .mega-menu
@@ -1341,7 +1341,7 @@ NOTE: This is main stylesheet of template, This file contains the styling for th
     li.active
     a
     i.fa-indicator {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 /*label*/
 .header .label.label-default,
@@ -1415,7 +1415,7 @@ header.one-page {
     text-transform: capitalize;
 }
 .navbar-inverse .navbar-nav > li > a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .navbar.affix {
     width: 100%;
@@ -1491,7 +1491,7 @@ header.one-page {
 .navbar-inverse .navbar-nav > .active > a:focus,
 .navbar-inverse .navbar-nav > .active > a:hover {
     background: transparent;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 header.one-page.vertical-menu {
     position: fixed;
@@ -1534,13 +1534,13 @@ header.one-page.light .navbar-inverse .navbar-nav > li > a {
     color: #323232;
 }
 header.one-page.light .navbar-inverse .navbar-nav > li > a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 header.one-page.light .navbar-inverse .navbar-nav > .active > a,
 header.one-page.light .navbar-inverse .navbar-nav > .active > a:focus,
 header.one-page.light .navbar-inverse .navbar-nav > .active > a:hover {
     background: transparent;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 header.one-page.light .navbar-inverse .navbar-collapse,
@@ -1568,11 +1568,11 @@ header.one-page.light
     .navbar-nav.hover-effect-01
     > .active
     > a {
-    -webkit-box-shadow: inset 178px 0px 0px 0px #84ba3f;
-    -o-box-shadow: inset 178px 0px 0px 0px #84ba3f;
-    -ms-box-shadow: inset 178px 0px 0px 0px #84ba3f;
-    -moz-box-shadow: inset 178px 0px 0px 0px #84ba3f;
-    box-shadow: inset 178px 0px 0px 0px #84ba3f;
+    -webkit-box-shadow: inset 178px 0px 0px 0px #2bb6aa;
+    -o-box-shadow: inset 178px 0px 0px 0px #2bb6aa;
+    -ms-box-shadow: inset 178px 0px 0px 0px #2bb6aa;
+    -moz-box-shadow: inset 178px 0px 0px 0px #2bb6aa;
+    box-shadow: inset 178px 0px 0px 0px #2bb6aa;
     color: #fff;
     -webkit-transition: all 0.9s ease-in;
     -moz-transition: all 0.9s ease-in;
@@ -3172,13 +3172,13 @@ header.one-page.light
     display: block;
 }
 .personal-typer-banner b {
-    border-bottom: 2px solid #84ba3f;
+    border-bottom: 2px solid #2bb6aa;
 }
 .personal-typer-banner h1 {
     font-size: 100px;
     line-height: 100px;
     font-weight: 600;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .personal-typer-banner h1 span {
     color: #ffffff;
@@ -3191,7 +3191,7 @@ header.one-page.light
     left: -20px;
 }
 .personal-typer-banner h2 {
-    border-left: 3px solid #84ba3f;
+    border-left: 3px solid #2bb6aa;
     padding-left: 10px;
     margin-top: 20px;
 }
@@ -3207,7 +3207,7 @@ header.one-page.light
     line-height: 22px;
 }
 .slider-content .typer {
-    color: #84ba3f !important;
+    color: #2bb6aa !important;
 }
 
 /*popup-video-banner*/
@@ -3224,7 +3224,7 @@ header.one-page.light
     display: inline-block;
     text-align: center;
     background: #ffffff;
-    color: #84ba3f;
+    color: #2bb6aa;
     border-radius: 50%;
     transition: all 0.5s ease-in-out;
     -webkit-transition: all 0.5s ease-in-out;
@@ -3233,7 +3233,7 @@ header.one-page.light
     -moz-transition: all 0.5s ease-in-out;
 }
 .popup-video-banner a:hover span {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #ffffff;
 }
 .popup-video-banner a strong {
@@ -3252,7 +3252,7 @@ header.one-page.light
     text-transform: uppercase;
 }
 .video-background-banner .slider-content {
-    border: 20px solid #84ba3f;
+    border: 20px solid #2bb6aa;
     width: 50%;
     margin: 0 auto;
     padding: 60px 30px;
@@ -3315,7 +3315,7 @@ header.one-page.light
     background: #666666;
 }
 .theme-bg {
-    background: #84ba3f;
+    background: #2bb6aa;
 }
 .black-bg {
     background: #323232;
@@ -3577,7 +3577,7 @@ header.one-page.light
 }
 .custom-content {
     margin-top: -220px;
-    background: #84ba3f;
+    background: #2bb6aa;
     position: relative;
     z-index: 9;
     padding: 50px;
@@ -3616,7 +3616,7 @@ header.one-page.light
 }
 .feature-step a {
     font-size: 14px;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .feature-step a:hover {
     color: #323232;
@@ -3705,7 +3705,7 @@ header.one-page.light
     opacity: 0.3;
 }
 .service-blog ul {
-    border-right: 6px solid #84ba3f;
+    border-right: 6px solid #2bb6aa;
     padding-right: 20px;
 }
 .service-blog li {
@@ -3719,7 +3719,7 @@ header.one-page.light
     right: inherit;
 }
 .service-blog.left ul {
-    border-left: 6px solid #84ba3f;
+    border-left: 6px solid #2bb6aa;
     border-right: 0 none;
     padding-left: 20px;
     padding-right: 0;
@@ -3780,7 +3780,7 @@ header.one-page.light
 .resume-block .resume-icon span {
     font-size: 30px;
     line-height: 50px;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .resume-block .resume-name {
     display: table-cell;
@@ -3843,9 +3843,9 @@ header.one-page.light
 }
 .isotope-filters button.active,
 .isotope-filters button:hover {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #fff;
-    border-color: #84ba3f;
+    border-color: #2bb6aa;
 }
 .isotope-filters button + button {
     margin-left: 10px;
@@ -3942,7 +3942,7 @@ header.one-page.light
 }
 .isotope-filters.filters-vertical button.active,
 .isotope-filters.filters-vertical button:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
     background: transparent;
 }
 .portfolio-item.rs-hero:before {
@@ -3984,7 +3984,7 @@ header.one-page.light
 }
 .portfolio-item .portfolio-overlay {
     width: 100%;
-    background: #84ba3f;
+    background: #2bb6aa;
     padding: 10px 0px;
     position: absolute;
     bottom: -80px;
@@ -4042,7 +4042,7 @@ header.one-page.light
     -o-transition: all 0.5s ease-in-out;
 }
 .portfolio-item a.popup:hover {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #ffffff;
 }
 .portfolio-item:hover img {
@@ -4107,7 +4107,7 @@ header.one-page.light
     color: #323232;
 }
 .no-title .portfolio-item .portfolio-overlay a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 /*portfolio pupup*/
 .mfp-bottom-bar {
@@ -4173,7 +4173,7 @@ header.one-page.light
     margin-top: 5px;
 }
 .portfolio-item-2 .portfolio-hover .hover-name a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .portfolio-item-2 .portfolio-hover .hover-icon {
     position: absolute;
@@ -4189,7 +4189,7 @@ header.one-page.light
     color: #fff;
 }
 .portfolio-item-2 .portfolio-hover .hover-icon a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .portfolio-item-2:hover .portfolio-hover {
     opacity: 1;
@@ -4267,7 +4267,7 @@ header.one-page.light
 }
 .no-title .portfolio-item-2 .portfolio-hover .hover-icon a:hover,
 .no-title .portfolio-item-2 .portfolio-hover .hover-name a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*************************************
@@ -4319,7 +4319,7 @@ header.one-page.light
     font-size: 16px;
 }
 .port-meta li b {
-    color: #84ba3f;
+    color: #2bb6aa;
     width: 200px;
     font-weight: 400;
     width: 100px;
@@ -4397,7 +4397,7 @@ header.one-page.light
     font-size: 14px;
 }
 .port-post-social a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .port-post-info p {
     margin-top: 10px;
@@ -4450,7 +4450,7 @@ header.one-page.light
     font-weight: 500;
     border-radius: 3px;
     color: #fff;
-    background-color: #84ba3f;
+    background-color: #2bb6aa;
     -webkit-transition: all 0.3s ease;
     -moz-transition: ll 0.3s ease;
     transition: all 0.3s ease;
@@ -4459,7 +4459,7 @@ header.one-page.light
 a.blog-btn {
     text-align: center;
     font-size: 14px;
-    color: #84ba3f;
+    color: #2bb6aa;
     display: block;
     padding-bottom: 12px;
     position: relative;
@@ -4475,7 +4475,7 @@ a.blog-btn i {
 }
 .blog-box .border {
     position: absolute;
-    background: #84ba3f;
+    background: #2bb6aa;
     height: 0px;
     bottom: 0;
     left: 0;
@@ -4611,14 +4611,14 @@ a.blog-btn i {
     line-height: 28px;
 }
 .blog-entry .blog-detail .entry-title a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .blog-entry .entry-meta ul li {
     display: inline-block;
     margin-right: 12px;
 }
 .blog-entry .entry-meta ul li i {
-    color: #84ba3f;
+    color: #2bb6aa;
     padding-right: 6px;
 }
 .blog-entry .entry-meta ul li a {
@@ -4628,10 +4628,10 @@ a.blog-btn i {
 }
 .blog-entry .entry-meta ul li a i {
     padding-right: 6px;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .blog-entry .entry-meta ul li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .blog-entry .social strong {
     display: inline-block;
@@ -4657,12 +4657,12 @@ a.blog-btn i {
 
 /*blog-entry blockquote*/
 .blog-entry.blockquote {
-    background: #84ba3f;
+    background: #2bb6aa;
     border: 0px;
     padding: 36px 30px;
 }
 .blog-entry.blockquote blockquote {
-    background: #84ba3f;
+    background: #2bb6aa;
     border-left: 0px;
     color: #ffffff;
     padding: 0px;
@@ -4682,7 +4682,7 @@ a.blog-btn i {
 }
 .blog-entry.blockquote .blog-detail {
     border: 0px;
-    background: #84ba3f;
+    background: #2bb6aa;
     padding: 0px;
 }
 .blog-entry.blockquote .blog-detail .entry-title a {
@@ -4799,7 +4799,7 @@ a.blog-btn i {
     padding: 80px 50px !important;
 }
 .services-text-box-green {
-    background: #84ba3f;
+    background: #2bb6aa;
     padding: 80px 50px !important;
 }
 
@@ -4850,7 +4850,7 @@ a.blog-btn i {
     width: 100%;
 }
 .contact-box i {
-    background: #84ba3f;
+    background: #2bb6aa;
     width: 80px;
     height: 80px;
     text-align: center;
@@ -4929,7 +4929,7 @@ a.blog-btn i {
 }
 .contact-3 .contact-add i {
     font-size: 40px;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .contact-3 .contact-form .section-field {
     width: 100%;
@@ -4964,7 +4964,7 @@ a.blog-btn i {
 }
 .footer-contact .contact-box .contact-icon i {
     background: transparent;
-    color: #84ba3f;
+    color: #2bb6aa;
     margin-bottom: 10px;
 }
 .footer.footer-topbar hr {
@@ -5231,7 +5231,7 @@ a.blog-btn i {
     position: absolute;
     top: 16px;
     left: 50%;
-    border: 3px solid #84ba3f;
+    border: 3px solid #2bb6aa;
     margin-left: -9px;
     background-color: #fff;
     border-top-right-radius: 50%;
@@ -5372,7 +5372,7 @@ a.blog-btn i {
     cursor: pointer;
 }
 .widget-search input:focus {
-    border-color: #84ba3f;
+    border-color: #2bb6aa;
 }
 
 /*Recent Posts*/
@@ -5399,10 +5399,10 @@ a.blog-btn i {
     color: #323232;
 }
 .sidebar-widget .recent-post .recent-post-info a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .sidebar-widget .recent-post .recent-post-info span {
-    color: #84ba3f;
+    color: #2bb6aa;
     font-style: italic;
     font-size: 14px;
 }
@@ -5436,11 +5436,11 @@ a.blog-btn i {
     text-align: center;
 }
 .sidebar-widget .widget-categories li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .sidebar-widget .widget-categories li a:hover i {
-    border-color: #84ba3f;
-    color: #84ba3f;
+    border-color: #2bb6aa;
+    color: #2bb6aa;
 }
 
 /*widget-link*/
@@ -5464,7 +5464,7 @@ a.blog-btn i {
     text-align: center;
 }
 .sidebar-widget .widget-link li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*tags*/
@@ -5581,7 +5581,7 @@ a.blog-btn i {
     font-weight: bold;
 }
 .sidebar-widget .recent-item .recent-title a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .sidebar-widget .recent-item .recent-meta li {
     display: inline-block;
@@ -5614,10 +5614,10 @@ a.blog-btn i {
     margin: 0 44px;
 }
 .maintenance-progress-bar .progress-bar .rotate {
-    background: #84ba3f !important;
+    background: #2bb6aa !important;
 }
 .maintenance-progress-bar .progress-bar .right {
-    background: #84ba3f !important;
+    background: #2bb6aa !important;
 }
 .about-me .portfolio-item {
     width: 100%;
@@ -5629,7 +5629,7 @@ a.blog-btn i {
 }
 .about-me .contact-me i {
     float: left;
-    color: #84ba3f;
+    color: #2bb6aa;
     margin-right: 15px;
     line-height: 23px;
     width: 20px;
@@ -5642,7 +5642,7 @@ a.blog-btn i {
 }
 .about-me .follow-me li a {
     background: #e4e4e4;
-    color: #84ba3f;
+    color: #2bb6aa;
     border-radius: 3px;
     display: block;
     width: 35px;
@@ -5653,7 +5653,7 @@ a.blog-btn i {
     font-size: 16px;
 }
 .about-me .follow-me li a:hover {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #fff;
 }
 
@@ -5668,7 +5668,7 @@ a.blog-btn i {
 .team-details .social li a {
     background: #f7f7f7 none repeat scroll 0 0;
     border-radius: 3px;
-    color: #84ba3f;
+    color: #2bb6aa;
     display: block;
     font-size: 15px;
     height: 35px;
@@ -5678,7 +5678,7 @@ a.blog-btn i {
     width: 35px;
 }
 .team-details .social li a:hover {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #ffffff;
 }
 .team-details .info i {
@@ -5737,7 +5737,7 @@ a.blog-btn i {
 .pagination li span:focus,
 .pagination li span:hover {
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
-    background-color: #84ba3f;
+    background-color: #2bb6aa;
     color: #ffffff;
 }
 .pagination > .active > a,
@@ -5746,7 +5746,7 @@ a.blog-btn i {
 .pagination > .active > span,
 .pagination > .active > span:focus,
 .pagination > .active > span:hover {
-    background-color: #84ba3f;
+    background-color: #2bb6aa;
     color: #ffffff;
     box-shadow: 0px 3px 10px rgba(0, 0, 0, 0.1);
 }
@@ -5955,22 +5955,22 @@ a.blog-btn i {
     border-radius: 30px;
 }
 .blog .timeline li.entry-date-bottom a:hover {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #fff;
 }
 .blog .timeline li:hover .timeline-panel {
-    border-color: #84ba3f;
+    border-color: #2bb6aa;
 }
 .blog .timeline li:hover .timeline-badge a {
     color: #fff;
 }
 .blog .timeline li:hover .timeline-badge {
-    background: #84ba3f;
-    border-color: #84ba3f;
+    background: #2bb6aa;
+    border-color: #2bb6aa;
 }
 .blog .timeline li:hover .timeline-panel:before {
-    border-left-color: #84ba3f;
-    border-right-color: #84ba3f;
+    border-left-color: #2bb6aa;
+    border-right-color: #2bb6aa;
 }
 .blog .blog.timeline .entry-quote p {
     font-size: 16px;
@@ -6037,7 +6037,7 @@ a.blog-btn i {
     color: #626262;
 }
 .blog-single .blog-entry.blockquote blockquote cite {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .blog-single .entry-share .tags {
     display: inline-block;
@@ -6047,8 +6047,8 @@ a.blog-btn i {
     top: 20px;
 }
 .page-item.active .page-link {
-    background: #84ba3f;
-    border-color: #84ba3f;
+    background: #2bb6aa;
+    border-color: #2bb6aa;
 }
 
 /*blog-comments*/
@@ -6076,7 +6076,7 @@ a.blog-btn i {
     color: #626262;
 }
 .comments-1 .comments-info a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .comments-1 .comments-info a:hover {
     color: #363636;
@@ -6198,7 +6198,7 @@ a.blog-btn i {
     font-size: 90px;
     font-weight: bold;
     line-height: 80px;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .coming-soon-countdown ul.countdown li p {
     color: #626262;
@@ -6275,7 +6275,7 @@ a.blog-btn i {
     border: 0;
 }
 .remember-checkbox a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .remember-checkbox label {
     position: relative;
@@ -6320,7 +6320,7 @@ label:after {
 }
 .remember-checkbox label:before,
 .remember-checkbox after:before {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*************************************
@@ -6373,7 +6373,7 @@ label:after {
 .login-social li a.fb:hover,
 .login-social li a.twitter:hover,
 .login-social li a.pinterest:hover {
-    background: #84ba3f;
+    background: #2bb6aa;
 }
 
 /*login 02*/
@@ -6384,7 +6384,7 @@ label:after {
     background: #ffffff;
 }
 .login-bg .login-title {
-    background: #84ba3f;
+    background: #2bb6aa;
     padding: 30px;
 }
 .login-bg .login-form {
@@ -6400,7 +6400,7 @@ label:after {
     background: #ffffff;
 }
 .register-bg .register-title {
-    background: #84ba3f;
+    background: #2bb6aa;
     padding: 30px;
 }
 .register-bg .register-form {
@@ -6469,7 +6469,7 @@ img.logo-small {
 }
 .progress-bar-new {
     line-height: 50px;
-    background-color: #84ba3f;
+    background-color: #2bb6aa;
     color: #ffffff;
     font-size: 20px;
     padding-left: 20px;
@@ -6517,7 +6517,7 @@ img.logo-small {
 }
 .clients-info a {
     font-size: 14px;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .clients-info a:hover {
     color: #626262;
@@ -6536,7 +6536,7 @@ img.logo-small {
     top: -10px;
     font-size: 120px;
     line-height: 1;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .happy-clients .tab-content p {
     padding-left: 30px;
@@ -6725,7 +6725,7 @@ img.logo-small {
     height: 70px;
     line-height: 70px;
     text-align: center;
-    background: #84ba3f;
+    background: #2bb6aa;
     border-radius: 100%;
     display: inline-block;
     z-index: 99;
@@ -6739,7 +6739,7 @@ img.logo-small {
 .process .process-content span {
     font-size: 80px;
     line-height: 80px;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .process.left .process-content .process-icon {
     display: table-cell;
@@ -6798,7 +6798,7 @@ img.logo-small {
     text-transform: capitalize;
 }
 .sitemap ul li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*************************************
@@ -6932,7 +6932,7 @@ img.logo-small {
     color: #626262;
 }
 .addresss-info.text-black i {
-    color: #84ba3f;
+    color: #2bb6aa;
     font-size: 20px;
     width: 40px;
 }
@@ -6997,7 +6997,7 @@ img.logo-small {
     line-height: 26px;
 }
 .footer-useful-link ul li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 /*transparent*/
 .footer-Newsletter.transparent .form-control {
@@ -7024,10 +7024,10 @@ img.logo-small {
     letter-spacing: 0.5px;
 }
 .footer-widget a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .footer-widget a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .footer-widget-social {
     margin-top: 5px;
@@ -7052,7 +7052,7 @@ img.logo-small {
     transition: all 0.3s ease-out 0s;
 }
 .footer-widget-social a i:hover {
-    background: #84ba3f;
+    background: #2bb6aa;
 }
 .footer .footer-nav ul li {
     display: inline-block;
@@ -7062,7 +7062,7 @@ img.logo-small {
     color: #323232;
 }
 .footer .footer-nav ul li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .footer .social ul li {
     display: inline-block;
@@ -7082,7 +7082,7 @@ img.logo-small {
     transition: all 0.5s ease-out 0s;
 }
 .footer .social ul li a i:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .footer .social ul {
     background: #f6f7f8;
@@ -7100,7 +7100,7 @@ img.logo-small {
     color: #323232;
 }
 .footer .usefull-link ul li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .footer .copyright {
     padding: 30px 0 20px;
@@ -7109,7 +7109,7 @@ img.logo-small {
     color: #323232;
 }
 .footer .copyright ul li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 img#logo-footer {
     height: 40px;
@@ -7150,7 +7150,7 @@ img#logo-footer {
     color: #fff;
 }
 .footer.light .social ul li a i {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .footer.light .social ul li a:hover i {
     color: #323232;
@@ -7164,7 +7164,7 @@ img#logo-footer {
     padding-top: 10px;
 }
 .footer .footer-social ul li a:hover {
-    color: #84ba3f !important;
+    color: #2bb6aa !important;
 }
 .footer.footer-topbar .copyright ul li {
     color: rgba(255, 255, 255, 0.5) !important;
@@ -7212,7 +7212,7 @@ img#logo-footer {
     display: block;
 }
 .footer .footer-tags li a:hover {
-    background: #84ba3f;
+    background: #2bb6aa;
 }
 
 /*footer-social-big*/
@@ -7297,7 +7297,7 @@ img#logo-footer {
     line-height: 60px;
     border-radius: 50%;
     background: #ffffff;
-    color: #84ba3f;
+    color: #2bb6aa;
     text-align: center;
 }
 .google-map.google-map-open .map-icon::before {
@@ -7378,7 +7378,7 @@ img#logo-footer {
     background-color: #ffffff;
 }
 .popup-video .play-video:hover a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .play-video {
     cursor: pointer;
@@ -7396,7 +7396,7 @@ img#logo-footer {
     transition: all 0.5s;
 }
 .play-video {
-    background-color: #84ba3f;
+    background-color: #2bb6aa;
 }
 .play-video a {
     color: #fff;
@@ -7412,7 +7412,7 @@ img#logo-footer {
     line-height: 100px;
 }
 .play-video:hover a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .play-video:after {
     content: "";
@@ -7438,7 +7438,7 @@ img#logo-footer {
 
 .play-video:hover {
     background: #ffffff;
-    color: #84ba3f;
+    color: #2bb6aa;
     border-color: transparent !important;
     -webkit-transform: scale(1);
     -moz-transform: scale(1);
@@ -7520,10 +7520,10 @@ img#logo-footer {
     color: #363636;
 }
 .portfolio-item.simple-effect .portfolio-overlay a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .portfolio-item.simple-effect .portfolio-overlay span a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .portfolio-item.simple-effect .portfolio-overlay {
     z-index: 9;
@@ -7643,7 +7643,7 @@ img#logo-footer {
     line-height: 60px;
     width: 60px;
     height: 60px;
-    background: #84ba3f;
+    background: #2bb6aa;
     display: inline-block;
     margin: 0 auto;
     border-radius: 50%;
@@ -7697,7 +7697,7 @@ img#logo-footer {
     line-height: 60px;
 }
 .play-video-section .play-video a {
-    color: #84ba3f;
+    color: #2bb6aa;
     line-height: 60px;
 }
 .play-video-section .play-video a i {
@@ -7726,7 +7726,7 @@ img#logo-footer {
     color: #ffffff;
 }
 .play-video-section.black-button .play-video:hover {
-    background: #84ba3f;
+    background: #2bb6aa;
 }
 
 /*blockquote-section*/
@@ -7758,7 +7758,7 @@ img#logo-footer {
     padding-top: 100px;
 }
 .blockquote-section blockquote.quote:before {
-    color: #84ba3f;
+    color: #2bb6aa;
     left: 0;
     top: 0;
     font-size: 120px;
@@ -8077,7 +8077,7 @@ img#logo-footer {
     height: 30px;
     top: -29px;
     width: 100%;
-    background: #84ba3f;
+    background: #2bb6aa;
     left: 0;
 }
 .login-box-theme:after {
@@ -8086,7 +8086,7 @@ img#logo-footer {
     height: 30px;
     bottom: -29px;
     width: 100%;
-    background: #84ba3f;
+    background: #2bb6aa;
     left: 0;
 }
 .login-box-main .nav li {
@@ -8105,8 +8105,8 @@ img#logo-footer {
 }
 .login-box-left li.active a,
 .login-box-left li a:hover {
-    border-left: 5px solid #84ba3f;
-    color: #84ba3f;
+    border-left: 5px solid #2bb6aa;
+    color: #2bb6aa;
 }
 .login-box-main .nav li a i {
     display: inline-block;
@@ -8277,7 +8277,7 @@ img#logo-footer {
     color: #ffffff;
 }
 .blog-overlay.white-bg:hover span a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .blog-overlay.white-bg:hover .blog-icon .link {
     color: #ffffff;
@@ -8287,7 +8287,7 @@ img#logo-footer {
     color: #ffffff;
 }
 .blog-overlay.white-bg a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 .blog-overlay.dark-theme-bg:hover {
@@ -8298,13 +8298,13 @@ img#logo-footer {
     color: #323232;
 }
 .blog-overlay.dark-theme-bg:hover span a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .blog-overlay.dark-theme-bg:hover .blog-icon .date {
     color: #ffffff;
 }
 .blog-overlay.dark-theme-bg a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*blog-fashion */
@@ -8312,12 +8312,12 @@ img#logo-footer {
     height: auto;
 }
 .blog-overlay .tag {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #ffffff;
     padding: 2px 10px;
 }
 .blog.blog-simple .tag {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #ffffff;
     padding: 2px 10px;
 }
@@ -8326,7 +8326,7 @@ img#logo-footer {
     margin-right: 12px;
 }
 .blog.blog-simple .entry-meta ul li i {
-    color: #84ba3f;
+    color: #2bb6aa;
     padding-right: 6px;
 }
 .blog.blog-simple .entry-meta ul li a {
@@ -8336,10 +8336,10 @@ img#logo-footer {
 }
 .blog.blog-simple .entry-meta ul li a i {
     padding-right: 6px;
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 .blog.blog-simple .entry-meta ul li a:hover {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 .blog.blog-simple.blog-left .blog-image {
@@ -8664,7 +8664,7 @@ img#logo-footer {
     border: 1px solid rgba(0, 0, 0, 0.1);
 }
 .blog-box.blog-2.blog-border .blog-info .tag {
-    border-bottom: 2px solid #84ba3f;
+    border-bottom: 2px solid #2bb6aa;
 }
 .blog-box.blog-2.blog-border .blog-info span i {
     color: rgba(0, 0, 0, 0.5);
@@ -8775,7 +8775,7 @@ canvas {
 }
 .service ul li a:hover,
 .service ul li a.active {
-    background-color: #84ba3f;
+    background-color: #2bb6aa;
     color: #ffffff;
 }
 .iconbox {
@@ -8817,7 +8817,7 @@ canvas {
     line-height: 24px;
 }
 .quote:before {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*contact 05*/
@@ -8889,7 +8889,7 @@ canvas {
     margin-bottom: 10px;
 }
 .addresss-info.invoice-addresss li a {
-    color: #84ba3f;
+    color: #2bb6aa;
 }
 
 /*process 02*/
@@ -9066,11 +9066,11 @@ canvas {
     outline: 0;
 }
 .fc-state-active {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #ffffff;
 }
 .fc-today-button {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #ffffff;
 }
 .fc-event {
@@ -9090,7 +9090,7 @@ canvas {
 }
 .fc-event,
 .fc-event-dot {
-    background: #84ba3f;
+    background: #2bb6aa;
 }
 .fc-day-header span {
     padding: 15px 0;
@@ -9282,7 +9282,7 @@ canvas {
     z-index: 4;
 }
 .portfolio-item .portfolio-overlay a.tag {
-    background: #84ba3f;
+    background: #2bb6aa;
     color: #ffffff;
     padding: 2px 10px;
     border-radius: 3px;

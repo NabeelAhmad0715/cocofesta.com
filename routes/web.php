@@ -149,9 +149,6 @@ Route::get('/remove-symlink', function () {
     }
 });
 
-Route::post('payment', 'PaymentController@payWithPaypal')->name('paypal-payment');
-Route::get('payment-callback', 'PaymentController@paypalsuccess')->name('payment.success');
-
 Route::get('{type:slug}/products-search/', 'Frontend\PageController@search')->name('pages.search');
 Route::get('{type:slug}', 'Frontend\PageController@product')->name('pages.products');
 Route::get('/{type:slug}/{post:slug}', 'Frontend\PageController@productPost')->name('pages.product-post');

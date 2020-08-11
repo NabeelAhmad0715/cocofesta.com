@@ -55,7 +55,7 @@
 
         <style>
            .product-cart-button{
-              background: #84ba3f;
+              background: #2bb6aa;
               padding: 10px;
               margin-top: 10px;
            }
@@ -156,7 +156,7 @@
                 height: 16px;
                 line-height: 16px;
                 text-align: center;
-                background-color: #84ba3f;
+                background-color: #2bb6aa;
                 border-radius: 50%;
             }
             .search-no-result{
@@ -178,7 +178,7 @@
                 font-weight: 500;
                 border-radius: 3px;
                 color: #fff;
-                background-color: #84ba3f;
+                background-color: #2bb6aa;
                 -webkit-transition: all 0.3s ease;
                 -moz-transition: ll 0.3s ease;
                 transition: all 0.3s ease;
@@ -190,12 +190,12 @@
             }
             .listing-post-meta .list-unstyled li .product-price ins {
                 text-decoration: none;
-                color: #84ba3f;
+                color: #2bb6aa;
                 font-size: 20px;
                 font-weight: bold;
             }
             .listing-post a.popup:hover {
-                background: #84ba3f;
+                background: #2bb6aa;
                 color: #ffffff;
             }
             .listing-post {
@@ -212,7 +212,7 @@
                 top: 20px;
             }
             .listing-post a.popup:hover {
-                background: #84ba3f;
+                background: #2bb6aa;
                 color: #ffffff;
             }
             .listing-post a.popup {
