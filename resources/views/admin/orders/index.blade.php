@@ -35,6 +35,7 @@
                         <th>Phone No</th>
                         <th>Price</th>
                         <th>Qunatity</th>
+                        <th>Status</th>
                         <th>Created At</th>
                         <th class="text-center">Actions</th>
                     </tr>
@@ -49,6 +50,15 @@
                         <td>{{ $orderDetail->order->phone }}</td>
                         <td>{{ $orderDetail->price }}</td>
                         <td>{{ $orderDetail->quantity }}</td>
+                        <td class="data">
+                            <select data-id="{{ $orderDetail->id }}" class="order-status form-control" name="status"
+                                id="status">
+                                    <option {{ $orderDetail->status == 1 ? 'selected' : '' }} value="1" name="hidden_status" class="hidden_status" id="hidden_status" >Approved</option>
+                                    <option {{ $orderDetail->status == 0 ? 'selected' : '' }} value="0" name="hidden_status" class="hidden_status" id="hidden_status">Pending</option>
+                            </select>
+                            <input type="hidden" class="order_detail_id" name="order_detail_id" id="order_detail_id"
+                                value="{{ $orderDetail->id }}" />
+                        </td>
                         <td>{{$orderDetail->created_at }}</td>
                         <td class="text-center">
                             <div class="list-icons">
@@ -84,4 +94,26 @@
 @push('scripts')
     <script src="{{asset('backend/js/plugins/tables/datatables/datatables.min.js')}}"></script>
     <script src="{{asset('backend/js/demo_pages/datatables_basic.js')}}"></script>
+
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+        $('.order-status').change(function(status){
+            var order_detail_id = this.getAttribute('data-id');
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'get',
+                url: "/admin/" + order_detail_id + "/set-order-status/" + status.target.value,
+                dataType: 'json',
+                success:function(data){
+                    if(data == 'done')
+                    {
+                    $('#status').bootstrapToggle('on');
+                    alert("Data Inserted");
+                    }
+                }
+            });
+        });
+    </script>
 @endpush

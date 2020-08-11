@@ -1,25 +1,24 @@
 @extends('frontend.layouts.layout')
 
 @section('head')
-    <title>Products | Coco Cart</title>
-    <meta name="description" content="Coco Cart">
-    <meta name="keywords" content="Coco Cart">
+    <title>{{ $type->meta_title }}</title>
+    <meta name="description" content="{{ $type->meta_description }}">
+    <meta name="keywords" content="{{ $type->meta_keywords }}">
 @endsection
 
 @section('content')
 {{ session(['link' => url()->current()]) }}
-<section class="page-title bg-overlay-black-60 parallax" data-jarallax='{"speed": 0.6}' style="background-image: url({{ asset('images/bg/02.jpg') }});">
+<section class="page-title bg-overlay-black-60 parallax" data-jarallax='{"speed": 0.6}' style="@if(count($type->images('header')) > 0)background-image:url({{ asset('/storage/' . $type->images('header')[0]->name) }});@else background-image:url({{ asset('/frontend/images/index/image/deselect.jpg') }} )@endif">
     <div class="container">
       <div class="row">
         <div class="col-lg-12">
         <div class="page-title-name">
-            <h1>Products</h1>
-            <p>We know the secret of your success</p>
+            <h1>{{ $type->title }}</h1>
+            {!! $type->introduction !!}
           </div>
             <ul class="page-breadcrumb">
-              <li><a href="#"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><a href="#">page</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><span>Products</span> </li>
+              <li><a href="{{ route('pages.home') }}"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
+              <li><span>{{ $type->title}}</span> </li>
          </ul>
        </div>
        </div>
@@ -108,14 +107,18 @@
                     </div>
                 </div>
             <div class="col-lg-9 col-md-9">
-               <div class="row">
+                <div class="isotope-filters">
+                    <button data-filter="" class="active">All</button>
+                    <button data-filter=".latest">Latest</button>
+                    <button data-filter=".sale">On Sale</button>
+                  </div>
+                  <div class="isotope columns-2 popup-gallery">
                   @forelse ($records as $post)
-                  <div class="col-lg-6 col-md-6 mb-30">
+                  <div class="grid-item {{ $post->getMetaData('discount') !=  null? 'sale' : 'latest' }}">
                     <div class="listing-post">
-                          <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
                           <div class="blog-overlay">
                                 <div class="blog-image">
-                                      <img class="img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
+                                      <img style="width:417px;height:270px;" class="img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
                                 </div>
                                 @if ($post->getMetaData('discount'))
                                 <div class="blog-icon clearfix">
@@ -136,6 +139,7 @@
                                       </a>
                                 </div>
                           </div>
+                        <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
                       <div class="listing-post-info" style="background:#f7f7f7 !important;">
                         <div class="listing-post-meta clearfix">
                              <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
@@ -172,6 +176,11 @@
                     <h2 class="text-center">Records Not Found</h2>
                   </div>
                   @endforelse
+               </div>
+               <div class="w-100">
+                   <div class="paginate">
+                       {!! $records->links() !!}
+                   </div>
                </div>
               </div>
             </div>

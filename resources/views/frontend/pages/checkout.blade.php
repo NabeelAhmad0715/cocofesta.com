@@ -31,7 +31,14 @@
       <div class="row">
         <h2 class="mb-20 text-center" style="width: -webkit-fill-available;">Order details</h2>
       </div>
-      <form role="form" method="post" action="{{ route('generate.order') }}">
+      <form role="form"
+      method="post"
+      class="require-validation"
+      data-cc-on-file="false"
+      data-stripe-publishable-key="{{ config('app.stripe_key') }}"
+      id="payment-form" action="{{ route('generate.order') }}">
+      {{-- <form action="https://www.sandbox.paypal.com/cgi-bin/webscr"  target="_blank" method="post"> --}}
+        {{-- <form action="{{ route('paypal-payment') }}"  target="_blank" method="post"> --}}
         @csrf
       <div class="row">
             <div class="col-lg-6 col-md-6">
@@ -79,20 +86,17 @@
                 </thead>
                 <tbody>
                   @foreach ($postCarts as $postCart)
-                    @php
-                        $post = $postCart->post;
-                    @endphp
                     <tr>
                       <td>
                         <div class="product-image">
-                          <img class="img-fluid mx-auto" style="width:50px;height:58px;" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}">
+                          <img class="img-fluid mx-auto" style="width:50px;height:58px;" src="{{ asset('/storage/'. $postCart->post->getMetaData('featured_image')) }}">
                         </div>
                       </td>
-                      <td><p>{{ $post->title }}</p></td>
+                      <td><p>{{ $postCart->post->title }}</p></td>
                       @php
-                      $discount = $post->getMetaData('price') / ($post->getMetaData('discount'));
+                      $discount = $postCart->post->getMetaData('price') - ($postCart->post->getMetaData('price') * ($postCart->post->getMetaData('discount')/100));
                       @endphp
-                      <td><p>Rs {{ $postCart->price ? $postCart->price : ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) }}</p></td>
+                      <td><p>${{ $postCart->price ? $postCart->price : ($postCart->post->getMetaData('discount') ? $discount : $postCart->post->getMetaData('price')) }}</p></td>
                     </tr>
                   @endforeach
                 </tbody>
@@ -100,7 +104,7 @@
                   <tr>
                   <th>Subtotal</th>
                     <td>
-                      <p>Rs {{ $totalPrice == 0 ? ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) : $totalPrice }}</p>
+                      <p>${{ $postCarts->sum('price') }}</p>
                     </td>
                 </tr>
                 <tr>
@@ -115,22 +119,77 @@
                 </tr>
                 <tr>
                     <th>Total</th>
-                    <td><p class="price">Rs {{ $totalPrice == 0 ? ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) : $totalPrice }}</p></td>
+                    <td><p class="price">${{ $postCarts->sum('price') }}</p></td>
                     </tr>
                 </tfoot>
                 </table>
            </div>
            <div class="col-md-6">
             <div class="gray-bg  pl-50 pr-50 pt-50 pb-50">
-             <table class="mb-30">
-                <tbody>
-                  <tr>
-                   <th class="pl-40"><h3>GRAND TOTAL:</h3> </th>
-                   <td class="pl-40"><h3>Rs {{ $totalPrice == 0 ? ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) : $totalPrice }}</h3></td>
-                   </tr>
-                  </tbody>
-                </table>
-                 <input type="submit" class="button btn-block" value="Place Order Now"><span class="icon-action-redo"></span>
+                <div class="payment-method mb-10">
+                    <div class="row">
+                        <div class="col-md-6" style="display:flex;">
+                            <input type="radio" width="40" class="form-control radio" id="stripe-radio" name="payment" style="    margin-top: 19px;height: 21px;" value="stripe">
+                            <label  style="font-size:25px;margin-top:10px;" for="stripe"><b>Stripe</b></label><br>
+                        </div>
+                        <div class="col-md-6" style="display:flex;">
+                            <input type="radio" width="40" class="form-control radio" style="    margin-top: 19px;height: 21px;" id="paypal-radio" name="payment" value="paypal">
+                            <label  style="font-size:25px;margin-top:10px;" for="paypal"><b>Paypal</b></label><br>
+                        </div>
+                    </div>
+                </div>
+                    <div id="stripe-form">
+                        <div class='form-row row'>
+                            <div class='col-xs-12 col-md-6 col-lg-6 form-group required'>
+                                <label class='control-label'>Name on Card</label> <input
+                                    style="background:#fff;" class='form-control' size='4' type='text'>
+                            </div>
+                            <div class='col-xs-12 col-md-6 col-lg-6 form-group card required' style="border:none;background-color:transparent;">
+                                <label class='control-label'>Card Number</label> <input
+                                    autocomplete='off' style="background:#fff;" class='form-control card-number' size='20'
+                                    type='text'>
+                            </div>
+                        </div>
+                        <div class='form-row row'>
+                            <div class='col-xs-12 col-md-4 form-group cvc required'>
+                                <label class='control-label'>CVC</label> <input autocomplete='off'
+                                    style="background:#fff;" class='form-control card-cvc' placeholder='ex. 311' size='4'
+                                    type='text'>
+                            </div>
+                            <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                <label class='control-label'>Expiration Month</label> <input
+                                    style="background:#fff;" class='form-control card-expiry-month' placeholder='MM' size='2'
+                                    type='text'>
+                            </div>
+                            <div class='col-xs-12 col-md-4 form-group expiration required'>
+                                <label class='control-label'>Expiration Year</label> <input
+                                    style="background:#fff;" class='form-control card-expiry-year' placeholder='YYYY' size='4'
+                                    type='text'>
+                            </div>
+                        </div>
+                        <input type="hidden" name="price" value="{{ $postCarts->sum('price') }}" />
+                        <div class="row" style="justify-content: center">
+                            <div class="col-xs-12">
+                                <input type="submit" class="button btn-block" value="Place Order Now ${{ $postCarts->sum('price') }}"><span class="icon-action-redo"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="paypal-form">
+
+                            <input type="hidden" name="cmd" value="_cart">
+                            <input type="hidden" name="upload" value="1">
+                            <input type="hidden" name="business" value="nabeelahma7779@gmail.com">
+
+                            <input type="hidden" name="item_name_1" value="Name1">
+                            <input type="hidden" name="amount_1" value="{{ $postCarts->sum('price') }}">
+
+
+                             <input type="hidden" name="cancel_return" id="cancel_return" value="http://localhost:8000/checkout" />
+
+                            <input type="hidden" name="return" id="return" value="http://localhost:8000/thankyou" />
+
+                            <input target="_blank" type="submit" id="paypalId" style="background:#f9be37;color:#fff;" class="form-control btn btn-primary" value="Paypal">
+                    </div>
                </div>
            </div>
         </div>
@@ -139,3 +198,78 @@
 </section>
 
 @endsection
+@push('scripts')
+<script>
+            $('#stripe-form').hide();
+            $('#paypal-form').hide();
+            $('#paypal-radio').click(function(){
+                $('#stripe-form').hide();
+                $('#paypal-form').show();
+            });
+
+            $('#stripe-radio').click(function(){
+                $('#paypal-form').hide();
+                $('#stripe-form').show();
+            });
+
+</script>
+<script type="text/javascript" src="https://js.stripe.com/v2/"></script>
+
+  <script type="text/javascript">
+  $(function() {
+
+      var $form         = $(".require-validation");
+
+      $('form.require-validation').bind('submit', function(e) {
+          var $form         = $(".require-validation"),
+          inputSelector = ['input[type=email]', 'input[type=password]',
+                           'input[type=text]', 'input[type=file]',
+                           'textarea'].join(', '),
+          $inputs       = $form.find('.required').find(inputSelector),
+          $errorMessage = $form.find('div.error'),
+          valid         = true;
+          $errorMessage.addClass('hide');
+
+          $('.has-error').removeClass('has-error');
+          $inputs.each(function(i, el) {
+            var $input = $(el);
+            if ($input.val() === '') {
+              $input.parent().addClass('has-error');
+              $errorMessage.removeClass('hide');
+              e.preventDefault();
+            }
+          });
+
+          if (!$form.data('cc-on-file')) {
+            e.preventDefault();
+            Stripe.setPublishableKey($form.data('stripe-publishable-key'));
+            Stripe.createToken({
+              number: $('.card-number').val(),
+              cvc: $('.card-cvc').val(),
+              exp_month: $('.card-expiry-month').val(),
+              exp_year: $('.card-expiry-year').val()
+            }, stripeResponseHandler);
+          }
+
+    });
+
+    function stripeResponseHandler(status, response) {
+          if (response.error) {
+              $('.error')
+                  .removeClass('hide')
+                  .find('.alert')
+                  .text(response.error.message);
+          } else {
+              /* token contains id, last4, and card type */
+              var token = response['id'];
+
+              $form.find('input[type=text]').empty();
+              $form.append("<input type='hidden' name='stripeToken' value='" + token + "'/>");
+              $form.get(0).submit();
+          }
+      }
+
+  });
+  </script>
+
+@endpush

@@ -24,4 +24,12 @@ class OrderController extends Controller
         $orderDetail = OrderDetail::where('id', $id)->first();
         return view('admin.orders.show', compact('orderDetail'));
     }
+
+    public function setOrderStatus($id, $status)
+    {
+        $orderDetail = OrderDetail::where('id', $id)->first();
+        $orderDetail->status = $status;
+        $orderDetail->save();
+        return response()->json($orderDetail);
+    }
 }
