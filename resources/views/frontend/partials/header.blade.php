@@ -57,10 +57,15 @@
             @auth
             <li class="active"><a href="javascript:void(0)">{{ auth()->user()->name }}<i class="fa fa-angle-down fa-indicator"></i></a>
               <ul class="drop-down-multilevel">
+                <li>
+                    <a class="dropdown-item" href="{{ route('customers.profile') }}"><i class="fa fa-user"></i>
+                        Profile
+                    </a>
+                </li>
                   <li>
                     <a class="dropdown-item" href="{{ route('logout') }}"
                         onclick="event.preventDefault();
-                                      document.getElementById('logout-form').submit();">
+                                      document.getElementById('logout-form').submit();"><i class="fa fa-lock"></i>
                         {{ __('Logout') }}
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -71,8 +76,6 @@
             </li>
            @else
               <li><a class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold" href="{{ route('login') }}" style="padding: 5px 15px 5px 15px;"><span class="fa fa-lock" style="margin-right:5px"></span>Login</a></li>
-
-              <li><a class="c-btn-border-opacity-04 c-btn btn-no-focus c-btn-header btn btn-sm c-btn-border-1x c-btn-white c-btn-circle c-btn-uppercase c-btn-sbold"  style="padding: 5px 15px 5px 15px;" href="{{ route('register') }}"><span class="fa fa-users" style="margin-right:5px"></span>Signup</a></li>
            @endauth
         </ul>
         <div class="search-cart">
@@ -112,7 +115,7 @@
               @forelse ($cartPosts as $cart)
                 <div class="cart-item">
                     <div class="cart-image">
-                    <img class="img-fluid" src="images/shop/01.jpg" alt="">
+                    <img class="img-fluid cart-image" src="{{ asset('/storage/' . $cart->post->getMetaData('featured_image')) }}" alt="">
                     </div>
                     <div class="cart-name clearfix">
                     <a href="#">{{ $cart->post->title }} <strong>x{{ $cart->quantity }}</strong></a>

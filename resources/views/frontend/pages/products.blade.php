@@ -107,6 +107,14 @@
                     </div>
                 </div>
             <div class="col-lg-9 col-md-9">
+                <div id="cart-success-message" class="alert alert-success alert-dismissible" style="display: none;" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                     Product is added to cart
+                   </div>
+                   <div id="cart-danger-message" class="alert alert-danger alert-dismissible" style="display: none;" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                      Product is already added to cart
+                   </div>
                 <div class="isotope-filters">
                     <button data-filter="" class="active">All</button>
                     <button data-filter=".latest">Latest</button>
@@ -118,7 +126,7 @@
                     <div class="listing-post">
                           <div class="blog-overlay">
                                 <div class="blog-image">
-                                      <img style="width:417px;height:270px;" class="img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
+                                      <img class="feature-image-product img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
                                 </div>
                                 @if ($post->getMetaData('discount'))
                                 <div class="blog-icon clearfix">
@@ -187,3 +195,6 @@
         </div>
 </section>
 @endsection
+@push('scripts')
+    <script src="{{asset('backend/js/cart-create.js') }}"></script>
+@endpush

@@ -113,11 +113,7 @@ Route::post('post/reviews', 'Frontend\PageController@setReviews');
 Route::get('login/{provider}', 'Auth\LoginController@redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@Callback');
 
-Route::get('login/{provider}', 'Auth\LoginController@redirectToGoogle');
-Route::get('login/{provider}/callback', 'Auth\LoginController@handleGoogleCallback');
 
-Route::get('login/{provider}', 'Auth\LoginController@redirectToInstagram');
-Route::get('login/{provider}/callback', 'Auth\LoginController@handleInstagramCallback');
 
 Route::get('/create-symlink', function () {
     $projectFolder = base_path() . '/../';
@@ -148,6 +144,8 @@ Route::get('/remove-symlink', function () {
         return "<h1>Symlink does not exist</h1>";
     }
 });
+Route::get('login/{provider}', 'Auth\LoginController@redirectToGoogle')->name('login.google');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleGoogleCallback');
 
 Route::get('{type:slug}/products-search/', 'Frontend\PageController@search')->name('pages.search');
 Route::get('{type:slug}', 'Frontend\PageController@product')->name('pages.products');

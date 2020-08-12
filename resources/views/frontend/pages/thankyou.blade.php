@@ -58,10 +58,10 @@
                         </div>
                         <div class="list-posts mt-5">
                             <div class="row mb-5">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <h4 class="c-font-uppercase c-font-16 c-font-grey-2 c-font-bold text-center">Product</h4>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <h4 class="c-font-uppercase c-font-16 c-font-grey-2 c-font-bold text-center">Description</h4>
                                 </div>
                                 <div class="col-md-4">
@@ -70,12 +70,12 @@
                             </div>
                             @foreach ($orderPosts as $order)
                             <div class="row mb-5">
-                                <div class="col-md-3">
+                                <div class="col-md-4">
                                     <img class="img-fluid" src="{{ asset('/storage/'. $order->post->getMetaData('featured_image'))}}"/>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <div class="description-details text-center">
-                                        <h3>{{ $order->post->title }}</h3>
+                                        <h3 class="theme-color">{{ $order->post->title }}</h3>
                                         <p>Qunatity: {{ $order->quantity }}</p>
                                     </div>
                                 </div>
