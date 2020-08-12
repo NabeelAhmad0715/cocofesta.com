@@ -296,15 +296,20 @@
            </div>
          </div>
        </div>
-       <div class="row popup-gallery">
+       <div class="isotope-filters">
+        <button data-filter="" class="active">All</button>
+        <button data-filter=".latest">Latest</button>
+        <button data-filter=".sale">On Sale</button>
+      </div>
+      <div class="isotope columns-3 popup-gallery">
         @forelse ($latestPosts as $post)
-         <div class="col-lg-4 col-md-6 mb-30">
+         <div class="grid-item {{ $post->getMetaData('discount') !=  null? 'sale' : 'latest' }}">
             <div class="listing-post">
                   <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
                   <div class="blog-overlay">
 
                         <div class="blog-image">
-                              <img class="img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
+                              <img class="feature-image img-fluid" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}" alt="{{ $post->title }}">
                         </div>
                         @if ($post->getMetaData('discount'))
                         <div class="blog-icon clearfix">
@@ -361,10 +366,10 @@
              <h2 class="text-center">No New Collections</h2>
          </div>
          @endforelse
-         <div class="w-100 text-center">
-          <a class="button ml-10" href="{{ route('pages.products',[$type->slug]) }}">Explore All</a>
-         </div>
-       </div>
+        </div>
+        <div class="w-100 text-center">
+        <a class="button ml-10" href="{{ route('pages.products',[$type->slug]) }}">Explore All</a>
+        </div>
      </div>
 </section>
 

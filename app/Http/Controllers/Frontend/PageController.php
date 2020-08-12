@@ -38,7 +38,7 @@ class PageController extends Controller
 
     public function product(Type $type)
     {
-        $records = $type->posts;
+        $records = $type->posts()->paginate(10);
         return view('frontend.pages.products', compact('type', 'records'));
     }
 

@@ -7,98 +7,76 @@
 @endsection
 
 @section('content')
-<section class="login-box-main height-100vh page-section-ptb" style="background: url({{ asset('images/login/06.jpg') }});">
-    <div class="login-box-main-middle">
+<section class="page-section-ptb bg-overlay-white-70 login-signup parallax" style="background: url({{ asset('images/login/07.jpg') }});">
     <div class="container">
-       <div class="row justify-content-center no-gutter">
-        <div class="col-lg-2 col-md-4">
-          <div class="login-box-left  white-bg">
-            <img class="logo-small" src="images/logo-icon-dark.png" alt="">
-               <ul class="nav">
-                 <li class="active"><a href="#"> <i class="ti-user"></i> Login</a></li>
-                 <li><a href="{{ route('register') }}"> <i class="ti-pencil-alt"></i> Signup</a></li>
-              </ul>
-             <div class="social-icons color-hover clearfix pos-bot pb-30 pl-30">
-              <ul>
-                <li class="social-facebook"><a href="#"><i class="fa fa-facebook"></i></a></li>
-                <li class="social-twitter"><a href="#"><i class="fa fa-twitter"></i></a></li>
-                <li class="social-instagram"><a href="#"><i class="fa fa-instagram"></i></a></li>
-              </ul>
-            </div>
-          </div>
-        </div>
-         <div class="col-md-4 theme-bg">
-           <div class="login-box pos-r text-white login-box-theme">
-            <h2 class="text-white mb-20">Welcome to webster</h2>
-            <p class="mb-10 text-white">Create tailor-cut websites </p>
-            <p class="text-white">The exclusive multi-purpose responsive template.</p>
-            <ul class="list-unstyled pos-bot pb-40">
-              <li class="list-inline-item"><a class="text-white" href="#"> Terms of Use</a> </li>
-              <li class="list-inline-item"><a class="text-white" href="#"> Privacy Policy</a></li>
-            </ul>
-           </div>
-         </div>
-         <div class="col-md-4">
-          <div class="login-box pb-50 clearfix white-bg">
-          <h3 class="mb-30">Login</h3>
-            <form method="POST" action="{{ route('login') }}">
-                @csrf
-                <div class="section-field mb-20">
-                    <label class="mb-10" for="name">Email* </label>
-                        <input id="email" class="web form-control @error('email') is-invalid @enderror"  type="email" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
-                        @error('email')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+     <div class="row no-gutter">
+       <div class="col-md-5">
+            <div class="login-box-02 bg-overlay-black-70 parallax" style="background: url({{ asset('images/login/01.jpg') }});">
+                <div class="pb-50 pos-r clearfix">
+                   <h4 class="mb-20 text-white"> Login here </h4>
+                   <p class="mb-30 text-white">Welcome back, Please login to your account believing in yourself and those around you. </p>
+                <form method="POST" action="{{ route('login') }}">
+                    @csrf
+                 <div class="section-field mb-20">
+                     <label class="mb-10 text-white" for="email">Email* </label>
+                       <input id="email" class="form-control" type="email" placeholder="Email" name="email">
+                       @error('email')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
                     <div class="section-field mb-20">
-                    <label class="mb-10" for="Password">Password* </label>
-                        <input id="Password" class="Password form-control" type="password" placeholder="Password" name="password">
-                        @error('password')
-                            <span class="invalid-feedback" role="alert">
-                                <strong>{{ $message }}</strong>
-                            </span>
-                        @enderror
+                     <label class="mb-10 text-white" for="Pas   sword">Password* </label>
+                       <input id="Password" class="Password form-control" type="password" placeholder="Password" name="password">
+                       @error('password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                     </div>
                     <div class="section-field">
-                        <div class="form-check mb-30">
-                            <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
-                            <label class="form-check-label" for="emember">Remember me</label>
-                        </div>
-                    </div>
-                        <input type="submit" value="Log in" class="button" />
-                    </a>
+                       <div class="custom-control custom-checkbox mb-30">
+                        <input type="checkbox" class="custom-control-input" id="customControlAutosizing">
+                        <label class="text-white custom-control-label" for="customControlAutosizing">Remember me</label>
+                      </div>
+                      </div>
+                      <input type="submit" value="Log in" class="credentials-button button btn-block"/>
                 </form>
-                <div class="social-buttons mt-10">
-                    <form method="get" action="{{ url('/login/facebook') }}">
-                        @csrf
-                        <div class="section-field mb-2" style="width:100%">
-                            <div class="form-check" style="padding-left:0px;">
-                                    <input type="submit" style="width:100%;background: #3B5998;color:white" class="btn btn-facebook" value="Login with Facebook">
-                            </div>
-                        </div>
-                    </form>
-                    <form method="get" action="{{ url('/login/google') }}">
-                        @csrf
-                        <div class="section-field mb-2" style="width:100%">
-                            <div class="form-check" style="padding-left:0px;">
-                                <input type="submit" style="width:100%;background: #dd4b39;color:white" class="btn btn-google" value="Login with Google+">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                {{-- <form method="get" action="{{ url('/login/instagram') }}">
-                  @csrf
-                  <div class="form-group row">
-                    <div class="col-md-6">
-                      <input type="submit" style="background: purple;color:white" class="btn btn-instagram" value="Instagram">
                   </div>
-                </div>
-                </form> --}}
-            </div>
+                  <div class="login-social text-center clearfix pos-r">
+                    <ul>
+                        <li><a target="_blank" class="fb" href="{{ url('/login/facebook') }}"> Facebook</a></li>
+                        <li><a target="_blank" class="pinterest" href="{{ route('login.google',['google']) }}"> google+</a></li>
+                    </ul>
+                  </div>
+               </div>
            </div>
-          </div>
+            <div class="col-md-7">
+            <div class="login-box-02 theme-bg">
+              <div class="pb-50 clearfix">
+                <h4 class="mb-20 text-white">Or signup for free</h4>
+                  <p class="mb-30 text-white">Sign-up for free trial now and build custom solutions. </p>
+                  <form method="POST" action="{{ route('register') }}">
+                    @csrf
+                    <div class="section-field mb-20">
+                     <label class="mb-10 text-white" for="name">Name*</label>
+                       <input id="name" class="form-control" type="text" placeholder="Name" name="name">
+                    </div>
+                  <div class="section-field mb-20">
+                       <label class="mb-10 text-white" for="name">Email* </label>
+                        <input type="email" placeholder="Email*" class="form-control" name="email">
+                   </div>
+                  <div class="section-field mb-20">
+                   <label class="mb-10 text-white" for="Password">Password* </label>
+                     <input id="Password" class="Password form-control" type="password" placeholder="Password" name="password">
+                  </div>
+                  <input type="submit" value="Signup" class="w-100 button credentials-signup-button"/>
+                  </form>
+                </div>
+                 <p class="text-white">by signing up, you agree to our <a class="text-black" href="#"> Terms and conditions </a> & <a class="text-black" href="#"> Privacy policy </a></p>
+               </div>
+            </div>
         </div>
     </div>
 </section>

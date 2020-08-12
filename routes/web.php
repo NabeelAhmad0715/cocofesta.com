@@ -71,7 +71,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', "namespace" => 
     Route::put('/general-settings', "GeneralSettingController@update")->name("general-settings.update");
     Route::resource('contact-enquiries', 'ContactEnquiryController');
 
-    Route::get('/{id}/set-status/{is_active}', 'CustomerController@setStatus')->name('custpmers.user-status');
+    Route::get('/{id}/set-status/{is_active}', 'CustomerController@setStatus');
+    Route::get('/{id}/set-stock-status/{in_stock}', 'PostsController@setStockStatus');
+    Route::get('/{id}/set-order-status/{status}', 'OrderController@setOrderStatus');
 });
 
 Auth::routes();
@@ -81,7 +83,6 @@ Auth::routes();
 // });
 
 Route::get('/', 'Frontend\PageController@index')->name('pages.home');
-// Route::get('/home', 'Frontend\PageController@dashboard')->name('pages.home');
 Route::get('/about', 'Frontend\PageController@about')->name('pages.about');
 Route::get('/contact-us', 'Frontend\PageController@contactUs')->name('pages.contact-us');
 Route::post('/contact-enquiry', 'Frontend\PageController@contactEnquiry')->name('pages.contact-enquiry');
@@ -103,19 +104,16 @@ Route::get('count/post/whishlist', 'Frontend\WhishlistController@count')->name('
 Route::get('create/post/whishlist', 'Frontend\WhishlistController@create')->name('whishlist.create')->middleware('auth');
 Route::get('remove/post/whishlist', 'Frontend\WhishlistController@remove')->name('whishlist.remove')->middleware('auth');
 
+Route::get('/profile', 'Frontend\CustomerController@profile')->name('customers.profile')->middleware('auth');
 
-
+Route::post('/profile/edit', 'Frontend\CustomerController@editProfile')->name('customers.edit-profile');
 
 Route::post('post/reviews', 'Frontend\PageController@setReviews');
 
 Route::get('login/{provider}', 'Auth\LoginController@redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@Callback');
 
-Route::get('login/{provider}', 'Auth\LoginController@redirectToGoogle');
-Route::get('login/{provider}/callback', 'Auth\LoginController@handleGoogleCallback');
 
-Route::get('login/{provider}', 'Auth\LoginController@redirectToInstagram');
-Route::get('login/{provider}/callback', 'Auth\LoginController@handleInstagramCallback');
 
 Route::get('/create-symlink', function () {
     $projectFolder = base_path() . '/../';
@@ -146,6 +144,8 @@ Route::get('/remove-symlink', function () {
         return "<h1>Symlink does not exist</h1>";
     }
 });
+Route::get('login/{provider}', 'Auth\LoginController@redirectToGoogle')->name('login.google');
+Route::get('login/{provider}/callback', 'Auth\LoginController@handleGoogleCallback');
 
 Route::get('{type:slug}/products-search/', 'Frontend\PageController@search')->name('pages.search');
 Route::get('{type:slug}', 'Frontend\PageController@product')->name('pages.products');

@@ -44,8 +44,8 @@ class ViewServiceProvider extends ServiceProvider
             $type = Type::first();
             $posts = Post::orderBy('created_at')->get();
             $reviews = Review::all();
-            $topRatedPosts = Review::orderBy('rating', 'desc')->take(3)->get();
-            $popularPosts = OrderDetail::select('post_id', DB::raw('count(*) as total'))->groupBy('post_id')->orderBy('total', 'desc')->take(3)->get();
+            $topRatedPosts = Review::select('post_id')->distinct()->orderBy('rating', 'desc')->take(3)->get();
+            $popularPosts = OrderDetail::select('post_id', DB::raw('count(*) as total'))->distinct()->groupBy('post_id')->orderBy('total', 'desc')->take(3)->get();
 
             if (Auth::user()) {
                 $whishlistPosts = Whishlist::where('user_id', Auth::user()->id)->get();
@@ -55,7 +55,9 @@ class ViewServiceProvider extends ServiceProvider
                 $cartCount = Cart::where('user_id', Auth::user()->id)->count();
                 $totalPrice = Cart::where('user_id', Auth::user()->id)->where('in_stock', 1)->sum('price');
 
-                $view->with(compact('type', 'posts', 'whishlistPosts', 'whishlistCount', 'cartPosts', 'cartCount', 'totalPrice', 'topRatedPosts', 'popularPosts'));
+                $orderPosts = OrderDetail::where('user_id', Auth::user()->id)->where('status', 0)->get();
+                $orderHistories = OrderDetail::where('user_id', Auth::user()->id)->get();
+                $view->with(compact('type', 'posts', 'whishlistPosts', 'whishlistCount', 'cartPosts', 'cartCount', 'totalPrice', 'topRatedPosts', 'popularPosts', 'orderPosts', 'orderHistories'));
             }
             $view->with(compact('type', 'posts', 'reviews', 'topRatedPosts', 'popularPosts'));
         });

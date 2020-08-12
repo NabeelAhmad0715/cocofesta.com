@@ -55,7 +55,7 @@
 
         <style>
            .product-cart-button{
-              background: #84ba3f;
+              background: #2bb6aa;
               padding: 10px;
               margin-top: 10px;
            }
@@ -156,7 +156,7 @@
                 height: 16px;
                 line-height: 16px;
                 text-align: center;
-                background-color: #84ba3f;
+                background-color: #2bb6aa;
                 border-radius: 50%;
             }
             .search-no-result{
@@ -178,7 +178,7 @@
                 font-weight: 500;
                 border-radius: 3px;
                 color: #fff;
-                background-color: #84ba3f;
+                background-color: #2bb6aa;
                 -webkit-transition: all 0.3s ease;
                 -moz-transition: ll 0.3s ease;
                 transition: all 0.3s ease;
@@ -190,12 +190,12 @@
             }
             .listing-post-meta .list-unstyled li .product-price ins {
                 text-decoration: none;
-                color: #84ba3f;
+                color: #2bb6aa;
                 font-size: 20px;
                 font-weight: bold;
             }
             .listing-post a.popup:hover {
-                background: #84ba3f;
+                background: #2bb6aa;
                 color: #ffffff;
             }
             .listing-post {
@@ -212,7 +212,7 @@
                 top: 20px;
             }
             .listing-post a.popup:hover {
-                background: #84ba3f;
+                background: #2bb6aa;
                 color: #ffffff;
             }
             .listing-post a.popup {
@@ -285,6 +285,53 @@
                 cursor: default;
                 opacity: 0.6;
             }
+            .credentials-button:hover,
+            .credentials-signup-button:hover,
+            .credentials-signup-button{
+                background:#fff;
+                color:#2bb6aa;
+                border-color: #fff;
+            }
+            .feature-image{
+                width:370px;
+                height:280px;
+            }
+            .feature-image-product{
+                width:417px;
+                height:280px;
+            }
+            .profile{
+                display: grid;
+            }
+            .pricing-top.thankyou-box{
+                box-shadow: 0 0 40px rgba(0, 0, 0, 0.05);
+                padding: 30px;
+                border: 4px solid #2bb6aa;
+                border-radius: 6px;
+            }
+            .c-theme-bg{
+                background:#2bb6aa;
+            }
+            .c-theme-bg .c-message{
+                padding:35px 10px;
+            }
+            .order-details ul{
+                display:flex;
+                justify-content: center;
+            }
+            .order-details ul li{
+                list-style: none;
+                margin-right:30px
+            }
+            .order-details ul li p{
+                text-align: center;
+            }
+            .description-details{
+                text-align: center;
+            }
+            .cart-image{
+                width: 50px;
+            }
         </style>
       </head>
 <body>
@@ -335,7 +382,20 @@
     <!-- custom -->
     <script src="{{ asset('js/custom.js') }}"></script>
 
-    <script type="text/javascript">
+    <!--Start of Tawk.to Script-->
+<script type="text/javascript">
+    var Tawk_API=Tawk_API||{}, Tawk_LoadStart=new Date();
+    (function(){
+    var s1=document.createElement("script"),s0=document.getElementsByTagName("script")[0];
+    s1.async=true;
+    s1.src='https://embed.tawk.to/5f3109b2ed9d9d26270988ba/default';
+    s1.charset='UTF-8';
+    s1.setAttribute('crossorigin','*');
+    s0.parentNode.insertBefore(s1,s0);
+    })();
+    </script>
+    <!--End of Tawk.to Script-->
+    {{-- <script type="text/javascript">
         (function () {
             var options = {
                 facebook: "103233641397198", // Facebook page ID
@@ -353,7 +413,7 @@
             s.onload = function () { WhWidgetSendButton.init(host, proto, options); };
             var x = document.getElementsByTagName('script')[0]; x.parentNode.insertBefore(s, x);
         })();
-      </script>
+      </script> --}}
       @stack('scripts')
 </body>
 </html>
