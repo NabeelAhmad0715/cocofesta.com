@@ -146,14 +146,16 @@
                     @if(!auth()->user())<p class="mt-3" style="color:red"><b>*You Need To First Login</b></p>@endif
                 </div>
                 <div class="product-detail-des mb-30" style="display:flex;">
-                    <h4>Available Size:</h4>
-                    <div class="box dropdown">
-                    <select class="fancyselect">
-                    @foreach (explode(',', $post->available_size) as $size)
-                          <option>{{ ucfirst($size) }}</option>
-                    @endforeach
-                    </select>
-                    </div>
+                    @if ($post->available_size)
+                        <h4>Available Size:</h4>
+                        <div class="box dropdown">
+                        <select class="fancyselect">
+                        @foreach (explode(',', $post->available_size) as $size)
+                            <option>{{ ucfirst($size) }}</option>
+                        @endforeach
+                        </select>
+                        </div>
+                    @endif
                 </div>
                 <div class="product-detail-des mb-30">
                     {!! $post->getMetaData('introduction') !!}

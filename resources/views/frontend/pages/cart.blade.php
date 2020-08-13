@@ -70,6 +70,7 @@
                               <td class="td-quentety">
                                   <input id="cart-quantity-max" class="change-quantity" data-id="{{ $post->id }}" data-data="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" type="number" min="0" max="{{ $post->getMetaData('available_small_quantity') }}" value="{{ $cartPost->quantity ? $cartPost->quantity : 1 }}">
                                 </td>
+                                @if ($post->available_size)
                                 <td>
                                     <div class="box">
                                         <select data-id="{{ $cartPost->id }}" class="select-size wide fancyselect">
@@ -79,6 +80,9 @@
                                         </select>
                                     </div>
                                 </td>
+                                @else
+                                <td><p>Size Not Available</p></td>
+                                @endif
                               <td class="price price-2">{{ $post->in_stock == 1 ? 'In Stock' : 'Out of Stock' }}</td>
                               <td class="total">
                               <a data-data="{{ $post->id }}" class="removetocart" href='javascript:;'><i class="fa fa-close"></i></a>

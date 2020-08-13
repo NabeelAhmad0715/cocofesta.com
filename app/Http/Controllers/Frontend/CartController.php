@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Cart;
 use Illuminate\Support\Facades\Auth;
+use App\Post;
 
 class CartController extends Controller
 {
@@ -21,6 +22,7 @@ class CartController extends Controller
 
     public function create(Request $request)
     {
+        $post = Post::where('id', $request->product_id)->first();
         $findPost = Cart::where('post_id', $request->product_id)->where('user_id', Auth::user()->id)->first();
         if (!$findPost) {
             if ($request->ajax()) {
@@ -30,7 +32,7 @@ class CartController extends Controller
                     'post_id' => $product_id,
                     'price' => $request->price,
                     'quantity' => 1,
-                    'in_stock' => 1
+                    'in_stock' => $post->in_stock
                 ]);
                 return response()->json($cart);
             }
