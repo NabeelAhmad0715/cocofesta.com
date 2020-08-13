@@ -145,6 +145,16 @@
                     <a style="margin-top:10px;" data-data="{{ $post->id }}" class="@if(!auth()->user())disabled @endif button small addtowishlist" href='javascript:;' >Add to Whishlist</a>
                     @if(!auth()->user())<p class="mt-3" style="color:red"><b>*You Need To First Login</b></p>@endif
                 </div>
+                <div class="product-detail-des mb-30" style="display:flex;">
+                    <h4>Available Size:</h4>
+                    <div class="box dropdown">
+                    <select class="fancyselect">
+                    @foreach (explode(',', $post->available_size) as $size)
+                          <option>{{ ucfirst($size) }}</option>
+                    @endforeach
+                    </select>
+                    </div>
+                </div>
                 <div class="product-detail-des mb-30">
                     {!! $post->getMetaData('introduction') !!}
              </div>

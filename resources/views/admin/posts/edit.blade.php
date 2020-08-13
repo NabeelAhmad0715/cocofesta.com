@@ -141,6 +141,33 @@
                     <input type="hidden" value="{{ $field->id }}" name="meta_data_id[]">
                     @endforeach
                     <div class="form-group">
+                        <label class="@error('available_size') text-danger @enderror">Avialble Size</label>
+                        <div class="form-group-feedback form-group-feedback-right">
+                            <select name="available_size[]"
+                                class="form-control multiselect-select-all-filtering @error('available_size') text-danger @enderror"
+                                multiple="multiple">
+                                    @foreach ($sizes as $size)
+                                        <option @foreach ($availableSizes as $availableSize)
+                                            @if($size == $availableSize)
+                                            selected="selected"
+                                            @else
+                                            ""
+                                            @endif
+                                            @endforeach value="{{ $size }}">{{ $size }}</option>
+                                        {{-- <option {{ $size=='medium' ? 'selected' : '' }} value="medium">Medium</option>
+                                        <option {{ $size=='large' ? 'selected' : '' }} value="large">Large</option>
+                                        <option {{ $size=='extra-large' ? 'selected' : '' }} value="extra-large">Extra Large</option>
+                                        <option {{ $size=='xx-large' ? 'selected' : '' }} value="xx-large">XX Large</option>
+                                        <option {{ $size=='xxx-large' ? 'selected' : '' }} value="xxx-large">XXX Large</option> --}}
+                                    @endforeach
+                            </select>
+                        </div>
+                        @error('available_size')
+                        <span class="form-text text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="form-group">
                         <label>Tags:</label>
                         <input type="text" id="tag" name="tags" class="form-control tokenfield tag" value="{{$tags}}">
                     </div>

@@ -95,6 +95,24 @@
                         <h3> Create Fields in Type module </h3>
                     @endforelse
                     <div class="form-group">
+                        <label class="@error('available_size') text-danger @enderror">Available Size</label>
+                        <div class="form-group-feedback form-group-feedback-right">
+                            <select name="available_size[]"
+                                    class="form-control multiselect-select-all-filtering @error('available_size') text-danger @enderror"
+                                     multiple="multiple">
+                                    <option value="small">Small</option>
+                                    <option value="medium">Medium</option>
+                                    <option value="large">Large</option>
+                                    <option value="extra-large">Extra Large</option>
+                                    <option value="xx-large">XX Large</option>
+                                    <option value="xxx-large">XXX Large</option>
+                            </select>
+                        </div>
+                        @error('available_size')
+                        <span class="form-text text-danger">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="form-group">
                         <label>Tags:</label>
                         <input type="text" name="tags" class="form-control tokenfield" value="">
                     </div>

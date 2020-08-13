@@ -332,6 +332,17 @@
             .cart-image{
                 width: 50px;
             }
+            .box.dropdown{
+                margin-left: 30px;
+                margin-top: -10px;
+            }
+            .nice-select,
+            .nice-select ul.list{
+                width:200px !important;
+            }
+            .table-responsive.h-60vh{
+                height:80vh;
+            }
         </style>
       </head>
 <body>

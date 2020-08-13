@@ -34,7 +34,7 @@
             <div id="cart-success-remove-message" class="alert alert-success alert-dismissible" style="display: none;" role="alert">
               Product is remove from cart
             </div>
-           <div class="table-responsive">
+           <div class="table-responsive h-60vh">
               <table class="table">
                 <thead>
                     <tr>
@@ -43,6 +43,7 @@
                       <th>Product name</th>
                       <th>Price</th>
                       <th>Quantity </th>
+                      <th>Size</th>
                       <th>Stock status </th>
                       <th>Remove </th>
                       @endif
@@ -67,7 +68,16 @@
                                 {{ $cartPost->price ? $cartPost->price : ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) }}
                               </td>
                               <td class="td-quentety">
-                                  <input class="change-quantity" data-id="{{ $post->id }}" data-data="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" type="number" value="{{ $cartPost->quantity ? $cartPost->quantity : 1 }}">
+                                  <input id="cart-quantity-max" class="change-quantity" data-id="{{ $post->id }}" data-data="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" type="number" min="0" max="{{ $post->getMetaData('available_small_quantity') }}" value="{{ $cartPost->quantity ? $cartPost->quantity : 1 }}">
+                                </td>
+                                <td>
+                                    <div class="box">
+                                        <select data-id="{{ $cartPost->id }}" class="select-size wide fancyselect">
+                                        @foreach (explode(',', $post->available_size) as $size)
+                                              <option {{ $size == $cartPost->size ? 'selected' : '' }} value="{{ $size }}">{{ ucfirst($size) }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
                                 </td>
                               <td class="price price-2">{{ $post->in_stock == 1 ? 'In Stock' : 'Out of Stock' }}</td>
                               <td class="total">
@@ -167,4 +177,24 @@
     <script src="{{  asset('backend/js/plugins/forms/styling/uniform.min.js') }}"></script>
     <script src="{{asset('backend/js/cart-remove.js') }}"></script>
     <script src="{{asset('backend/js/quantity-change-cart.js') }}"></script>
+
+    <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
+    <script>
+        $('.select-size').change(function(status){
+            var cart_id = this.getAttribute('data-id');
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'get',
+                url: "/cart/" + cart_id + "/set-size/" + status.target.value,
+                dataType: 'json',
+                success:function(data){
+                    console.log(data);
+                    var quantity = document.getElementById('cart-quantity-max');
+                    quantity.setAttribute('max', data);
+                }
+            });
+        });
+    </script>
 @endpush

@@ -8,7 +8,7 @@ class Post extends Model
 {
     public $timestamps = true;
 
-    protected $fillable = ['type_id', 'title', 'slug', 'in_stock', 'created_at', 'updated_at'];
+    protected $fillable = ['type_id', 'title', 'slug', 'in_stock', 'available_size', 'created_at', 'updated_at'];
 
     public function type()
     {

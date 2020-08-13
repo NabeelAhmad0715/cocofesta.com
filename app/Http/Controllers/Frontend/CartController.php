@@ -59,7 +59,6 @@ class CartController extends Controller
             $cart = Cart::where('user_id', $user_id)->where('post_id', $post_id)->delete();
             return response()->json($cart);
         } else {
-            dd("not ok");
             $cart = null;
             return response()->json($cart);
         }
@@ -72,12 +71,10 @@ class CartController extends Controller
             $price = $quantity * $request->price;
             $post_id = $request->post_id;
             $cart = Cart::where('user_id', Auth::user()->id)->where('post_id', $post_id)->first();
-
             $cart = $cart->update([
                 'quantity' => $quantity,
                 'price' => $price,
             ]);
-
             $cart = Cart::where('in_stock', '1')->get();
             return response()->json($cart);
         } else {
