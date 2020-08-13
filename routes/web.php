@@ -104,6 +104,8 @@ Route::get('count/post/whishlist', 'Frontend\WhishlistController@count')->name('
 Route::get('create/post/whishlist', 'Frontend\WhishlistController@create')->name('whishlist.create')->middleware('auth');
 Route::get('remove/post/whishlist', 'Frontend\WhishlistController@remove')->name('whishlist.remove')->middleware('auth');
 
+Route::get('cart/{cart_id}/set-size/{size}', 'Frontend\PageController@setSize')->middleware('auth');
+
 Route::get('/profile', 'Frontend\CustomerController@profile')->name('customers.profile')->middleware('auth');
 
 Route::post('/profile/edit', 'Frontend\CustomerController@editProfile')->name('customers.edit-profile');

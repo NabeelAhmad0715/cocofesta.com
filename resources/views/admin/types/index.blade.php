@@ -50,7 +50,7 @@
                             @isset($type->images('featured')[0])
                                 <img src="{{asset('/storage/' . $type->images('featured')[0]->name)}}" style="width:150px;height:100px" alt="{{ $type->title }}">
                             @else
-                                <img src="{{asset('/backend/images/noimage.png')}}" style="width:120px;height:110px" alt="No Image Found">
+                            <img src="{{ asset('/backend/images/noimage.png')}}" style="width:120px;height:110px" alt="No Image found"/>
                             @endisset
                         </td>
                         <td>{{ $type->title }}</td>

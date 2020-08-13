@@ -51,8 +51,15 @@ class PostsController extends Controller
 
         $data = $request->validate([
             'type_id' => ['required'],
-            'title' => ['required', 'string', 'max:191', 'unique:posts'],
+            'title' => ['required', 'string', 'max:255', 'unique:posts'],
+            'available_size' => ['array'],
+            'available_size.*' => ['required', 'string', 'max:255']
         ]);
+        $size = [];
+        foreach ($data['available_size'] as $key => $availableSize) {
+            $size[] = $availableSize;
+        }
+        $data['available_size'] = implode(',', $size);
         $data['slug'] = Str::slug($data['title'], '-');
         $post = Post::create($data);
 
@@ -117,7 +124,9 @@ class PostsController extends Controller
         $categories = $type->categories;
         $names = array_column($post->tags->toArray(), 'name');
         $tags = implode(',', $names);
-        return view('admin.posts.edit', compact('post', 'type', 'categories', 'tags'));
+        $availableSizes = explode(',', $post->available_size);
+        $sizes = ['small', 'medium', 'large', 'extra-large', 'xx-large', 'xxx-large'];
+        return view('admin.posts.edit', compact('post', 'type', 'categories', 'tags', 'availableSizes', 'sizes'));
     }
 
     /**
@@ -132,14 +141,22 @@ class PostsController extends Controller
         $post = Post::where('id', $id)->first();
         $type = Type::where('slug', $slug)->first();
 
-        $request->validate([
-            'title' => ['required', 'string', 'max:191', 'unique:posts,title,' . $post->id]
+        $data = $request->validate([
+            'title' => ['required', 'string', 'max:191', 'unique:posts,title,' . $post->id],
+            'available_size' => ['array'],
+            'available_size.*' => ['required', 'string', 'max:255']
         ]);
+        $size = [];
+        foreach ($data['available_size'] as $key => $availableSize) {
+            $size[] = $availableSize;
+        }
+        $data['available_size'] = implode(',', $size);
         $slug = Str::slug($request->title, '-');
         $post->update([
             'type_id' => $type->id,
             'title' => $request->title,
-            'slug' => $slug
+            'slug' => $slug,
+            'available_size' => $data['available_size'],
         ]);
         foreach ($type->metaData as $key => $field) {
             $metaData = MetaDataPost::where('post_id', $post->id)->where('meta_data_id', $field->id)->first();

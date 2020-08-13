@@ -140,4 +140,14 @@ class PageController extends Controller
             return response()->json($reviews);
         }
     }
+
+    public function setSize($cart_id, $size)
+    {
+        $cart = Cart::where('id', $cart_id)->first();
+        $cart->size = $size;
+        $cart->save();
+        $size = str_replace('-', '_', $size);
+        $quantity = $cart->post->getMetaData('available_' . $size . '_quantity');
+        return response()->json($quantity);
+    }
 }
