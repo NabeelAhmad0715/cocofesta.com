@@ -154,11 +154,6 @@
                                             ""
                                             @endif
                                             @endforeach value="{{ $size }}">{{ $size }}</option>
-                                        {{-- <option {{ $size=='medium' ? 'selected' : '' }} value="medium">Medium</option>
-                                        <option {{ $size=='large' ? 'selected' : '' }} value="large">Large</option>
-                                        <option {{ $size=='extra-large' ? 'selected' : '' }} value="extra-large">Extra Large</option>
-                                        <option {{ $size=='xx-large' ? 'selected' : '' }} value="xx-large">XX Large</option>
-                                        <option {{ $size=='xxx-large' ? 'selected' : '' }} value="xxx-large">XXX Large</option> --}}
                                     @endforeach
                             </select>
                         </div>
@@ -168,9 +163,14 @@
                     </div>
 
                     <div class="form-group">
+                        <label>Available Colors:</label>
+                        <input type="text" id="tag" name="available_colors" class="form-control tokenfield tag" value="{{$post->available_colors}}">
+                    </div>
+{{--
+                    <div class="form-group">
                         <label>Tags:</label>
                         <input type="text" id="tag" name="tags" class="form-control tokenfield tag" value="{{$tags}}">
-                    </div>
+                    </div> --}}
                     <input type="hidden" value="{{ $type->id }}" name="type_id">
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Submit <i class="icon-paperplane ml-2"></i></button>

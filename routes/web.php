@@ -105,6 +105,7 @@ Route::get('create/post/whishlist', 'Frontend\WhishlistController@create')->name
 Route::get('remove/post/whishlist', 'Frontend\WhishlistController@remove')->name('whishlist.remove')->middleware('auth');
 
 Route::get('cart/{cart_id}/set-size/{size}', 'Frontend\PageController@setSize')->middleware('auth');
+Route::get('cart/{cart_id}/set-color/{color}', 'Frontend\PageController@setColor')->middleware('auth');
 
 Route::get('/profile', 'Frontend\CustomerController@profile')->name('customers.profile')->middleware('auth');
 
