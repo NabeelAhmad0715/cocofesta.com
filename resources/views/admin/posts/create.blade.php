@@ -113,9 +113,13 @@
                         @enderror
                     </div>
                     <div class="form-group">
+                        <label>Available Colors:</label>
+                        <input type="text" name="available_colors" class="form-control tokenfield" value="">
+                    </div>
+                    {{-- <div class="form-group">
                         <label>Tags:</label>
                         <input type="text" name="tags" class="form-control tokenfield" value="">
-                    </div>
+                    </div> --}}
                     <input type="hidden" value="{{ $type->id }}" name="type_id">
                     <div class="text-right">
                         <button type="submit" class="btn btn-primary">Submit <i class="icon-paperplane ml-2"></i></button>

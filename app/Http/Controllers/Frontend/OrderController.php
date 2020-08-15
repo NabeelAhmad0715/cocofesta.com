@@ -15,6 +15,11 @@ class OrderController extends Controller
 {
     public function order(Request $request)
     {
+        if ($request->price == 0) {
+            $request->session()->flash('message', 'First you can add a product');
+            $request->session()->flash('alert-class', 'alert alert-success');
+            return redirect()->back();
+        }
         $data = $request->validate([
             'fullname' => ['required', 'string', 'max:255'],
             'city' => ['required', 'string', 'max:255'],
@@ -26,13 +31,13 @@ class OrderController extends Controller
         ]);
 
         $price = $request->price;
-        // Stripe\Stripe::setApiKey(config('app.stripe_secret'));
-        // Stripe\Charge::create([
-        //     "amount" => $price * 100,
-        //     "currency" => "usd",
-        //     "source" => $request->stripeToken,
-        //     "description" => "payment from As Fine Leather"
-        // ]);
+        Stripe\Stripe::setApiKey(config('app.stripe_secret'));
+        Stripe\Charge::create([
+            "amount" => $price * 100,
+            "currency" => "usd",
+            "source" => $request->stripeToken,
+            "description" => "payment from As Fine Leather"
+        ]);
 
         $data['user_id'] = Auth::user()->id;
         $order = Order::create($data);
@@ -48,6 +53,7 @@ class OrderController extends Controller
                 'quantity' => $post->quantity,
                 'order_number' => $orderNumber,
                 'size' => $post->size,
+                'color' => $post->color,
             ]);
             $size = "available_" . $orderDetail->size . "_quantity";
             $metaData = $orderDetail->post->metaData->where('name', $size)->first();

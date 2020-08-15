@@ -53,7 +53,8 @@ class PostsController extends Controller
             'type_id' => ['required'],
             'title' => ['required', 'string', 'max:255', 'unique:posts'],
             'available_size' => ['array'],
-            'available_size.*' => ['required', 'string', 'max:255']
+            'available_size.*' => ['required', 'string', 'max:255'],
+            'available_colors' => ['required', 'string', 'max:255'],
         ]);
         $size = [];
         foreach ($data['available_size'] as $key => $availableSize) {
@@ -144,7 +145,8 @@ class PostsController extends Controller
         $data = $request->validate([
             'title' => ['required', 'string', 'max:191', 'unique:posts,title,' . $post->id],
             'available_size' => ['array'],
-            'available_size.*' => ['required', 'string', 'max:255']
+            'available_size.*' => ['required', 'string', 'max:255'],
+            'available_colors' => ['required', 'string', 'max:255'],
         ]);
         $size = [];
         foreach ($data['available_size'] as $key => $availableSize) {
@@ -157,6 +159,7 @@ class PostsController extends Controller
             'title' => $request->title,
             'slug' => $slug,
             'available_size' => $data['available_size'],
+            'available_colors' => $data['available_colors'],
         ]);
         foreach ($type->metaData as $key => $field) {
             $metaData = MetaDataPost::where('post_id', $post->id)->where('meta_data_id', $field->id)->first();

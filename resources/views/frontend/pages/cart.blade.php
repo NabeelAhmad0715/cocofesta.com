@@ -43,7 +43,8 @@
                       <th>Product name</th>
                       <th>Price</th>
                       <th>Quantity </th>
-                      <th>Size</th>
+                      <th>Select Size</th>
+                      <th>Select Color</th>
                       <th>Stock status </th>
                       <th>Remove </th>
                       @endif
@@ -73,7 +74,8 @@
                                 @if ($post->available_size)
                                 <td>
                                     <div class="box">
-                                        <select data-id="{{ $cartPost->id }}" class="select-size wide fancyselect">
+                                        <select data-id="{{ $cartPost->id }}" class="select-size wide fancyselect" required>
+                                            <option value="">Select Size</option>
                                         @foreach (explode(',', $post->available_size) as $size)
                                               <option {{ $size == $cartPost->size ? 'selected' : '' }} value="{{ $size }}">{{ ucfirst($size) }}</option>
                                         @endforeach
@@ -82,6 +84,20 @@
                                 </td>
                                 @else
                                 <td><p>Size Not Available</p></td>
+                                @endif
+                                @if ($post->available_colors)
+                                <td>
+                                    <div class="box">
+                                        <select data-id="{{ $cartPost->id }}" class="select-color wide fancyselect" required>
+                                        <option value="">Select Color</option>
+                                        @foreach (explode(',', $post->available_colors) as $color)
+                                              <option {{ $color == $cartPost->size ? 'selected' : '' }} value="{{ $color }}">{{ ucfirst($color) }}</option>
+                                        @endforeach
+                                        </select>
+                                    </div>
+                                </td>
+                                @else
+                                <td><p>Color Not Available</p></td>
                                 @endif
                               <td class="price price-2">{{ $post->in_stock == 1 ? 'In Stock' : 'Out of Stock' }}</td>
                               <td class="total">
@@ -132,11 +148,11 @@
                   <tbody>
                     <tr>
                     <td>Subtotal</td>
-                    <td class="totalCartPrice">Rs {{ $totalPrice == 0 ? ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) : $totalPrice }}</td>
+                    <td class="totalCartPrice">$ {{ $totalPrice == 0 ? ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) : $totalPrice }}</td>
                   </tr>
                   <tr class="price">
                     <td><b>Grand Total </b></td>
-                    <td class="totalCartPrice"><b>Rs {{ $totalPrice == 0 ? ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) : $totalPrice }} </b></td>
+                    <td class="totalCartPrice"><b>$ {{ $totalPrice == 0 ? ($post->getMetaData('discount') ? $discount : $post->getMetaData('price')) : $totalPrice }} </b></td>
                   </tr>
                   <tr>
                       <td></td>
@@ -197,6 +213,21 @@
                     console.log(data);
                     var quantity = document.getElementById('cart-quantity-max');
                     quantity.setAttribute('max', data);
+                }
+            });
+        });
+
+        $('.select-color').change(function(status){
+            var cart_id = this.getAttribute('data-id');
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                method: 'get',
+                url: "/cart/" + cart_id + "/set-color/" + status.target.value,
+                dataType: 'json',
+                success:function(data){
+                    console.log(data);
                 }
             });
         });
