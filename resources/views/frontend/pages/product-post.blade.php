@@ -76,7 +76,7 @@
                   </ul>
               </div>
               <div class="clearfix mb-30">
-                <div class="product-detail-price"><span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                <div class="product-detail-price"><span class="text-black" style="font-size:20px"><b>$</b></span>
                     @if ($post->getMetaData('discount'))
                                 <del>
                                 @php
@@ -312,7 +312,7 @@
                         </div>
                         <div class="recent-meta">
                            <ul class="list-style-unstyled">
-                            <li class="color">PKR. {{ $topRatedPost->post->getMetaData('price') - ($topRatedPost->post->getMetaData('price') * ($topRatedPost->post->getMetaData('discount')/100)) }} /</li>
+                            <li class="color">$ {{ $topRatedPost->post->getMetaData('price') - ($topRatedPost->post->getMetaData('price') * ($topRatedPost->post->getMetaData('discount')/100)) }} /</li>
                             <li>
                             @php
                             $star = round(number_format((float) ($topRatedPost->post->reviews->sum('rating') / $topRatedPost->post->reviews->count()), 2, '.', ''));
@@ -397,7 +397,7 @@
                      <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
                         <li>
                               <div class="product-price">
-                                    <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                                    <span class="text-black" style="font-size:20px"><b>$</b></span>
                                     @if ($post->getMetaData('discount'))
                                                 <del>
                                                 @php

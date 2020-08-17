@@ -336,7 +336,7 @@
                      <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
                         <li>
                               <div class="product-price">
-                                    <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                                    <span class="text-black" style="font-size:20px"><b>$</b></span>
                                     @if ($post->getMetaData('discount'))
                                                 <del>
                                                 @php
@@ -406,7 +406,7 @@
                             <h5> <a href="#"> {{ $post->title }} </a> </h5>
                         </div>
                         <div class="product-price">
-                            <span class="text-black" style="font-size:10px"><b>PKR.</b></span>
+                            <span class="text-black" style="font-size:10px"><b>$</b></span>
                             @if ($post->getMetaData('discount'))
                                         <del>
                                         @php
@@ -467,7 +467,7 @@
                             <h5> <a href="#"> {{ $post->title }} </a> </h5>
                         </div>
                         <div class="product-price">
-                            <span class="text-black" style="font-size:10px"><b>PKR.</b></span>
+                            <span class="text-black" style="font-size:10px"><b>$</b></span>
                             @if ($post->getMetaData('discount'))
                                         <del>
                                         @php

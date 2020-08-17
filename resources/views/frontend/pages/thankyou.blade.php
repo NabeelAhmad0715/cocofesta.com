@@ -103,7 +103,7 @@
                                 </div>
                                 <div class="col-md-4 text-center">
                                     <h4><b>Billing Address</b></h4>
-                                    <p>{{ $orderPosts[0]->order->city }}, {{ $orderPosts[0]->order->address }}
+                                    <p>{{ $orderPosts[0]->order->address }}
                                     </p>
                                 </div>
                                 <div class="col-md-4 text-center">

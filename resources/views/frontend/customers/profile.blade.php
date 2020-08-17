@@ -105,6 +105,16 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-5" style="display:flex;">
+                                  <div class="col-md-6">
+                                      <label>Address</label>
+                                      <input class="white-bg form-control" type="text" placeholder="Address" name="address" />
+                                  </div>
+                                  <div class="col-md-6">
+                                      <label>Phone</label>
+                                      <input class="white-bg form-control" type="tel" placeholder="Phone" name="phone" />
+                                  </div>
+                              </div>
+                                <div class="col-md-12 mb-5" style="display:flex;">
                                     <div class="col-md-6">
                                         <label>Password</label>
                                         <input class="white-bg form-control" type="password" placeholder="Password" name="password" />

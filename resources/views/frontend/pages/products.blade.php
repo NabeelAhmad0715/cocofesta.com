@@ -60,7 +60,7 @@
                             </div>
                             <div class="recent-meta">
                                <ul class="list-style-unstyled">
-                                <li class="color">PKR. {{ round($post->getMetaData('price') / $post->getMetaData('discount')) }} /</li>
+                                <li class="color">$ {{ round($post->getMetaData('price') / $post->getMetaData('discount')) }} /</li>
                                 <li>
                                 @php
                                 $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
@@ -143,7 +143,7 @@
                              <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
                                 <li>
                                       <div class="product-price">
-                                            <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                                            <span class="text-black" style="font-size:20px"><b>$</b></span>
                                             @if ($post->getMetaData('discount'))
                                                         <del>
                                                         @php

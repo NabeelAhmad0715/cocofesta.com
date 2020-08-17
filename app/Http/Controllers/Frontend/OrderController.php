@@ -43,20 +43,16 @@ class OrderController extends Controller
                 "description" => "payment from As Fine Leather",
             ]);
 
-            $data = $request->validate([
-                'fullname' => ['required', 'string', 'max:255'],
-                'city' => ['required', 'string', 'max:255'],
-                'email' => ['nullable', 'email'],
-                'address' => ['required', 'string', 'max:255'],
-                'postal_code' => ['nullable', 'string', 'max:255'],
-                'phone' => ['required', 'string', 'max:255'],
-                'message' => ['nullable', 'string'],
-            ]);
-            $data['user_id'] = Auth::user()->id;
+            $data = [
+                'fullname' => Auth::user()->name,
+                'email' => Auth::user()->email,
+                'address' => Auth::user()->address,
+                'phone' => Auth::user()->phone,
+                'user_id' => Auth::user()->id
+            ];
             $this->orderCreate($data);
         } else if ($request->method === 'paypal') {
             try {
-                $this->payment_success($request);
                 $response = $this->gateway->purchase(array(
                     'amount' => $request->post('amount'),
                     'currency' => config('app.paypal_currency'),
@@ -166,16 +162,13 @@ class OrderController extends Controller
 
     public function payment_success(Request $request)
     {
-        $data = $request->validate([
-            'fullname' => ['required', 'string', 'max:255'],
-            'city' => ['required', 'string', 'max:255'],
-            'email' => ['nullable', 'email'],
-            'address' => ['required', 'string', 'max:255'],
-            'postal_code' => ['nullable', 'string', 'max:255'],
-            'phone' => ['required', 'string', 'max:255'],
-            'message' => ['nullable', 'string'],
-        ]);
-        $data['user_id'] = Auth::user()->id;
+        $data = [
+            'fullname' => Auth::user()->name,
+            'email' => Auth::user()->email,
+            'address' => Auth::user()->address,
+            'phone' => Auth::user()->phone,
+            'user_id' => Auth::user()->id
+        ];
         // Once the transaction has been approved, we need to complete it.
         if ($request->input('paymentId') && $request->input('PayerID')) {
             $transaction = $this->gateway->completePurchase(array(

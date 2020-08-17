@@ -23,6 +23,8 @@ class CustomerController extends Controller
             'email' => ['nullable', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['nullable', 'string', 'min:8'],
             'new_password' => ['nullable', 'string', 'min:8'],
+            'address' => ['nullable', 'string'],
+            'phone' => ['nullable', 'string', 'max:255'],
         ]);
         if ($data['password'] == null && $data['email'] == null && $data['name'] ==  null) {
             $request->session()->flash('message', 'First You Enter Fields');
@@ -43,15 +45,25 @@ class CustomerController extends Controller
 
         if ($data['email']) {
             $user->update([
-                'password' => $data['email'],
+                'email' => $data['email'],
             ]);
         }
         if ($data['name']) {
             $user->update([
-                'password' => $data['name']
+                'name' => $data['name']
             ]);
         }
 
+        if ($data['address']) {
+            $user->update([
+                'address' => $data['address']
+            ]);
+        }
+        if ($data['phone']) {
+            $user->update([
+                'phone' => $data['phone']
+            ]);
+        }
         $request->session()->flash('message', 'Profile updated Support successfully');
         $request->session()->flash('alert-class', 'alert alert-success');
         return redirect()->route('customers.profile');

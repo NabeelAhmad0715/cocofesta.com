@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddPostIdToPaymentsTable extends Migration
+class AddAddressColumnToUsersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddPostIdToPaymentsTable extends Migration
      */
     public function up()
     {
-        Schema::table('payments', function (Blueprint $table) {
-            $table->integer('post_id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->text('address');
+            $table->string('phone');
         });
     }
 
@@ -25,8 +26,9 @@ class AddPostIdToPaymentsTable extends Migration
      */
     public function down()
     {
-        Schema::table('payments', function (Blueprint $table) {
-            $table->dropColumn('post_id');
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn('address');
+            $table->dropColumn('phone');
         });
     }
 }
