@@ -29,6 +29,7 @@
 @if (count($orderPosts) > 0)
 <section class="page-section-ptb">
     <div class="container">
+      @include('common.partials.flash')
         <div class="row">
             <div class="col-md-12">
                 <div class="pricing-table">
@@ -76,7 +77,9 @@
                                 <div class="col-md-4">
                                     <div class="description-details text-center">
                                         <h3 class="theme-color">{{ $order->post->title }}</h3>
-                                        <p>Qunatity: {{ $order->quantity }}</p>
+                                        <p><b>Qunatity:</b> {{ $order->quantity }}</p>
+                                        <p><b>Size:</b> {{ $order->size }}</p>
+                                        <p><b>Color:</b> {{ $order->color }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 text-center">

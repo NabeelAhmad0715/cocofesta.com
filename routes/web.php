@@ -117,6 +117,10 @@ Route::get('login/{provider}', 'Auth\LoginController@redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@Callback');
 
 
+// Route::get('payment', 'PaymentController@index');
+// Route::post('charge', 'PaymentController@charge');
+Route::get('paymentsuccess', 'Frontend\OrderController@payment_success');
+Route::get('paymenterror', 'Frontend\OrderController@payment_error');
 
 Route::get('/create-symlink', function () {
     $projectFolder = base_path() . '/../';

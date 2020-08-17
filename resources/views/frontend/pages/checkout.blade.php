@@ -31,6 +31,7 @@
       <div class="row">
         <h2 class="mb-20 text-center" style="width: -webkit-fill-available;">Order details</h2>
       </div>
+      @include('common.partials.flash')
       <form role="form"
       method="post"
       class="require-validation"
@@ -166,6 +167,7 @@
                             </div>
                         </div>
                         <input type="hidden" name="price" value="{{ $postCarts->sum('price') }}" />
+                        <input type="hidden" id="method-stripe" name="method" value="stripe" />
                         <div class="row" style="justify-content: center">
                             <div class="col-xs-12">
                                 <input type="submit" class="button btn-block" value="Place Order Now ${{ $postCarts->sum('price') }}"><span class="icon-action-redo"></span>
@@ -173,7 +175,13 @@
                         </div>
                     </div>
                     <div id="paypal-form">
-
+                            <input type="hidden" name="amount" value="{{ $postCarts->sum('price') }}"/>
+                            <input type="hidden" id="method-paypal" name="method" value="paypal" />
+                            <div class="row" style="justify-content: center">
+                                <div class="col-xs-12">
+                                    <input type="submit" class="button btn-block" value="Place Order Now ${{ $postCarts->sum('price') }}"><span class="icon-action-redo"></span>
+                                </div>
+                            </div>
                     </div>
                </div>
            </div>
@@ -190,20 +198,33 @@
             $('#paypal-radio').click(function(){
                 $('#stripe-form').hide();
                 $('#paypal-form').show();
+                var method = document.getElementById('method-stripe');
+                method.removeAttribute('name');
+                // var form = document.getElementById('payment-form');
+                // form.removeAttribute('class');
+                // form.removeAttribute('role');
+                // form.removeAttribute('data-cc-on-file');
+                // form.removeAttribute('data-stripe-publishable-key');
             });
 
             $('#stripe-radio').click(function(){
                 $('#paypal-form').hide();
                 $('#stripe-form').show();
+                var method = document.getElementById('method-paypal');
+                method.removeAttribute('name');
+                // var form = document.getElementById('payment-form');
+                // form.setAttribute('class', 'require-validation');
+                // form.setAttribute('role', 'form');
+                // form.setAttribute('data-cc-on-file', 'false');
+                // form.setAttribute('data-stripe-publishable-key', '{{ config("app.stripe_key")}} ');
             });
 
 </script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
   <script type="text/javascript">
-  $(function() {
+$('#stripe-radio').click(function(){
 
-      var $form         = $(".require-validation");
+      var $form = $(".require-validation");
 
       $('form.require-validation').bind('submit', function(e) {
           var $form         = $(".require-validation"),

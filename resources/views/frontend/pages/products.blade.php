@@ -45,16 +45,6 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="sidebar-widgets-wrap">
                     <div class="sidebar-widget mb-40">
-                    <h5 class="mb-20">categories</h5>
-                        <div class="widget-link">
-                            <ul>
-                               {{-- @foreach ($category->children as $category)
-                                  <li> <a href="shop-single.html"> <i class="fa fa-angle-double-right"></i> {{ $category->title }} </a></li>
-                               @endforeach --}}
-                            </ul>
-                        </div>
-                     </div>
-                    <div class="sidebar-widget mb-40">
                     <h5 class="mb-20">Popular items</h5>
                     @forelse ($topRatedPosts as $post)
                     @php

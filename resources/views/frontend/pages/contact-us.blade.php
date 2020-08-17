@@ -1,9 +1,9 @@
 @extends('frontend.layouts.layout')
 
 @section('head')
-    <title>Contact us | Coco Cart</title>
-    <meta name="description" content="Coco Cart">
-    <meta name="keywords" content="Coco Cart">
+    <title>Contact us | As Fine Leather</title>
+    <meta name="description" content="As Fine Leather">
+    <meta name="keywords" content="As Fine Leather">
 @endsection
 
 @section('content')
@@ -13,13 +13,12 @@
     <div class="row">
       <div class="col-lg-12">
       <div class="page-title-name">
-          <h1>error 404 01</h1>
+          <h1>Contact Us</h1>
           <p>We know the secret of your success</p>
         </div>
           <ul class="page-breadcrumb">
             <li><a href="{{ route('pages.home') }}"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
-            <li><a href="{{ route('pages.home') }}">page</a> <i class="fa fa-angle-double-right"></i></li>
-            <li><span>error 404 01</span> </li>
+            <li><span>Contact us</span> </li>
        </ul>
      </div>
    </div>

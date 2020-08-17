@@ -88,7 +88,7 @@
                 </form>
            </div>
           </div>
-          <div class="whishlist" style="padding:20px">
+          <div class="whishlist">
             <a class="whishlist-btn" href="{{ route('pages.whishlist') }}"> <i class="fa fa-heart icon"></i> <strong id="whishlistCount" class="item">
               @isset($whishlistCount)
               {{ $whishlistCount }}
@@ -98,7 +98,7 @@
             </strong></a>
           </div>
 
-          <div class="shpping-cart" style="padding: 20px 20px 20px 10px;">
+          <div class="shpping-cart">
            <a class="cart-btn" href="#"> <i class="fa fa-shopping-cart icon"></i> <strong id="cartCount" class="item">
             @isset($cartCount)
            {{ $cartCount }}
@@ -111,9 +111,10 @@
               <div class="cart-title">
                  <h6 class="uppercase mb-0">Shopping cart</h6>
               </div>
+              <div id="cart-posts"></div>
               @isset($cartPosts)
               @forelse ($cartPosts as $cart)
-                <div class="cart-item">
+                <div id="cart-post" class="cart-item">
                     <div class="cart-image">
                     <img class="img-fluid cart-image" src="{{ asset('/storage/' . $cart->post->getMetaData('featured_image')) }}" alt="">
                     </div>

@@ -343,6 +343,32 @@
             .table-responsive.h-60vh{
                 height:80vh;
             }
+
+            @media (max-width: 991px){
+                    .search-cart {
+                        display: flex;
+                        position: absolute;
+                        right: 60px;
+                        top: 0;
+                        z-index: 999;
+                    }
+                    .shpping-cart, .whishlist{
+                        padding: 0px 0px 0px 10px;
+                    }
+                    .whishlist strong.item {;
+                        top: 20px;
+                        left: auto;
+                        right: 15px;
+                    }
+            }
+            @media (min-width: 992px){
+                .shpping-cart{
+                    padding: 20px 20px 20px 10px;
+                }
+                .whishlist{
+                    padding: 20px;
+                }
+            }
         </style>
       </head>
 <body>

@@ -32,7 +32,8 @@ class CartController extends Controller
                     'post_id' => $product_id,
                     'price' => $request->price,
                     'quantity' => 1,
-                    'in_stock' => $post->in_stock
+                    'in_stock' => $post->in_stock,
+                    'color' => $post->available_colors
                 ]);
                 return response()->json($cart);
             }

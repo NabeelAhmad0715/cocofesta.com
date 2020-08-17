@@ -138,8 +138,10 @@
                                     <div class="description-details text-center">
                                         <h3 class="theme-colo">{{ $order->post->title }}</h3>
                                         <p>{{ date('F d, Y', strtotime($order->created_at)) }}</p>
-                                        <p>Order Number: #{{ $order->order_number }}</p>
-                                        <p>Qunatity: {{ $order->quantity }}</p>
+                                        <p><b>Order Number:</b> #{{ $order->order_number }}</p>
+                                        <p><b>Qunatity:</b> {{ $order->quantity }}</p>
+                                        <p><b>Size:</b> {{ $order->size }}</p>
+                                        <p><b>Color:</b> {{ $order->color }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 text-center">
