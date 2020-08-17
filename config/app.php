@@ -49,6 +49,11 @@ return [
 
     'stripe_secret' => env('STRIPE_SECRET', 'sk_test_6LOddZgaK4kIQoJYOXvin19900JY7xx5QO'),
 
+    'paypal_key' => env('PAYPAL_CLIENT_ID', 'AZCTYbyuDoQ_g7SupH_x5QvdKPCy00J2tlS0fi4VK-PXcNNezPFx3T1QhiSYocvSPg-JvV7Xc_oiOj77'),
+
+    'paypal_secret' => env('PAYPAL_CLIENT_SECRET', 'EOAapwOoUCcLRV5y53b4QBtbLdAWkwAer9x5Jk9N8oPE3oq58MIyf7JR4B1UZhqKQPhlqguE1WCOLQT3'),
+
+    'paypal_currency' => env('PAYPAL_CURRENCY', 'USD'),
     /*
 |--------------------------------------------------------------------------
 | Application URL

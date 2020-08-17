@@ -83,12 +83,16 @@
                                     </div>
                                 </td>
                                 @else
-                                <td><p>Size Not Available</p></td>
+                                <td>
+                                  <select data-id="{{ $cartPost->id }}" class="select-size wide fancyselect" required="required">
+                                      <option>Size Not Available</option>
+                                    </select>
+                                </td>
                                 @endif
                                 @if ($post->available_colors)
                                 <td>
                                     <div class="box">
-                                        <select data-id="{{ $cartPost->id }}" class="select-color wide fancyselect" required>
+                                        <select data-id="{{ $cartPost->id }}" class="select-color wide fancyselect" required="required">
                                         <option value="">Select Color</option>
                                         @foreach (explode(',', $post->available_colors) as $color)
                                               <option {{ $color == $cartPost->size ? 'selected' : '' }} value="{{ $color }}">{{ ucfirst($color) }}</option>

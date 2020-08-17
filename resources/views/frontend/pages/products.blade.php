@@ -45,16 +45,6 @@
                 <div class="col-lg-3 col-md-3">
                     <div class="sidebar-widgets-wrap">
                     <div class="sidebar-widget mb-40">
-                    <h5 class="mb-20">categories</h5>
-                        <div class="widget-link">
-                            <ul>
-                               {{-- @foreach ($category->children as $category)
-                                  <li> <a href="shop-single.html"> <i class="fa fa-angle-double-right"></i> {{ $category->title }} </a></li>
-                               @endforeach --}}
-                            </ul>
-                        </div>
-                     </div>
-                    <div class="sidebar-widget mb-40">
                     <h5 class="mb-20">Popular items</h5>
                     @forelse ($topRatedPosts as $post)
                     @php
@@ -70,7 +60,7 @@
                             </div>
                             <div class="recent-meta">
                                <ul class="list-style-unstyled">
-                                <li class="color">PKR. {{ round($post->getMetaData('price') / $post->getMetaData('discount')) }} /</li>
+                                <li class="color">$ {{ round($post->getMetaData('price') / $post->getMetaData('discount')) }} /</li>
                                 <li>
                                 @php
                                 $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
@@ -153,7 +143,7 @@
                              <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
                                 <li>
                                       <div class="product-price">
-                                            <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                                            <span class="text-black" style="font-size:20px"><b>$</b></span>
                                             @if ($post->getMetaData('discount'))
                                                         <del>
                                                         @php

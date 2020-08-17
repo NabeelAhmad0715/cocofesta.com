@@ -305,7 +305,7 @@
         @forelse ($latestPosts as $post)
          <div class="grid-item {{ $post->getMetaData('discount') !=  null? 'sale' : 'latest' }}">
             <div class="listing-post">
-                  <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
+
                   <div class="blog-overlay">
 
                         <div class="blog-image">
@@ -330,12 +330,13 @@
                               </a>
                         </div>
                   </div>
+            <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
               <div class="listing-post-info">
                 <div class="listing-post-meta clearfix">
                      <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
                         <li>
                               <div class="product-price">
-                                    <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                                    <span class="text-black" style="font-size:20px"><b>$</b></span>
                                     @if ($post->getMetaData('discount'))
                                                 <del>
                                                 @php
@@ -405,7 +406,7 @@
                             <h5> <a href="#"> {{ $post->title }} </a> </h5>
                         </div>
                         <div class="product-price">
-                            <span class="text-black" style="font-size:10px"><b>PKR.</b></span>
+                            <span class="text-black" style="font-size:10px"><b>$</b></span>
                             @if ($post->getMetaData('discount'))
                                         <del>
                                         @php
@@ -466,7 +467,7 @@
                             <h5> <a href="#"> {{ $post->title }} </a> </h5>
                         </div>
                         <div class="product-price">
-                            <span class="text-black" style="font-size:10px"><b>PKR.</b></span>
+                            <span class="text-black" style="font-size:10px"><b>$</b></span>
                             @if ($post->getMetaData('discount'))
                                         <del>
                                         @php

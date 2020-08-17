@@ -1,9 +1,9 @@
 @extends('frontend.layouts.layout')
 
 @section('head')
-    <title>Products | Coco Cart</title>
-    <meta name="description" content="Coco Cart">
-    <meta name="keywords" content="Coco Cart">
+    <title>{{ $post->getMetaData('meta_title') }}</title>
+    <meta name="description" content="{{ $post->getMetaData('meta_description') }}">
+    <meta name="keywords" content="{{ $post->getMetaData('meta_keywords') }}">
 @endsection
 
 @section('content')
@@ -17,8 +17,9 @@
             <p>{{ $post->getMetaData('subtitle') }}</p>
           </div>
             <ul class="page-breadcrumb">
-              <li><a href="#"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><span>{{ $post->type->title }}</span> </li>
+              <li><a href="{{ route('pages.home') }}"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
+              <li><a href="{{ route('pages.products',[$post->type->slug])}}"><i class="fa fa-cart"></i> {{ $post->type->title }}</a> <i class="fa fa-angle-double-right"></i></li>
+              <li><span>{{ $post->title }}</span> </li>
          </ul>
        </div>
        </div>
@@ -75,7 +76,7 @@
                   </ul>
               </div>
               <div class="clearfix mb-30">
-                <div class="product-detail-price"><span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                <div class="product-detail-price"><span class="text-black" style="font-size:20px"><b>$</b></span>
                     @if ($post->getMetaData('discount'))
                                 <del>
                                 @php
@@ -311,7 +312,7 @@
                         </div>
                         <div class="recent-meta">
                            <ul class="list-style-unstyled">
-                            <li class="color">PKR. {{ $topRatedPost->post->getMetaData('price') - ($topRatedPost->post->getMetaData('price') * ($topRatedPost->post->getMetaData('discount')/100)) }} /</li>
+                            <li class="color">$ {{ $topRatedPost->post->getMetaData('price') - ($topRatedPost->post->getMetaData('price') * ($topRatedPost->post->getMetaData('discount')/100)) }} /</li>
                             <li>
                             @php
                             $star = round(number_format((float) ($topRatedPost->post->reviews->sum('rating') / $topRatedPost->post->reviews->count()), 2, '.', ''));
@@ -365,7 +366,7 @@
         @forelse ($relatedPosts as $post)
          <div class="col-lg-4 col-md-4 mb-30">
             <div class="listing-post">
-                  <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
+
                   <div class="blog-overlay">
 
                         <div class="blog-image">
@@ -390,12 +391,13 @@
                               </a>
                         </div>
                   </div>
+                  <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
               <div class="listing-post-info">
                 <div class="listing-post-meta clearfix">
                      <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
                         <li>
                               <div class="product-price">
-                                    <span class="text-black" style="font-size:20px"><b>PKR.</b></span>
+                                    <span class="text-black" style="font-size:20px"><b>$</b></span>
                                     @if ($post->getMetaData('discount'))
                                                 <del>
                                                 @php

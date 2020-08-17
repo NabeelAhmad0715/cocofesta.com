@@ -55,8 +55,8 @@ class ViewServiceProvider extends ServiceProvider
                 $cartCount = Cart::where('user_id', Auth::user()->id)->count();
                 $totalPrice = Cart::where('user_id', Auth::user()->id)->where('in_stock', 1)->sum('price');
 
-                $orderPosts = OrderDetail::where('user_id', Auth::user()->id)->where('status', 0)->get();
-                $orderHistories = OrderDetail::where('user_id', Auth::user()->id)->get();
+                $orderPosts = OrderDetail::where('user_id', Auth::user()->id)->where('status', 0)->latest()->get();
+                $orderHistories = OrderDetail::where('user_id', Auth::user()->id)->latest()->get();
                 $view->with(compact('type', 'posts', 'whishlistPosts', 'whishlistCount', 'cartPosts', 'cartCount', 'totalPrice', 'topRatedPosts', 'popularPosts', 'orderPosts', 'orderHistories'));
             }
             $view->with(compact('type', 'posts', 'reviews', 'topRatedPosts', 'popularPosts'));

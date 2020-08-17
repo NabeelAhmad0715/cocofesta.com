@@ -18,6 +18,8 @@
         "laravel/socialite": "^4.4",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
+        "league/omnipay": "^3.0",
+        "omnipay/paypal": "^3.0",
         "stripe/stripe-php": "^7.46"
     },
     "require-dev": {
@@ -32,6 +34,12 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
+    "repositories": {
+        "packagist": {
+          "type": "composer",
+          "url": "https://packagist.org"
+        }
+      },
     "extra": {
         "laravel": {
             "dont-discover": []

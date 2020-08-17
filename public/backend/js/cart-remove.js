@@ -32,8 +32,6 @@ $(".removetocart").on("click", function (event) {
                         url: url,
                         dataType: "json",
                         success: function (cartCount) {
-                            console.log(cartCount);
-
                             var cart = document.getElementById("cartCount");
                             cart.innerHTML = cartCount;
                         },

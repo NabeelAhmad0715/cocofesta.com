@@ -105,6 +105,16 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12 mb-5" style="display:flex;">
+                                  <div class="col-md-6">
+                                      <label>Address</label>
+                                      <input class="white-bg form-control" type="text" placeholder="Address" name="address" />
+                                  </div>
+                                  <div class="col-md-6">
+                                      <label>Phone</label>
+                                      <input class="white-bg form-control" type="tel" placeholder="Phone" name="phone" />
+                                  </div>
+                              </div>
+                                <div class="col-md-12 mb-5" style="display:flex;">
                                     <div class="col-md-6">
                                         <label>Password</label>
                                         <input class="white-bg form-control" type="password" placeholder="Password" name="password" />
@@ -138,8 +148,10 @@
                                     <div class="description-details text-center">
                                         <h3 class="theme-colo">{{ $order->post->title }}</h3>
                                         <p>{{ date('F d, Y', strtotime($order->created_at)) }}</p>
-                                        <p>Order Number: #{{ $order->order_number }}</p>
-                                        <p>Qunatity: {{ $order->quantity }}</p>
+                                        <p><b>Order Number:</b> #{{ $order->order_number }}</p>
+                                        <p><b>Qunatity:</b> {{ $order->quantity }}</p>
+                                        <p><b>Size:</b> {{ $order->size }}</p>
+                                        <p><b>Color:</b> {{ $order->color }}</p>
                                     </div>
                                 </div>
                                 <div class="col-md-4 text-center">

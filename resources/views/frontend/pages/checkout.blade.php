@@ -31,6 +31,7 @@
       <div class="row">
         <h2 class="mb-20 text-center" style="width: -webkit-fill-available;">Order details</h2>
       </div>
+      @include('common.partials.flash')
       <form role="form"
       method="post"
       class="require-validation"
@@ -38,40 +39,6 @@
       data-stripe-publishable-key="{{ config('app.stripe_key') }}"
       id="payment-form" action="{{ route('generate.order') }}">
         @csrf
-      <div class="row">
-            <div class="col-lg-6 col-md-6">
-                <div class="section-field mb-30">
-                    <label class="mb-10">Full name * </label>
-                    <input id="name" type="text"  class="form-control"  name="fullname" required>
-                </div>
-                <div class="section-field mb-30">
-                    <label class="mb-10">Address * </label>
-                    <input type="text" class="not-click form-control mb-10" value="" name="address" required>
-                </div>
-                <div class="section-field mb-30">
-                    <label class="mb-10">Phone * </label>
-                    <input id="name" type="tel" class="form-control"  name="phone" required>
-                </div>
-                <div class="section-field mb-30">
-                  <label class="mb-10">Email</label>
-                  <input id="email" type="email" class="form-control"  name="email">
-              </div>
-            </div>
-            <div class="col-lg-6 col-md-6">
-                <div class="section-field mb-30">
-                    <label class="mb-10">City * </label>
-                    <input type="text" name="city" class="form-control" required/>
-                </div>
-                <div class="section-field mb-30">
-                    <label class="mb-10">Postcode / ZIP  </label>
-                    <input id="name" type="text" class="form-control"  name="postal_code">
-                </div>
-                <div class="section-field mb-30">
-                    <label class="mb-10">Order notes </label>
-                    <textarea class="form-control input-message" rows="7" name="message"></textarea>
-                </div>
-            </div>
-        </div>
         <div class="row">
            <div class="col-md-6">
              <table class="table table-responsive">
@@ -166,6 +133,7 @@
                             </div>
                         </div>
                         <input type="hidden" name="price" value="{{ $postCarts->sum('price') }}" />
+                        <input type="hidden" id="method-stripe" name="method" value="stripe" />
                         <div class="row" style="justify-content: center">
                             <div class="col-xs-12">
                                 <input type="submit" class="button btn-block" value="Place Order Now ${{ $postCarts->sum('price') }}"><span class="icon-action-redo"></span>
@@ -173,7 +141,13 @@
                         </div>
                     </div>
                     <div id="paypal-form">
-
+                            <input type="hidden" name="amount" value="{{ $postCarts->sum('price') }}"/>
+                            <input type="hidden" id="method-paypal" name="method" value="paypal" />
+                            <div class="row" style="justify-content: center">
+                                <div class="col-xs-12">
+                                    <input type="submit" class="button btn-block" value="Place Order Now ${{ $postCarts->sum('price') }}"><span class="icon-action-redo"></span>
+                                </div>
+                            </div>
                     </div>
                </div>
            </div>
@@ -190,20 +164,33 @@
             $('#paypal-radio').click(function(){
                 $('#stripe-form').hide();
                 $('#paypal-form').show();
+                var method = document.getElementById('method-stripe');
+                method.removeAttribute('name');
+                // var form = document.getElementById('payment-form');
+                // form.removeAttribute('class');
+                // form.removeAttribute('role');
+                // form.removeAttribute('data-cc-on-file');
+                // form.removeAttribute('data-stripe-publishable-key');
             });
 
             $('#stripe-radio').click(function(){
                 $('#paypal-form').hide();
                 $('#stripe-form').show();
+                var method = document.getElementById('method-paypal');
+                method.removeAttribute('name');
+                // var form = document.getElementById('payment-form');
+                // form.setAttribute('class', 'require-validation');
+                // form.setAttribute('role', 'form');
+                // form.setAttribute('data-cc-on-file', 'false');
+                // form.setAttribute('data-stripe-publishable-key', '{{ config("app.stripe_key")}} ');
             });
 
 </script>
 <script type="text/javascript" src="https://js.stripe.com/v2/"></script>
-
   <script type="text/javascript">
-  $(function() {
+$('#stripe-radio').click(function(){
 
-      var $form         = $(".require-validation");
+      var $form = $(".require-validation");
 
       $('form.require-validation').bind('submit', function(e) {
           var $form         = $(".require-validation"),

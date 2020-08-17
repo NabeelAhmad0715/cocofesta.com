@@ -1,9 +1,9 @@
 @extends('frontend.layouts.layout')
 
 @section('head')
-    <title>About | Coco Cart</title>
-    <meta name="description" content="Coco Cart">
-    <meta name="keywords" content="Coco Cart">
+    <title>About | As Fine Leather</title>
+    <meta name="description" content="About | As Fine Leather">
+    <meta name="keywords" content="About | As Fine Leather">
 @endsection
 
 @section('content')
@@ -13,13 +13,12 @@
       <div class="row">
         <div class="col-lg-12">
         <div class="page-title-name">
-            <h1>About us 02</h1>
+            <h1>About us</h1>
             <p>We know the secret of your success</p>
           </div>
             <ul class="page-breadcrumb">
               <li><a href="#"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><a href="#">page</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><span>About us 02</span> </li>
+              <li><span>About us</span> </li>
          </ul>
        </div>
        </div>

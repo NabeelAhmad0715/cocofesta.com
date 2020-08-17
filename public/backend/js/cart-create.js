@@ -16,9 +16,12 @@ $(".addtocart").on("click", function (event) {
         dataType: "json",
         success: function (cart) {
             if (cart != null) {
-                var message = document.getElementById("cart-success-message");
-                message.setAttribute("style", "display:block");
-
+                setTimeout(function () {
+                    var message = document.getElementById(
+                        "cart-success-message"
+                    );
+                    message.setAttribute("style", "display:block");
+                }, 2000);
                 var token = $('meta[name="csrf-token"]').attr("content");
                 var url = "/count/post/cart/";
                 $.ajax({
@@ -29,8 +32,6 @@ $(".addtocart").on("click", function (event) {
                     url: url,
                     dataType: "json",
                     success: function (cartCount) {
-                        console.log(cartCount);
-
                         var cart = document.getElementById("cartCount");
                         cart.innerHTML = cartCount;
                     },
@@ -38,6 +39,7 @@ $(".addtocart").on("click", function (event) {
                         console.log(request);
                     },
                 });
+                // location.reload();
             } else {
                 var message = document.getElementById("cart-danger-message");
                 message.setAttribute("style", "display:block");
