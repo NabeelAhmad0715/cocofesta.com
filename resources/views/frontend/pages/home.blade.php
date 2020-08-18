@@ -272,13 +272,7 @@
 </section>
 <section class="page-section-ptb gray-bg" >
       <div class="container">
-       <div class="row justify-content-center">
-         <div class="col-lg-8">
-           <div class="section-title text-center">
-           <h2>New  <span class="theme-color"> Collections </span>  </h2>
-           <p>You will sail along until you collide with an immovable object, after which you will sink to the bottom</p>
-          </div>
-          <div id="whishlist-success-message" class="alert alert-success alert-dismissible" style="display: none;" role="alert">
+        <div id="whishlist-success-message" class="alert alert-success alert-dismissible" style="display: none;" role="alert">
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
              Product is added to whishlist
            </div>
@@ -294,6 +288,12 @@
             <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
               Product is already added to cart
            </div>
+       <div class="row justify-content-center">
+         <div class="col-lg-8">
+           <div class="section-title text-center">
+           <h2>New  <span class="theme-color"> Collections </span>  </h2>
+           <p>You will sail along until you collide with an immovable object, after which you will sink to the bottom</p>
+          </div>
          </div>
        </div>
        <div class="isotope-filters">
@@ -303,7 +303,7 @@
       </div>
       <div class="isotope columns-3 popup-gallery">
         @forelse ($latestPosts as $post)
-         <div class="grid-item {{ $post->getMetaData('discount') !=  null? 'sale' : 'latest' }}">
+         <div class="grid-item products {{ $post->getMetaData('discount') !=  null? 'sale' : 'latest' }}">
             <div class="listing-post">
 
                   <div class="blog-overlay">
@@ -333,7 +333,7 @@
             <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
               <div class="listing-post-info">
                 <div class="listing-post-meta clearfix">
-                     <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
+                     <ul class="list-unstyled d-inline-block" style="padding: 5px;">
                         <li>
                               <div class="product-price">
                                     <span class="text-black" style="font-size:20px"><b>$</b></span>
@@ -350,6 +350,32 @@
                                           @endif
                                           <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
                               </div>
+                              @if($post->reviews->sum('rating'))
+                                    <div class="text-left" style="margin-left:3px;margin-top:3px;">
+                                        @php
+                                            $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
+                                        @endphp
+                                        @for ($i = 0; $i < $star; $i++)
+                                            <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
+                                        @endfor
+                                        @if ($star == 4)
+                                            <i class='fa fa-star-o'></i>
+                                        @elseif($star == 3)
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                        @elseif($star == 2)
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                        @elseif($star == 1)
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                        @endif
+                                        <span class="text-black">({{$post->reviews->count()}})</span>
+                                    </div>
+                                    @endif
                         </li>
                      </ul>
                      <div class="float-right">
@@ -378,10 +404,9 @@
     <div class="container">
      <div class="row justify-content-center">
        <div class="col-md-10 text-center pt-50 pb-50">
-        <h2 class="text-white">Women’s lookbook </h2>
-          <p class="text-white mt-20 mb-30">Best Watches available on the cheapest prices at Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
-           <a class="button white button-border" href="#">Shop Now </a>
-           <a class="button white ml-10" href="#">Get deale</a>
+        <h2 class="text-white">Men's & Women’s lookbook </h2>
+          <p class="text-white mt-20 mb-30">Best Leather Bags available on the cheapest prices at Lorem ipsum dolor sit amet, consectetur adipisicing elit. </p>
+           <a class="button white button-border" href="{{route('pages.products', [$type->slug])}}">Shop Now </a>
        </div>
       </div>
     </div>

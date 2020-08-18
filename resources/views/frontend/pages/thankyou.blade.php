@@ -1,9 +1,9 @@
 @extends('frontend.layouts.layout')
 
 @section('head')
-    <title>Thank You | Coco Cart</title>
-    <meta name="description" content="Coco Cart">
-    <meta name="keywords" content="Coco Cart">
+    <title>Thank You | AS Fine Leather</title>
+    <meta name="description" content="AS Fine Leather">
+    <meta name="keywords" content="AS Fine Leather">
 @endsection
 
 @section('content')

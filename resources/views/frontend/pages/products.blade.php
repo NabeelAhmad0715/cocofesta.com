@@ -60,7 +60,11 @@
                             </div>
                             <div class="recent-meta">
                                <ul class="list-style-unstyled">
+                                @if($post->getMetaData('discount'))
                                 <li class="color">$ {{ round($post->getMetaData('price') / $post->getMetaData('discount')) }} /</li>
+                                @else
+                                <li class="color">$ {{ round($post->getMetaData('price')) }} /</li>
+                                @endif
                                 <li>
                                 @php
                                 $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
@@ -157,6 +161,32 @@
                                                   @endif
                                                   <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
                                       </div>
+                                      @if($post->reviews->sum('rating'))
+                                    <div class="text-left" style="margin-left:3px;margin-top:3px;">
+                                        @php
+                                            $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
+                                        @endphp
+                                        @for ($i = 0; $i < $star; $i++)
+                                            <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
+                                        @endfor
+                                        @if ($star == 4)
+                                            <i class='fa fa-star-o'></i>
+                                        @elseif($star == 3)
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                        @elseif($star == 2)
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                        @elseif($star == 1)
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                            <i class='fa fa-star-o'></i>
+                                        @endif
+                                        <span class="text-black">({{$post->reviews->count()}})</span>
+                                    </div>
+                                    @endif
                                 </li>
                              </ul>
                              <div class="float-right">

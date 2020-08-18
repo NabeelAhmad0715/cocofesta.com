@@ -265,13 +265,13 @@
 
             /* Selected state of the stars */
             .rating-stars ul > li.star.selected > i.fa {
-            color:#FF912C;
+            color:#FFCC36;
             }
             .rating-stars ul > li.starSelected {
                 display: inline-block;
             }
             .rating-stars ul > li.starSelected.selected > i.fa {
-            color:#FF912C;
+            color:#FFCC36;
             }
             i.fa.fa-star-o {
                 width: 1.28571429em;
@@ -368,6 +368,9 @@
                 .whishlist{
                     padding: 20px;
                 }
+            }
+            .listing-post-info{
+                height:104px;
             }
         </style>
       </head>
