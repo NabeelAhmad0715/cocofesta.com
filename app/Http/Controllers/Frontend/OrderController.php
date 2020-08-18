@@ -12,7 +12,6 @@ use Stripe;
 use App\MetaDataPost;
 use Omnipay\Omnipay;
 use App\Payment;
-
 class OrderController extends Controller
 {
     public $gateway;
@@ -72,46 +71,6 @@ class OrderController extends Controller
             return redirect()->back();
         }
 
-        // $order = Order::create($data);
-        // $cartPosts = Cart::where('user_id', Auth::user()->id)->where('in_stock', 1)->get();
-        // $orderNumber = 'AS' . rand(1, 10000);
-        // foreach ($cartPosts as $post) {
-
-        //     $orderDetail = OrderDetail::create([
-        //         'user_id' => $data['user_id'],
-        //         'order_id' => $order->id,
-        //         'post_id' => $post->post_id,
-        //         'price' => $post->price,
-        //         'quantity' => $post->quantity,
-        //         'order_number' => $orderNumber,
-        //         'size' => $post->size,
-        //         'color' => $post->color,
-        //     ]);
-        //     $size = "available_" . str_replace('-', '_', $orderDetail->size) . "_quantity";
-        //     $metaData = $orderDetail->post->metaData->where('name', $size)->first();
-        //     $metaDataPost = MetaDataPost::where('meta_data_id', $metaData->id)->where('post_id', $orderDetail->post_id)->first();
-        //     $updatedQuantity = ((int)$metaDataPost->value) - $orderDetail->quantity;
-        //     $metaDataPost->update([
-        //         'value' => $updatedQuantity
-        //     ]);
-        //     if (((int)$metaDataPost->value) <= 0) {
-        //         $sizes = [];
-        //         foreach (explode(',', $orderDetail->post->available_size) as $key => $availableSize) {
-        //             if ($availableSize != $orderDetail->size) {
-        //                 $sizes[] = $availableSize;
-        //             }
-        //         }
-        //         $orderDetail->post->update([
-        //             'available_size' => implode(',', $sizes),
-        //         ]);
-        //     }
-        //     if (!$orderDetail->post->available_size) {
-        //         $orderDetail->post->update([
-        //             'in_stock' => 0
-        //         ]);
-        //     }
-        //     $post->delete();
-        // }
         $request->session()->flash('message', 'Order has been placed successfully');
         $request->session()->flash('alert-class', 'alert alert-success');
         return redirect()->route('pages.thankyou');
@@ -205,7 +164,9 @@ class OrderController extends Controller
                 return $response->getMessage();
             }
         } else {
-            return 'Transaction is declined';
+            $request->session()->flash('message', 'Transaction is declined');
+            $request->session()->flash('alert-class', 'alert alert-danger');
+            return redirect()->route('pages.checkout');
         }
     }
 
