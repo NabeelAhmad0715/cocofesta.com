@@ -24,6 +24,7 @@
        </div>
      </div>
     </div>
+    <div class="overlay"></div>
 </section>
 
 <section class="page-section-ptb">

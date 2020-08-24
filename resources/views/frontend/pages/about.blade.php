@@ -101,6 +101,7 @@
         </div>
       </div>
    </div>
+   <div class="overlay"></div>
 </section>
 
 <section class="our-activities gray-bg page-section-ptb">

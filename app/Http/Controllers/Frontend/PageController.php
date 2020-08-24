@@ -70,7 +70,7 @@ class PageController extends Controller
     {
         if ($request->has('search')) {
             $search = $request->search;
-            $records = $type->posts()->where('title', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "{$search}%")->orwhere('slug', 'LIKE', "%{$search}")->orwhere('title', 'LIKE', "{$search}%")->orwhere('title', 'LIKE', "%{$search}")->get();
+            $records = $type->posts()->where('title', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "%{$search}%")->orwhere('slug', 'LIKE', "{$search}%")->orwhere('slug', 'LIKE', "%{$search}")->orwhere('title', 'LIKE', "{$search}%")->orwhere('title', 'LIKE', "%{$search}")->paginate(10);
 
             if (count($records) <= 0) {
                 $records = $type->posts;

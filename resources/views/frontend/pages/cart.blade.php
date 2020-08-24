@@ -13,17 +13,17 @@
       <div class="row">
         <div class="col-lg-12">
         <div class="page-title-name">
-            <h1>About us 02</h1>
+            <h1>Cart</h1>
             <p>We know the secret of your success</p>
           </div>
             <ul class="page-breadcrumb">
               <li><a href="#"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><a href="#">page</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><span>About us 02</span> </li>
+              <li><span>Cart</span> </li>
          </ul>
        </div>
        </div>
     </div>
+    <div class="overlay"></div>
 </section>
 @auth
 <section class="wishlist-page page-section-ptb">

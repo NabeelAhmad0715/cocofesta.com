@@ -23,6 +23,7 @@
        </div>
        </div>
     </div>
+    <div class="overlay"></div>
 </section>
 
 
@@ -213,61 +214,69 @@
                                 </div>
                           </div>
                         <a class="popup portfolio-img" href="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}"><i class="fa fa-arrows-alt"></i></a>
-                      <div class="listing-post-info" style="background:#f7f7f7 !important;">
-                        <div class="listing-post-meta clearfix">
-                             <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
-                                <li>
-                                      <div class="product-price">
-                                            <span class="text-black" style="font-size:20px"><b>$</b></span>
-                                            @if ($post->getMetaData('discount'))
-                                                        <del>
-                                                        @php
-                                                        $price = $post->getMetaData('price');
-                                                        $discount = $price - ($price * ($post->getMetaData('discount')/100));
-                                                        @endphp
-                                                        @if ($discount)
-                                                              {{ $price }}
-                                                        @endif
-                                                        </del>
-                                                  @endif
-                                                  <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
-                                      </div>
-                                      @if($post->reviews->sum('rating'))
-                                    <div class="text-left" style="margin-left:3px;margin-top:3px;">
-                                        @php
-                                            $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
-                                        @endphp
-                                        @for ($i = 0; $i < $star; $i++)
-                                            <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
-                                        @endfor
-                                        @if ($star == 4)
-                                            <i class='fa fa-star-o'></i>
-                                        @elseif($star == 3)
-                                            <i class='fa fa-star-o'></i>
-                                            <i class='fa fa-star-o'></i>
-                                        @elseif($star == 2)
-                                            <i class='fa fa-star-o'></i>
-                                            <i class='fa fa-star-o'></i>
-                                            <i class='fa fa-star-o'></i>
-                                        @elseif($star == 1)
-                                            <i class='fa fa-star-o'></i>
-                                            <i class='fa fa-star-o'></i>
-                                            <i class='fa fa-star-o'></i>
-                                            <i class='fa fa-star-o'></i>
-                                        @endif
-                                        <span class="text-black">({{$post->reviews->count()}})</span>
-                                    </div>
-                                    @endif
-                                </li>
-                             </ul>
-                             <div class="float-right">
-                               <h6 class="theme-color">
-                                <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="@if(!auth()->user())disabled @endif addtocart" href='javascript:;'>Add to cart</a>
-                            </h6>
-                             </div>
-                         </div>
-                         @if(!auth()->user())<p class="text-right mt-3" style="color:red"><b>*You Need To First Login</b></p>@endif
-                      </div>
+                        <div class="listing-post-info">
+                            <div class="listing-post-meta clearfix">
+                                 <ul class="list-unstyled d-inline-block" style="padding: 5px 15px;">
+                                    <li>
+                                          <div class="product-price">
+                                                <span class="text-black" style="font-size:20px"><b>$</b></span>
+                                                @if ($post->getMetaData('discount'))
+                                                            <del>
+                                                            @php
+                                                            $price = $post->getMetaData('price');
+                                                            $discount = $price - ($price * ($post->getMetaData('discount')/100));
+                                                            @endphp
+                                                            @if ($discount)
+                                                                  {{ $price }}
+                                                            @endif
+                                                            </del>
+                                                      @endif
+                                                      <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
+                                          </div>
+                                    </li>
+                                 </ul>
+                                 <div class="float-right">
+                                    @if($post->reviews->sum('rating'))
+                                                <div class="text-left" style="margin-left:3px;margin-top:3px;">
+                                                    @php
+                                                        $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
+                                                    @endphp
+                                                    @for ($i = 0; $i < $star; $i++)
+                                                        <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
+                                                    @endfor
+                                                    @if ($star == 4)
+                                                        <i class='fa fa-star-o'></i>
+                                                    @elseif($star == 3)
+                                                        <i class='fa fa-star-o'></i>
+                                                        <i class='fa fa-star-o'></i>
+                                                    @elseif($star == 2)
+                                                        <i class='fa fa-star-o'></i>
+                                                        <i class='fa fa-star-o'></i>
+                                                        <i class='fa fa-star-o'></i>
+                                                    @elseif($star == 1)
+                                                        <i class='fa fa-star-o'></i>
+                                                        <i class='fa fa-star-o'></i>
+                                                        <i class='fa fa-star-o'></i>
+                                                        <i class='fa fa-star-o'></i>
+                                                    @endif
+                                                    <span class="text-black">({{$post->reviews->count()}})</span>
+                                                </div>
+                                                @else
+                                                    <p>No Reviews yet</p>
+                                                @endif
+                                 </div>
+                                </div>
+                                <div class="listing-post-meta clearfix" style="height:5vh;">
+                                     <div class="float-right">
+                                       <h6 class="theme-color">
+                                        <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="@if(!auth()->user())disabled @endif addtocart" href='javascript:;'>Add to cart</a>
+                                        </h6>
+                                     </div>
+                                     @if(!auth()->user())<p class="text-left mt-0 mb-0" style="color:red;top: 20%;
+                                     position: relative;
+                                     margin-bottom: 0px;"><b>*You Need To First Login</b></p>@endif
+                                </div>
+                          </div>
                   </div>
                  </div>
                   @empty

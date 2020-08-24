@@ -43,8 +43,6 @@
         <!-- menu links -->
         <div class="menu-bar">
          <ul class="menu-links">
-
-          <li><a href="{{ route('pages.home') }}">Home</a></li>
           <li><a href="{{ route('pages.about') }}">About</a></li>
           @if ($type)
             <li><a href="{{ route('pages.products',[$type->slug]) }}"> {{ $type->title }}</a>
@@ -128,7 +126,7 @@
                     </div>
                 </div>
               @empty
-                  <h2>Cart is Empty</h2>
+                  <h3 class="text-center mt-3 mb-3">Cart is Empty</h3>
               @endforelse
               @endisset
               <div class="cart-total">
