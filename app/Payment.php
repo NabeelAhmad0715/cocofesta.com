@@ -8,8 +8,8 @@ class Payment extends Model
 {
     protected $guarded = [];
 
-    public function post()
+    public function order()
     {
-        return $this->belongsTo(Post::class);
+        return $this->belongsTo(Order::class);
     }
 }

@@ -417,37 +417,34 @@
          <div class="row">
           <div class="col-lg-4 col-sm-6">
             <h4 class="mb-30">Top Rated</h4>
-            @forelse ($topRatedPosts as $post)
-                @php
-                    $post = $post->post;
-                @endphp
+            @forelse ($topRatedPosts as $topRatedPost)
                 <div class="product left clearfix mb-40">
                     <div class="product-image">
-                        <a href="#"><img class="img-fluid mx-auto" alt="{{ $post->title }}" style="height: 88px;" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}">
+                        <a href="{{route('pages.product-post',[$type->slug,$topRatedPost->post->slug])}}"><img class="img-fluid mx-auto" alt="{{ $topRatedPost->post->title }}" style="height: 88px;" src="{{ asset('/storage/'. $topRatedPost->post->getMetaData('featured_image')) }}">
                         </a>
                     </div>
                     <div class="product-description">
                         <div class="product-title">
-                            <h5> <a href="#"> {{ $post->title }} </a> </h5>
+                            <h5> <a href="{{route('pages.product-post',[$type->slug,$topRatedPost->post->slug])}}"> {{ $topRatedPost->post->title }} </a> </h5>
                         </div>
                         <div class="product-price">
                             <span class="text-black" style="font-size:10px"><b>$</b></span>
-                            @if ($post->getMetaData('discount'))
+                            @if ($topRatedPost->post->getMetaData('discount'))
                                         <del>
                                         @php
-                                        $price = $post->getMetaData('price');
-                                        $discount = $price - ($price * ($post->getMetaData('discount')/100));
+                                        $price = $topRatedPost->post->getMetaData('price');
+                                        $discount = $price - ($price * ($topRatedPost->post->getMetaData('discount')/100));
                                         @endphp
                                         @if ($discount)
                                               {{ $price }}
                                         @endif
                                         </del>
                                   @endif
-                                  <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
+                                  <ins>{{ $topRatedPost->post->getMetaData('discount') ? round($discount) : $topRatedPost->post->getMetaData('price') }}</ins>
                       </div>
                         <div class="product-rate">
                             @php
-                                $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
+                                $star = round(number_format((float) ($topRatedPost->post->reviews->sum('rating') / $topRatedPost->post->reviews->count()), 2, '.', ''));
                             @endphp
                             @for ($i = 0; $i < $star; $i++)
                                 <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
@@ -467,6 +464,9 @@
                                 <i class='fa fa-star-o'></i>
                                 <i class='fa fa-star-o'></i>
                             @endif
+                            @if ($topRatedPost->post->reviews->count() > 0)
+                                <span class="text-black">({{$topRatedPost->post->reviews->count()}})</span>
+                            @endif
                         </div>
                     </div>
             </div>
@@ -479,32 +479,29 @@
           <div class="col-lg-4 col-sm-6">
             <h4 class="mb-30 xs-mt-30">Popular</h4>
             @forelse ($popularPosts as $popular)
-                @php
-                    $post = $popular->post;
-                @endphp
                 <div class="product left clearfix mb-40">
                     <div class="product-image">
-                        <a href="#"><img class="img-fluid mx-auto" alt="{{ $post->title }}" style="height: 88px;" src="{{ asset('/storage/'. $post->getMetaData('featured_image')) }}">
+                        <a href="{{route('pages.product-post',[$type->slug,$popular->post->slug])}}"><img class="img-fluid mx-auto" alt="{{ $popular->post->title }}" style="height: 88px;" src="{{ asset('/storage/'. $popular->post->getMetaData('featured_image')) }}">
                         </a>
                     </div>
                     <div class="product-description">
                         <div class="product-title">
-                            <h5> <a href="#"> {{ $post->title }} </a> </h5>
+                            <h5> <a href="{{route('pages.product-post',[$type->slug,$popular->post->slug])}}"> {{ $popular->post->title }} </a> </h5>
                         </div>
                         <div class="product-price">
                             <span class="text-black" style="font-size:10px"><b>$</b></span>
-                            @if ($post->getMetaData('discount'))
+                            @if ($popular->post->getMetaData('discount'))
                                         <del>
                                         @php
-                                        $price = $post->getMetaData('price');
-                                        $discount = $price - ($price * ($post->getMetaData('discount')/100));
+                                        $price = $popular->post->getMetaData('price');
+                                        $discount = $price - ($price * ($popular->post->getMetaData('discount')/100));
                                         @endphp
                                         @if ($discount)
                                               {{ $price }}
                                         @endif
                                         </del>
                                   @endif
-                                  <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
+                                  <ins>{{ $popular->post->getMetaData('discount') ? round($discount) : $popular->post->getMetaData('price') }}</ins>
                       </div>
                         <div class="product-rate">
                             @if ($popular->post->reviews->count())
@@ -529,7 +526,9 @@
                                     <i class='fa fa-star-o'></i>
                                     <i class='fa fa-star-o'></i>
                                 @endif
-
+                            @endif
+                            @if ($popular->post->reviews->count() > 0)
+                                <span class="text-black">({{$popular->post->reviews->count()}})</span>
                             @endif
                         </div>
                     </div>
@@ -551,7 +550,7 @@
             <div class="banner-content">
               <h1 class="text-uppercase text-white">Discount !</h1>
               <strong>Having more than 1000+ New Exclusive Men & Women products</strong>
-              <a class="button" href="#">view more <i class="fa fa-angle-right"></i></a>
+              <a class="button" href="{{route('pages.products', [$type->slug])}}">view more <i class="fa fa-angle-right"></i></a>
             </div>
          </div>
           </div>

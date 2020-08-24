@@ -35,8 +35,8 @@
                         <th>Price</th>
                         <th>Qunatity</th>
                         <th>Address</th>
-                        <th>Message</th>
-                        <th>City</th>
+                        <th>Size</th>
+                        <th>Color</th>
                         <th>Created At</th>
                     </tr>
                 </thead>
@@ -49,8 +49,8 @@
                         <td>{{ $orderDetail->price }}</td>
                         <td>{{ $orderDetail->quantity }}</td>
                         <td>{{ $orderDetail->order->address }}</td>
-                        <td>{{ $orderDetail->order->message }}</td>
-                        <td>{{ $orderDetail->order->city }}</td>
+                        <td>{{ $orderDetail->size }}</td>
+                        <td>{{ $orderDetail->color }}</td>
                         <td>{{$orderDetail->created_at }}</td>
                     </tr>
                 </tbody>

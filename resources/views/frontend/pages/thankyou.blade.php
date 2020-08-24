@@ -80,6 +80,9 @@
                                         <p><b>Qunatity:</b> {{ $order->quantity }}</p>
                                         <p><b>Size:</b> {{ $order->size }}</p>
                                         <p><b>Color:</b> {{ $order->color }}</p>
+                                        @if($order->status == 0)
+                                        <p><b>Status:</b> <span class="badge badge-primary" style="padding:7px;">Pending</span></p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4 text-center">

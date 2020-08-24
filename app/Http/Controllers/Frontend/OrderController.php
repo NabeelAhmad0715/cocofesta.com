@@ -12,6 +12,7 @@ use Stripe;
 use App\MetaDataPost;
 use Omnipay\Omnipay;
 use App\Payment;
+use Exception;
 class OrderController extends Controller
 {
     public $gateway;
@@ -28,7 +29,7 @@ class OrderController extends Controller
     {
         if ($request->price == 0) {
             $request->session()->flash('message', 'First you can add a product');
-            $request->session()->flash('alert-class', 'alert alert-success');
+            $request->session()->flash('alert-class', 'alert alert-danger');
             return redirect()->back();
         }
 
@@ -49,7 +50,8 @@ class OrderController extends Controller
                 'phone' => Auth::user()->phone,
                 'user_id' => Auth::user()->id
             ];
-            $this->orderCreate($data);
+            $order = Order::create($data);
+            $this->orderCreate($order);
         } else if ($request->method === 'paypal') {
             try {
                 $response = $this->gateway->purchase(array(
@@ -76,14 +78,14 @@ class OrderController extends Controller
         return redirect()->route('pages.thankyou');
     }
 
-    public function orderCreate($data){
-        $order = Order::create($data);
+    public function orderCreate($order)
+    {
         $cartPosts = Cart::where('user_id', Auth::user()->id)->where('in_stock', 1)->get();
         $orderNumber = 'AS' . rand(1, 10000);
         foreach ($cartPosts as $post) {
 
             $orderDetail = OrderDetail::create([
-                'user_id' => $data['user_id'],
+                'user_id' => Auth::user()->id,
                 'order_id' => $order->id,
                 'post_id' => $post->post_id,
                 'price' => $post->price,
@@ -137,8 +139,8 @@ class OrderController extends Controller
             $response = $transaction->send();
 
             if ($response->isSuccessful()) {
-
-                $this->orderCreate($data);
+                $order = Order::create($data);
+                $this->orderCreate($order);
                 // The customer has successfully paid.
                 $arr_body = $response->getData();
 
@@ -153,6 +155,7 @@ class OrderController extends Controller
                     $payment->amount = $arr_body['transactions'][0]['amount']['total'];
                     $payment->currency = config('app.paypal_currency');
                     $payment->payment_status = $arr_body['state'];
+                    $payment->order_id = $order->id;
                     $payment->save();
                 }
 

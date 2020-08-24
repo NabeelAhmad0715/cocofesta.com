@@ -96,8 +96,8 @@
     <div class="container">
        <div class="row justify-content-center">
         <div class="col-lg-10 text-center pt-30 pb-30">
-          <h2 class="mb-20 text-white">Coco Cart has best women's & men's designs, and amazing support.</h2>
-          <span class="theme-color"> - Nabeel Amjad</span>
+          <h2 class="mb-20 text-white">As Fine Leather has best women's & men's designs, and amazing support.</h2>
+          <span class="theme-color"> - Asim</span>
         </div>
       </div>
    </div>
