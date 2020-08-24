@@ -372,6 +372,18 @@
             .listing-post-info{
                 height:104px;
             }
+            .overlay {
+                background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0));
+                position: absolute;
+                top: 0;
+                left: 0;
+                height: 100%;
+                width: 100%;
+                display: block;
+            }
+            i.fa.fa-star-o {
+                color:black;
+            }
         </style>
       </head>
 <body>

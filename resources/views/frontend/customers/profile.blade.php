@@ -23,6 +23,7 @@
        </div>
        </div>
     </div>
+    <div class="overlay"></div>
 </section>
 <section class="gray-bg page-section-ptb">
     <div class="container">
@@ -139,12 +140,23 @@
                             <div class="section-title">
                               <h2 class="title-effect">Order Histroy</h2>
                             </div>
+                            <div class="row text-center mb-5">
+                                <div class="col-md-4">
+                                    <h2 class="title-effect">Image</h2>
+                                </div>
+                                <div class="col-md-4">
+                                    <h2 class="title-effect">Description</h2>
+                                </div>
+                                <div class="col-md-4">
+                                    <h2 class="title-effect">Total (${{ $orderHistories->sum('price') }})</h2>
+                                </div>
+                            </div>
                             @foreach ($orderHistories as $order)
                             <div class="row mb-5">
-                                <div class="col-md-3">
-                                    <img class="img-fluid" src="{{ asset('/storage/'. $order->post->getMetaData('featured_image'))}}"/>
+                                <div class="col-md-4">
+                                    <img style="height:264px;" class="img-fluid" src="{{ asset('/storage/'. $order->post->getMetaData('featured_image'))}}"/>
                                 </div>
-                                <div class="col-md-5">
+                                <div class="col-md-4">
                                     <div class="description-details text-center">
                                         <h3 class="theme-colo">{{ $order->post->title }}</h3>
                                         <p>{{ date('F d, Y', strtotime($order->created_at)) }}</p>
@@ -152,6 +164,11 @@
                                         <p><b>Qunatity:</b> {{ $order->quantity }}</p>
                                         <p><b>Size:</b> {{ $order->size }}</p>
                                         <p><b>Color:</b> {{ $order->color }}</p>
+                                        @if($order->status == 0)
+                                        <p><b>Status:</b> <span class="badge badge-primary" style="padding:7px;">Pending</span></p>
+                                        @else
+                                        <p><b>Status:</b> <span class="badge badge-success" style="padding:7px;">Approved</span></p>
+                                        @endif
                                     </div>
                                 </div>
                                 <div class="col-md-4 text-center">

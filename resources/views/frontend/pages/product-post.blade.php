@@ -18,12 +18,13 @@
           </div>
             <ul class="page-breadcrumb">
               <li><a href="{{ route('pages.home') }}"><i class="fa fa-home"></i> Home</a> <i class="fa fa-angle-double-right"></i></li>
-              <li><a href="{{ route('pages.products',[$post->type->slug])}}"><i class="fa fa-cart"></i> {{ $post->type->title }}</a> <i class="fa fa-angle-double-right"></i></li>
+              <li><a href="{{ route('pages.products',[$post->type->slug])}}">{{ $post->type->title }}</a> <i class="fa fa-angle-double-right"></i></li>
               <li><span>{{ $post->title }}</span> </li>
          </ul>
        </div>
        </div>
     </div>
+    <div class="overlay"></div>
 </section>
 
 
@@ -480,7 +481,10 @@
                                           @endif
                                           <ins>{{ $post->getMetaData('discount') ? round($discount) : $post->getMetaData('price') }}</ins>
                               </div>
-                              @if($post->reviews->sum('rating'))
+                        </li>
+                     </ul>
+                     <div class="float-right">
+                        @if($post->reviews->sum('rating'))
                                     <div class="text-left" style="margin-left:3px;margin-top:3px;">
                                         @php
                                             $star = round(number_format((float) ($post->reviews->sum('rating') / $post->reviews->count()), 2, '.', ''));
@@ -505,16 +509,21 @@
                                         @endif
                                         <span class="text-black">({{$post->reviews->count()}})</span>
                                     </div>
+                                    @else
+                                        <p>No Reviews yet</p>
                                     @endif
-                        </li>
-                     </ul>
-                     <div class="float-right">
-                       <h6 class="theme-color">
-                        <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="@if(!auth()->user())disabled @endif addtocart" href='javascript:;'>Add to cart</a>
-                    </h6>
                      </div>
-                 </div>
-                 @if(!auth()->user())<p class="text-right mt-3" style="color:red"><b>*You Need To First Login</b></p>@endif
+                    </div>
+                    <div class="listing-post-meta clearfix" style="height:5vh;">
+                         <div class="float-right">
+                           <h6 class="theme-color">
+                            <a data-data="{{ $post->id }}" data-id="{{ $post->getMetaData('discount') ? $discount : $post->getMetaData('price') }}" class="@if(!auth()->user())disabled @endif addtocart" href='javascript:;'>Add to cart</a>
+                            </h6>
+                         </div>
+                         @if(!auth()->user())<p class="text-left mt-0 mb-0" style="color:red;top: 20%;
+                         position: relative;
+                         margin-bottom: 0px;"><b>*You Need To First Login</b></p>@endif
+                    </div>
               </div>
           </div>
          </div>
