@@ -64,6 +64,9 @@ Route::group(['prefix' => 'admin', 'middleware' => 'auth:admin', "namespace" => 
     Route::resource('customers', 'CustomerController');
     Route::resource('reviews', 'ReviewController');
     Route::resource('orders', 'OrderController');
+    Route::resource('payments', 'PaymentController');
+    Route::get('/payments/{payment}', 'PaymentController@order')->name('payments.order');
+    Route::get('/payments/{payment}/order/{order}', 'PaymentController@orderDetails')->name('payments.order-details');
     // Contact Inquiries
     Route::get('/general-settings/create', "GeneralSettingController@create")->name("general-settings.create");
     Route::post('/general-settings', "GeneralSettingController@store")->name("general-settings.store");
@@ -117,8 +120,6 @@ Route::get('login/{provider}', 'Auth\LoginController@redirect');
 Route::get('login/{provider}/callback', 'Auth\LoginController@Callback');
 
 
-// Route::get('payment', 'PaymentController@index');
-// Route::post('charge', 'PaymentController@charge');
 Route::get('paymentsuccess', 'Frontend\OrderController@payment_success');
 Route::get('paymenterror', 'Frontend\OrderController@payment_error');
 

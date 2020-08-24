@@ -288,36 +288,100 @@
            </div>
        </div>
        </div>
-       <div class="col-lg-3">
-           <div class="sidebar-widgets-wrap">
-            <form method="GET" action="{{ route('pages.search',[$type->slug]) }}">
-                @csrf
-               <div class="sidebar-widget mb-40">
-                   <h5 class="mb-20">Search</h5>
-                     <div class="widget-search">
-                     <i class="fa fa-search"></i>
-                     <input type="search" name="search" class="form-control placeholder" placeholder="Search Products....">
-                   </div>
-                 </div>
-            </form>
-                <div class="sidebar-widget mb-0">
-                <h5 class="mb-20">Popular items</h5>
-                @forelse ($topRatedPosts as $topRatedPost)
-                 <div class="recent-item clearfix">
-                    <div class="recent-image">
-                        <a href="shop-single.html"><img style="height: 50px;" class="img-fluid" src="{{ asset('/storage/'. $topRatedPost->post->getMetaData('featured_image')) }}" alt=""></a>
+       <div class="col-lg-3 col-md-3">
+        <div class="sidebar-widgets-wrap">
+        <div class="sidebar-widget mb-40">
+        <h5 class="mb-20">Top Rated Post</h5>
+        @forelse ($topRatedPosts as $topRatedPost)
+         <div class="recent-item clearfix">
+            <div class="recent-image">
+                <a href="{{route('pages.product-post',[$type->slug,$topRatedPost->post->slug])}}"><img style="height: 50px;" class="img-fluid" src="{{ asset('/storage/'. $topRatedPost->post->getMetaData('featured_image')) }}" alt=""></a>
+            </div>
+            <div class="recent-info">
+                <div class="recent-title">
+                     <a href="{{route('pages.product-post',[$type->slug,$topRatedPost->post->slug])}}">{{ $topRatedPost->post->title }}</a>
+                </div>
+                <div class="recent-meta">
+                   <ul class="list-style-unstyled">
+                        <li>
+                        @php
+                        $price = $topRatedPost->post->getMetaData('price');
+                        $discount = $price - ($price * ($topRatedPost->post->getMetaData('discount')/100));
+                        @endphp
+                        @if ($discount)
+                            {{ round($discount) }}
+                        @else
+                            {{ round($price) }}
+                        @endif
+                        </li>
+                @if ($topRatedPost->post->reviews->count() > 0)
+                    @php
+                    $star = round(number_format((float) ($topRatedPost->post->reviews->sum('rating') / $topRatedPost->post->reviews->count()), 2, '.', ''));
+                    @endphp
+                        @for ($i = 0; $i < $star; $i++)
+                            <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
+                        @endfor
+                        @if ($star == 4)
+                            <i class='fa fa-star-o'></i>
+                        @elseif($star == 3)
+                            <i class='fa fa-star-o'></i>
+                            <i class='fa fa-star-o'></i>
+                        @elseif($star == 2)
+                            <i class='fa fa-star-o'></i>
+                            <i class='fa fa-star-o'></i>
+                            <i class='fa fa-star-o'></i>
+                        @elseif($star == 1)
+                            <i class='fa fa-star-o'></i>
+                            <i class='fa fa-star-o'></i>
+                            <i class='fa fa-star-o'></i>
+                            <i class='fa fa-star-o'></i>
+                        @endif
+                    @endif
+                    @if ($topRatedPost->post->reviews->count() > 0)
+                    <span class="text-black">({{$topRatedPost->post->reviews->count()}})</span>
+                    @endif
+                    </li>
+                </ul>
+               </div>
+            </div>
+          </div>
+          @empty
+          <div class="w-100">
+              <h2 class="text-center">No post top rated</h2>
+          </div>
+          @endforelse
+        </div>
+        </div>
+
+        <div class="sidebar-widgets-wrap">
+            <div class="sidebar-widget mb-40">
+            <h5 class="mb-20">Top Rated Post</h5>
+            @forelse ($popularPosts as $popularPost)
+             <div class="recent-item clearfix">
+                <div class="recent-image">
+                    <a href="{{route('pages.product-post',[$type->slug,$popularPost->post->slug])}}"><img style="height: 50px;" class="img-fluid" src="{{ asset('/storage/'. $popularPost->post->getMetaData('featured_image')) }}" alt=""></a>
+                </div>
+                <div class="recent-info">
+                    <div class="recent-title">
+                         <a href="{{route('pages.product-post',[$type->slug,$popularPost->post->slug])}}">{{ $popularPost->post->title }}</a>
                     </div>
-                    <div class="recent-info">
-                        <div class="recent-title">
-                             <a href="shop-single.html">{{ $topRatedPost->post->title }}</a>
-                        </div>
-                        <div class="recent-meta">
-                           <ul class="list-style-unstyled">
-                            <li class="color">$ {{ $topRatedPost->post->getMetaData('price') - ($topRatedPost->post->getMetaData('price') * ($topRatedPost->post->getMetaData('discount')/100)) }} /</li>
+                    <div class="recent-meta">
+                       <ul class="list-style-unstyled">
                             <li>
                             @php
-                            $star = round(number_format((float) ($topRatedPost->post->reviews->sum('rating') / $topRatedPost->post->reviews->count()), 2, '.', ''));
+                            $price = $popularPost->post->getMetaData('price');
+                            $discount = $price - ($price * ($popularPost->post->getMetaData('discount')/100));
                             @endphp
+                            @if ($discount)
+                                {{ round($discount) }}
+                            @else
+                                {{ round($price) }}
+                            @endif
+                            </li>
+                            @if ($popularPost->post->reviews->count() > 0)
+                                @php
+                                $star = round(number_format((float) ($popularPost->post->reviews->sum('rating') / $popularPost->post->reviews->count()), 2, '.', ''));
+                                @endphp
                                 @for ($i = 0; $i < $star; $i++)
                                     <i style="color:#FFCC36" class='fa fa-star fa-fw'></i>
                                 @endfor
@@ -336,19 +400,23 @@
                                     <i class='fa fa-star-o'></i>
                                     <i class='fa fa-star-o'></i>
                                 @endif
-                            </li>
-                        </ul>
-                       </div>
-                    </div>
-                  </div>
-                  @empty
-                  <div class="w-100">
-                      <h2 class="text-center">No post top rated</h2>
-                  </div>
-                  @endforelse
+                            @endif
+                            @if ($popularPost->post->reviews->count() > 0)
+                            <span class="text-black">({{$popularPost->post->reviews->count()}})</span>
+                            @endif
+                        </li>
+                    </ul>
+                   </div>
+                </div>
+              </div>
+              @empty
+              <div class="w-100">
+                  <h2 class="text-center">No Popular Post</h2>
+              </div>
+              @endforelse
             </div>
-        </div>
-       </div>
+            </div>
+    </div>
       </div>
     </div>
  </section>

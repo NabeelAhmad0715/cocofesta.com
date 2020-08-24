@@ -156,6 +156,10 @@
                             <a href="{{ route('orders.index') }}" class="nav-link"><i class="icon-cart"></i> <span>Orders</span></a>
                         </li>
                         <li
+                            class="nav-item  {{ (request()->routeIs('payments.*')) ? 'nav-item-open' : '' }}">
+                            <a href="{{ route('payments.index') }}" class="nav-link"><i class="icon-coin-dollar"></i> <span>Payments</span></a>
+                        </li>
+                        <li
                             class="nav-item  {{ (request()->routeIs('contact-enquiries.*')) ? 'nav-item-open' : '' }}">
                             <a href="{{ route('contact-enquiries.index') }}" class="nav-link"><i class="icon-phone2"></i> <span>Contact Enquiries</span></a>
                         </li>

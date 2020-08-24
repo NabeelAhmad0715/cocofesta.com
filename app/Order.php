@@ -12,4 +12,9 @@ class Order extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+    public function payments(){
+
+        return $this->belongsTo(Payment::class);
+    }
 }

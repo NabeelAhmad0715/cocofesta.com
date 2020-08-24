@@ -1,0 +1,142 @@
+{
+    "php.validate.executablePath": "D:/xampp/php/php.exe",
+    "terminal.integrated.shell.windows": "C:\\Program Files\\Git\\bin\\bash.exe",
+    "git.ignoreMissingGitWarning": true,
+    "files.autoSave": "off",
+    "liveServer.settings.donotShowInfoMsg": true,
+    "emmet.includeLanguages": {
+      "html": "html",
+      "pug": "html",
+      "ejs": "html",
+      "handlebars": "html",
+      "javascript": "javascriptreact"
+    },
+    "explorer.confirmDelete": false,
+    "terminal.integrated.rendererType": "dom",
+    "javascript.updateImportsOnFileMove.enabled": "always",
+    "editor.minimap.enabled": true,
+    "breadcrumbs.enabled": true,
+    "prettier.singleQuote": true,
+    "emmet.syntaxProfiles": {
+      "javascript": ["jsx", "html"]
+    },
+    "files.exclude": {
+      "**/.classpath": true,
+      "**/.project": true,
+      "**/.settings": true,
+      "**/.factorypath": true
+    },
+    "[html]": {},
+    "window.zoomLevel": 0.7,
+    "editor.fontFamily": "Operator Mono, Menlo, Monaco, 'Courier New', monospace",
+    "terminal.integrated.fontFamily": "'Operator Mono', 'Inconsolata for Powerline', monospace",
+    "editor.fontSize": 17,
+    "editor.lineHeight": 24,
+    "editor.letterSpacing": 0.5,
+    "editor.fontWeight": "400",
+    "editor.fontLigatures": true,
+    "editor.cursorStyle": "line",
+    "editor.cursorWidth": 5,
+    "editor.cursorBlinking": "solid",
+    "editor.renderWhitespace": "all",
+    "editor.snippetSuggestions": "top",
+    "workbench.startupEditor": "newUntitledFile",
+    "editor.glyphMargin": true,
+    "workbench.editor.enablePreview": false,
+    "explorer.confirmDragAndDrop": false,
+    "files.trimTrailingWhitespace": true,
+    "files.trimFinalNewlines": true,
+    // Formatting Optional.
+    "editor.formatOnSave": true,
+    "eslint.run": "onType",
+    // MacOS Only Settings.
+    "terminal.integrated.macOptionIsMeta": true,
+    "liveServer.settings.donotVerifyTags": true,
+    "workbench.iconTheme": "material-icon-theme",
+    "prettier.jsxSingleQuote": true,
+    "editor.wordWrap": "on",
+    "editor.maxTokenizationLineLength": 1e33,
+    "[php]": {
+      "editor.defaultFormatter": "bmewburn.vscode-intelephense-client"
+    },
+    // SOP's highlight matching tag setting.
+    "highlight-matching-tag.styles": {
+      "opening": {
+        "full": {
+          "highlight": "rgba(165, 153, 233, 0.3)"
+        }
+      }
+    },
+    // SOP's Import Cost Extension Settings.
+    "importCost.largePackageColor": "#EC3A37F5",
+    "importCost.mediumPackageColor": "#B362FF",
+    "importCost.smallPackageColor": "#B362FF",
+    "cSpell.userWords": [
+      "BSCS",
+      "ali",
+      "aswad",
+      "headoffice",
+      "kainat",
+      "set",
+      "todos"
+    ],
+    "git.autofetch": true,
+    "intelephense.diagnostics.undefinedFunctions": false,
+    "intelephense.diagnostics.undefinedConstants": false,
+    "intelephense.diagnostics.undefinedMethods": false,
+    "intelephense.diagnostics.undefinedProperties": false,
+    "intelephense.diagnostics.undefinedVariables": false,
+    "intelephense.diagnostics.undefinedClassConstants": false,
+    "typescript.validate.enable": false,
+    "sync.gist": "0b5dbe9bf65e06471111867a942c9101",
+    "editor.codeActionsOnSave": {
+      "source.fixAll.eslint": true
+    },
+    "[jsonc]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[javascript]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "[json]": {
+      "editor.defaultFormatter": "esbenp.prettier-vscode"
+    },
+    "java.home": "C:\\Program Files\\Java\\jdk1.8.0_231",
+    "java.help.firstView": "gettingStarted",
+    "editor.suggestSelection": "first",
+    "vsintellicode.modify.editor.suggestSelection": "automaticallyOverrodeDefaultValue",
+    "python.pythonPath": "C:\\Users\\aswad\\AppData\\Local\\Programs\\Python\\Python38\\python.exe",
+    "python.jediEnabled": false,
+    "python.testing.pytestEnabled": true,
+    "sync.autoDownload": false,
+    "sync.autoUpload": false,
+    "yaml.schemas": {
+      "file:///c%3A/Users/nabee/.vscode/extensions/atlassian.atlascode-2.7.0/resources/schemas/pipelines-schema.json": "bitbucket-pipelines.yml"
+    },
+    "atlascode.jira.jqlList": [
+      {
+        "enabled": true,
+        "id": "31688419-acb7-4abb-a477-6a3e48eecf40",
+        "monitor": true,
+        "name": "View All Issues",
+        "query": "assignee = currentUser() ORDER BY \"Epic Name\" DESC ",
+        "siteId": "6a210682-b553-4f38-98e9-50f07f986f46"
+      },
+      {
+        "enabled": true,
+        "id": "4201ad57-a888-498e-9901-64d2e2b5c09e",
+        "monitor": true,
+        "name": "Archiace Current Sprint",
+        "query": "Sprint in openSprints() AND assignee = currentUser() AND project = Archiace",
+        "siteId": "6a210682-b553-4f38-98e9-50f07f986f46"
+      }
+    ],
+    "atlascode.jira.explorer.fetchAllQueryResults": false,
+    "workbench.colorTheme": "Cobalt2",
+    "tabnine.experimentalAutoImports": true,
+    "java.semanticHighlighting.enabled": true,
+    "atlascode.jira.lastCreateSiteAndProject": {
+      "siteId": "6a210682-b553-4f38-98e9-50f07f986f46",
+      "projectKey": "AR"
+    }
+  }
