@@ -384,14 +384,18 @@
             i.fa.fa-star-o {
                 color:black;
             }
+            .fa-fw {
+                width: 0.8em;
+                text-align: center;
+            }
         </style>
       </head>
 <body>
 
     <div class="wrapper">
-        {{-- <div id="pre-loader">
-          <img src="{{ asset('images/pre-loader/loader-05.svg') }}" alt="iobotics technology" />
-        </div> --}}
+        <div id="pre-loader">
+          <img src="{{ asset('images/pre-loader/loader-05.svg') }}" alt="As Fine Leather" />
+        </div>
         @include('frontend.partials.header')
         @yield('content')
         @include('frontend.partials.footer')

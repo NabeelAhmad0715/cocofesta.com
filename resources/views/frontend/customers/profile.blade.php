@@ -47,10 +47,6 @@
                           <div class="grid-item dashboard w-100">
                             <div class="section-title">
                               <h2 class="title-effect">{{ auth()->user()->name }}</h2>
-                              <p>
-                                Truly ideal solutions for your business. Create a
-                                website that you are gonna be proud of.
-                              </p>
                             </div>
                             <p style="line-height: 2.5rem;">
                               We are providing creative marketing solutions mixed with
@@ -70,18 +66,31 @@
                               a long time.
                             </p>
                             <div class="row">
-                              <div class="col-sm-6 col-xs-6 col-xx-12">
-                                <ul class="list list-unstyled list-hand">
-                                  <li>Award-winning design</li>
-                                  <li>Super Fast Customer support</li>
-                                </ul>
-                              </div>
-                              <div class="col-sm-6 col-xs-6 col-xx-12">
-                                <ul class="list list-unstyled list-hand">
-                                  <li>Easy to Customize pages</li>
-                                  <li>Powerful Performance</li>
-                                </ul>
-                              </div>
+                                <div class="col-md-12">
+                                    <div class="pricing-table">
+                                        <div class="pricing-top thankyou-box">
+                                            <div class="billing-address">
+                                                <div class="row">
+                                                    <div class="col-md-6 text-center">
+                                                        <h4><b>Customer Details</b></h4>
+                                                        <ul class="list-unstyled">
+                                                            <li>Name: {{ auth()->user()->name }}</li>
+                                                            <li>Phone: {{ auth()->user()->phone }}</li>
+                                                            <li>Email:
+                                                                <a href="mailto:{{ auth()->user()->email }}" class="c-theme-color">{{ auth()->user()->email }}</a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="col-md-6 text-center">
+                                                        <h4><b>Billing Address</b></h4>
+                                                        <p>{{ auth()->user()->address }}
+                                                        </p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                           </div>
                         </div>
