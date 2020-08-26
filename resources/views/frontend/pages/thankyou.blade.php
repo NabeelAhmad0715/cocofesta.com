@@ -138,6 +138,7 @@
               <h2 class="theme-color">You Need To First Place Order</h2>
               <div class="error-info mt-30">
                 <a class="button xs-mb-10" href="{{ route('pages.home') }}">Contiune Shopping</a>
+                <a class="button xs-mb-10" href="{{ route('customers.profile') }}">Order History</a>
               </div>
             </div>
           </div>
